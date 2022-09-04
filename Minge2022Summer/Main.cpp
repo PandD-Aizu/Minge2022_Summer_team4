@@ -27,16 +27,12 @@ void Main()
 
 	const Texture PlayerTexture{ U"playerSprite.png" };
 
-	// 現在のセル座標
-	Point currentCell{ 6, 6 };
-
-	// 移動先のセル座標
-	Point nextCell = currentCell;
+	// 現在の座標
+	Vec2 currentPosition{ 6 * 16, 6 * 16 };
+	// 現在の移動速度
+	Vec2 currentVelocity{ 0, 0 };
 
 	constexpr double walkSpeed = 2.5;
-
-	// 歩行の進捗 (移動開始: 0.0, nextCell に到達: 1.0)
-	double walkProgress = 1.0;
 
 	// 方向: (下: 0, 左: 1, 右: 2, 上: 3) 
 	int32 direction = 0;
@@ -48,61 +44,53 @@ void Main()
 		//camera.update();
 		//const auto t = camera.createTransformer();
 
-		// 現在移動中でない場合、上下左右キーで次に進むセルを変更
-		if (currentCell == nextCell) 	{
-			//
-			// 移動先のセル座標を設定
-			//
-			if (KeyDown.pressed()) { // ↓ キー	
-				++nextCell.y;
-				direction = 0;
-			}else if (KeyUp.pressed()) { // ↑ キー
-				--nextCell.y;
-				direction = 3;
-			}else if (KeyLeft.pressed()) { // ← キー
-				--nextCell.x;
-				direction = 1;
-			}else if (KeyRight.pressed()) { // → キー
-				++nextCell.x;
-				direction = 2;
-			}
-
-			// nextCell をマップの範囲内に収める
-			nextCell.x = Clamp(nextCell.x, 0, (MapSize.x - 1));
-			nextCell.y = Clamp(nextCell.y, 0, (MapSize.y - 1));
-
-			// 移動先のセルが通行不能な場合
-			if (mapLayer1[nextCell] != 0)
-			{
-				// nextCell を現在のセル座標にする
-				nextCell = currentCell;
-			}
-
-			// 移動が発生する場合
-			if (currentCell != nextCell)
-			{
-				// 歩行の進捗を戻す
-				walkProgress -= 1.0;
-			}
-			else
-			{
-				// 移動しない場合、歩行の進捗は 1.0
-				walkProgress = 1.0;
-			}
+		// 移動先のセル座標を設定
+		currentVelocity = Vec2(0, 0);
+		if (KeyDown.pressed()) { // ↓ キー	
+			currentVelocity.y = walkSpeed;
+			direction = 0;
+		}
+		if (KeyUp.pressed()) { // ↑ キー
+			currentVelocity.y = -walkSpeed;
+			direction = 3;
+		}
+		if (KeyLeft.pressed()) { // ← キー
+			currentVelocity.x = -walkSpeed;
+			direction = 1;
+		}
+		if (KeyRight.pressed()) { // → キー
+			currentVelocity.x = walkSpeed;
+			direction = 2;
 		}
 
-		// 移動中の場合
-		if (currentCell != nextCell)
+		// 移動制限処理
 		{
-			// 歩行の進捗を進める
-			walkProgress += (Scene::DeltaTime() * walkSpeed);
+			Vec2 nextPos = currentPosition + currentVelocity*Vec2(1, 0);
+			Point nextCell(static_cast<int32>(nextPos.x / MapChip::MapChipSize), static_cast<int32>(nextPos.y / MapChip::MapChipSize));
+			//Print << nextPos << nextCell;
+			//Print << mapLayer1;
 
-			// 歩行の進捗が 1.0 以上になったら
-			if (1.0 <= walkProgress)
-			{
-				// 現在のセルを nextCell にして移動完了
-				currentCell = nextCell;
+			if (mapLayer1[nextCell.y][nextCell.x] != 0) {
+				if (currentVelocity.x > 0) {
+					nextPos.x = nextCell.x * MapChip::MapChipSize - 1;
+				}
+				else {
+					nextPos.x = (nextCell.x + 1) * MapChip::MapChipSize;
+				}
 			}
+
+			nextPos += currentVelocity * Vec2(0, 1);
+			nextCell = Point(static_cast<int32>(nextPos.x / MapChip::MapChipSize), static_cast<int32>(nextPos.y / MapChip::MapChipSize));
+
+			if (mapLayer1[nextCell.y][nextCell.x] != 0) {
+				if (currentVelocity.y > 0) {
+					nextPos.y = nextCell.y * MapChip::MapChipSize - 1;
+				}
+				else {
+					nextPos.y = (nextCell.y + 1) * MapChip::MapChipSize;
+				}
+			}
+			currentPosition = nextPos;
 		}
 
 		////////////////////////////////
@@ -143,23 +131,11 @@ void Main()
 			}
 
 			{
-				// 歩行の進捗に基づいて、現在のセル座標を小数で計算
-				const Vec2 cellPos = currentCell.lerp(nextCell, walkProgress);
-
-				// 現在のセル座標を描画座標に変換
-				const Vec2 pos = (cellPos * MapChip::MapChipSize) + Vec2{ -2, -12 };
-
 				// 歩行のアニメーションのインデックス (0, 1, 2)
 				int32 animationIndex = 1;
 
-				// 歩行の進捗が 0.25～0.75 の間は歩行中の絵にする
-				if (InRange(walkProgress, 0.25, 0.75))
-				{
-					// (nextCell.x + nextCell.y) が偶数なら 0, 奇数なら 2
-					animationIndex = IsEven(nextCell.x + nextCell.y) ? 0 : 2;
-				}
-
-				PlayerTexture((20 * animationIndex), (28 * direction), 20, 28).draw(pos);
+				PlayerTexture((20 * animationIndex), (28 * direction), 20, 28).draw(currentPosition.x - 10, currentPosition.y - 21);
+				Circle{ currentPosition.x, currentPosition.y, 1 }.draw();
 			}
 		}
 
