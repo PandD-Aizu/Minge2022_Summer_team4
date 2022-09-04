@@ -1,4 +1,5 @@
 ﻿# include <Siv3D.hpp>
+# include "common.hpp"
 # include "MapChip.hpp"
 # include "LoadCSV.hpp"
 
@@ -63,7 +64,7 @@ void Main()
 			direction = 2;
 		}
 
-		// 移動制限処理
+		// 移動制限処理あ
 		{
 			Vec2 nextPos = currentPosition + currentVelocity*Vec2(1, 0);
 			Point nextCell(static_cast<int32>(nextPos.x / MapChip::MapChipSize), static_cast<int32>(nextPos.y / MapChip::MapChipSize));

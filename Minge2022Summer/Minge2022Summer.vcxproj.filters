@@ -138,10 +138,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -776,10 +776,13 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MapChip.hpp">
+    <ClInclude Include="src\common.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="LoadCSV.hpp">
+    <ClInclude Include="src\LoadCSV.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MapChip.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
