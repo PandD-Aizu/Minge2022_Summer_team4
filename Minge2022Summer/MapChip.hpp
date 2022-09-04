@@ -1,4 +1,5 @@
 #pragma once
+# define STAIRS 10
 
 class MapChip
 {
@@ -14,9 +15,9 @@ public:
 	TextureRegion get(int32 chipIndex) const
 	{
         // インデックスが30番台なら3番のマップチップ、インデックスが40番台なら4番のマップチップ
-        if(chipIndex / 10 == 3){
+        if(chipIndex / STAIRS == 3){
             chipIndex = 3;
-        }else if(chipIndex / 10 == 4){
+        }else if(chipIndex / STAIRS == 4){
             chipIndex = 4;
         }
         
