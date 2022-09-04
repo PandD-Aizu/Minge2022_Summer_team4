@@ -1,5 +1,7 @@
-﻿#pragma once
+#pragma once
 
+size_t yCount;
+size_t xCount;
 // CSV ファイルから int32 の二次元配列を読み込む
 Grid<int32> LoadCSV(FilePathView path)
 {
@@ -14,10 +16,10 @@ Grid<int32> LoadCSV(FilePathView path)
 	}
 
 	// 行数
-	const size_t yCount = csv.rows();
+    yCount = csv.rows();
 
 	// 1 行目の列数（以降も同じ列数と仮定する）
-	const size_t xCount = csv.columns(0);
+    xCount = csv.columns(0);
 
 	// 二次元配列
 	Grid<int32> map(xCount, yCount);

@@ -1,4 +1,4 @@
-﻿# include <Siv3D.hpp>
+# include <Siv3D.hpp>
 # include "MapChip.hpp"
 # include "LoadCSV.hpp"
 
@@ -29,6 +29,22 @@ void Main()
 
 	// 現在の座標
 	Vec2 currentPosition{ 6 * 16, 6 * 16 };
+    
+    // 階段の場所を保存しておく配列
+    Point upstairposes[10];
+    Point downstairposes[10];
+    
+    // 階段の当たり判定の位置を保存しておく配列とその初期化
+    Rect upstairRects[10];
+    Rect downstairRects[10];
+    for(int32 i = 0; i < 10; i++){
+        upstairRects[i] = Rect(0, 0, 0, 0);
+        downstairRects[i] = Rect(0, 0, 0, 0);
+    }
+    
+    // プレイヤーの当たり判定の位置を初期化しておく 階段の当たり判定と違う位置に当たり判定を初期化する必要があるため、1000, 1000
+    Circle playerCircle = Circle(1000, 1000, 0);
+
 	// 現在の移動速度
 	Vec2 currentVelocity{ 0, 0 };
 
@@ -92,6 +108,17 @@ void Main()
 			}
 			currentPosition = nextPos;
 		}
+        
+        // 対応した階段の1マス右にワープする
+        for(int32 i = 0; i < 10; i++){
+            if(playerCircle.intersects(upstairRects[i])){
+                downstairposes[i] = { downstairposes[i].x + 3 * MapChip::MapChipSize / 2, downstairposes[i].y + MapChip::MapChipSize / 2 + 1 };
+                currentPosition=downstairposes[i];
+            }else if(playerCircle.intersects(downstairRects[i])){
+                upstairposes[i] = { upstairposes[i].x + 3 * MapChip::MapChipSize / 2, upstairposes[i].y + MapChip::MapChipSize / 2 + 1 };
+                currentPosition=upstairposes[i];
+            }
+        }
 
 		////////////////////////////////
 		//
@@ -118,6 +145,13 @@ void Main()
 					if (const int32 chipIndex = mapLayer0[y][x];
 						chipIndex != 0) // 0 の場合は描画しない
 					{
+                        // 階段がある場所を保持しておく
+                        if(chipIndex / 10 == 3){
+                            upstairposes[chipIndex % 10] = pos;
+                        }else if(chipIndex / 10 == 4){
+                            downstairposes[chipIndex % 10] = pos;
+                        }
+                        
 						mapchip.get(chipIndex).draw(pos);
 					}
 
@@ -129,13 +163,20 @@ void Main()
 					}
 				}
 			}
-
+            
+            // それぞれの階段に別々の当たり判定を配置
+            for(int32 i = 0; i < 10; i++){
+                upstairRects[i] = Rect(upstairposes[i], MapChip::MapChipSize);
+                downstairRects[i] = Rect(downstairposes[i], MapChip::MapChipSize);
+            }
+            
 			{
 				// 歩行のアニメーションのインデックス (0, 1, 2)
 				int32 animationIndex = 1;
 
 				PlayerTexture((20 * animationIndex), (28 * direction), 20, 28).draw(currentPosition.x - 10, currentPosition.y - 21);
-				Circle{ currentPosition.x, currentPosition.y, 1 }.draw();
+                playerCircle = Circle{ currentPosition.x, currentPosition.y, 1 };
+                playerCircle.draw();
 			}
 		}
 
