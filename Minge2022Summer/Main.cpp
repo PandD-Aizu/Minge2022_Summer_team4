@@ -41,13 +41,13 @@ void Main()
 	const Vec2 playerCollisionSize{ 16, 16 };
 
 	// 現在の座標
-	Vec2 currentPosition{ 6 * 16, 6 * 16 };
+	Vec2 playerPosition{ 6 * 16, 6 * 16 };
 	// 現在の移動速度
-	Vec2 currentVelocity{ 0, 0 };
+	Vec2 playerVelocity{ 0, 0 };
 	// 移動速度
-	constexpr double walkSpeed = 1;
+	constexpr double playerWalkSpeed = 1;
 	// 現在向いている方向: (下: 0, 左: 1, 右: 2, 上: 3, 左下: 4, 左上: 5, 右下: 6, 右上: 7)
-	int32 direction = 0;
+	int32 playerDirection = 0;
 
 
 	// マップを 320x240 のレンダーテクスチャに描画し、それを最終的に 2 倍サイズで描画する
@@ -65,41 +65,41 @@ void Main()
 		//////////////////////
 
 		// 速度を0で初期化する
-		currentVelocity = Vec2(0, 0);
+		playerVelocity = Vec2(0, 0);
 		// プレイヤー移動中フラグ
 		bool isPlayerMoving(false);
 		// キーボードで８方向移動
 		if (KeyDown.pressed()) { // ↓ キー	
-			currentVelocity.y = walkSpeed;
-			direction = 0;
+			playerVelocity.y = playerWalkSpeed;
+			playerDirection = 0;
 			isPlayerMoving = true;
 		}
 		if (KeyUp.pressed()) { // ↑ キー
-			currentVelocity.y = -walkSpeed;
-			direction = 3;
+			playerVelocity.y = -playerWalkSpeed;
+			playerDirection = 3;
 			isPlayerMoving = true;
 		}
 		if (KeyLeft.pressed()) { // ← キー
-			currentVelocity.x = -walkSpeed;
-			direction = 1;
+			playerVelocity.x = -playerWalkSpeed;
+			playerDirection = 1;
 			isPlayerMoving = true;
-			if (KeyDown.pressed()) direction = 4; // 左下
-			else if (KeyUp.pressed()) direction = 5; // 左上
+			if (KeyDown.pressed()) playerDirection = 4; // 左下
+			else if (KeyUp.pressed()) playerDirection = 5; // 左上
 		}
 		if (KeyRight.pressed()) { // → キー
-			currentVelocity.x = walkSpeed;
-			direction = 2;
+			playerVelocity.x = playerWalkSpeed;
+			playerDirection = 2;
 			isPlayerMoving = true;
-			if (KeyDown.pressed()) direction = 6; // 右下
-			else if (KeyUp.pressed()) direction = 7; // 右上
+			if (KeyDown.pressed()) playerDirection = 6; // 右下
+			else if (KeyUp.pressed()) playerDirection = 7; // 右上
 		}
 
 		// 移動制限処理
 		{
 			// x方向の移動制限
-			Vec2 nextPos = currentPosition + currentVelocity*Vec2(1, 0);
+			Vec2 nextPos = playerPosition + playerVelocity*Vec2(1, 0);
 			// 右方向に移動中の場合
-			if (currentVelocity.x > 0) {
+			if (playerVelocity.x > 0) {
 				// 当たり判定右上のセル座標
 				Point upperRightCell(
 					static_cast<int32>((nextPos.x + playerCollisionPoint.x + playerCollisionSize.x - 1) / MapChip::MapChipSize),
@@ -136,9 +136,9 @@ void Main()
 			}
 
 			// y方向の移動制限
-			nextPos += currentVelocity * Vec2(0, 1);
+			nextPos += playerVelocity * Vec2(0, 1);
 			// 下方向に移動中の場合
-			if (currentVelocity.y > 0) {
+			if (playerVelocity.y > 0) {
 				// 当たり判定左下のセル座標
 				Point lowerLeftCell(
 					static_cast<int32>((nextPos.x + playerCollisionPoint.x) / MapChip::MapChipSize),
@@ -174,7 +174,7 @@ void Main()
 				}
 			}
 
-			currentPosition = nextPos;
+			playerPosition = nextPos;
 		}
 
 		////////////////////////////////
@@ -221,10 +221,10 @@ void Main()
 				if (isPlayerMoving) animationIndex = static_cast<int32>(Scene::Time() * 10 / 2) % 3;
 				else animationIndex = 0;
 
-				PlayerTexture((playerTextureSize.x * animationIndex), (playerTextureSize.y * direction), playerTextureSize.x, playerTextureSize.y)
+				PlayerTexture((playerTextureSize.x * animationIndex), (playerTextureSize.y * playerDirection), playerTextureSize.x, playerTextureSize.y)
 					.draw(
-						static_cast<int32>(currentPosition.x - playerTextureCenter.x),
-						static_cast<int32>(currentPosition.y - playerTextureCenter.y)
+						static_cast<int32>(playerPosition.x - playerTextureCenter.x),
+						static_cast<int32>(playerPosition.y - playerTextureCenter.y)
 					);
 			}
 		}
