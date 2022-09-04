@@ -46,7 +46,7 @@ void Main()
 	Vec2 currentVelocity{ 0, 0 };
 	// 移動速度
 	constexpr double walkSpeed = 1;
-	// 現在向いている方向: (下: 0, 左: 1, 右: 2, 上: 3, 左下: 4, 左上: 5, 右下: 6, 右上: 7) 
+	// 現在向いている方向: (下: 0, 左: 1, 右: 2, 上: 3, 左下: 4, 左上: 5, 右下: 6, 右上: 7)
 	int32 direction = 0;
 
 
@@ -66,24 +66,30 @@ void Main()
 
 		// 速度を0で初期化する
 		currentVelocity = Vec2(0, 0);
+		// プレイヤー移動中フラグ
+		bool isPlayerMoving(false);
 		// キーボードで８方向移動
 		if (KeyDown.pressed()) { // ↓ キー	
 			currentVelocity.y = walkSpeed;
 			direction = 0;
+			isPlayerMoving = true;
 		}
 		if (KeyUp.pressed()) { // ↑ キー
 			currentVelocity.y = -walkSpeed;
 			direction = 3;
+			isPlayerMoving = true;
 		}
 		if (KeyLeft.pressed()) { // ← キー
 			currentVelocity.x = -walkSpeed;
 			direction = 1;
+			isPlayerMoving = true;
 			if (KeyDown.pressed()) direction = 4; // 左下
 			else if (KeyUp.pressed()) direction = 5; // 左上
 		}
 		if (KeyRight.pressed()) { // → キー
 			currentVelocity.x = walkSpeed;
 			direction = 2;
+			isPlayerMoving = true;
 			if (KeyDown.pressed()) direction = 6; // 右下
 			else if (KeyUp.pressed()) direction = 7; // 右上
 		}
@@ -210,7 +216,10 @@ void Main()
 
 			{
 				// 歩行のアニメーションのインデックス (0, 1, 2)
-				int32 animationIndex = 1;
+				
+				int32 animationIndex;
+				if (isPlayerMoving) animationIndex = static_cast<int32>(Scene::Time() * 10 / 2) % 3;
+				else animationIndex = 0;
 
 				PlayerTexture((playerTextureSize.x * animationIndex), (playerTextureSize.y * direction), playerTextureSize.x, playerTextureSize.y)
 					.draw(
