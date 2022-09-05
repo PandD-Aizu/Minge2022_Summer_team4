@@ -114,6 +114,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Scenes\Game.cpp" />
+    <ClCompile Include="src\Scenes\Title.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -316,6 +318,8 @@
     <ClInclude Include="src\common.hpp" />
     <ClInclude Include="src\LoadCSV.hpp" />
     <ClInclude Include="src\MapChip.hpp" />
+    <ClInclude Include="src\Scenes\Game.hpp" />
+    <ClInclude Include="src\Scenes\Title.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
