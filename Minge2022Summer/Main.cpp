@@ -1,4 +1,4 @@
-# include <Siv3D.hpp>
+﻿# include <Siv3D.hpp>
 # include "MapChip.hpp"
 # include "LoadCSV.hpp"
 
@@ -25,10 +25,22 @@ void Main()
 		throw Error{ U"mapLayer0: {}, mapLayer1: {}"_fmt(mapLayer0.size(), mapLayer1.size()) };
 	}
 
+	////////////////////////
+	// プレイヤーの初期化
+	////////////////////////
+	
+	// テクスチャ読み込み
 	const Texture PlayerTexture{ U"playerSprite.png" };
+	// テクスチャのサイズ
+	const Vec2 playerTextureSize{ 20, 28 };
+	// 中心の相対座標（テクスチャの左上からの相対座標
+	const Vec2 playerTextureCenter{ 10, 20 };
+	// 当たり判定の起点の座標（中心からの相対座標）
+	const Vec2 playerCollisionPoint{ -7, -7 };
+	// 当たり判定の幅、高さ
+	const Vec2 playerCollisionSize{ 14, 14 };
 
 	// 現在の座標
-	Vec2 currentPosition{ 6 * 16, 6 * 16 };
     
     // 階段の場所を保存しておく配列
     Point upstairposes[STAIRS];
@@ -43,80 +55,153 @@ void Main()
     }
     
     // プレイヤーの当たり判定の位置を初期化しておく 階段の当たり判定と違う位置に当たり判定を初期化する必要があるため、1200, 1200
-    Circle playerCircle = Circle(1200, 1200, 0);
+    Circle playerCircle = Circle(1000, 1000, 0);
+
+	Vec2 playerPosition{ 6 * 16, 6 * 16 };
 
 	// 現在の移動速度
-	Vec2 currentVelocity{ 0, 0 };
+	Vec2 playerVelocity{ 0, 0 };
+	// 移動速度
+	constexpr double playerWalkSpeed = 1;
+	// 現在向いている方向: (下: 0, 左: 1, 右: 2, 上: 3, 左下: 4, 左上: 5, 右下: 6, 右上: 7)
+	int32 playerDirection = 0;
 
-	constexpr double walkSpeed = 2.5;
-
-	// 方向: (下: 0, 左: 1, 右: 2, 上: 3) 
-	int32 direction = 0;
 
 	// マップを 320x240 のレンダーテクスチャに描画し、それを最終的に 2 倍サイズで描画する
 	RenderTexture renderTexture{ 320, 240 };
 
+	//////////////////
+	// メインループ
+	//////////////////
 	while (System::Update()) {
 		//camera.update();
 		//const auto t = camera.createTransformer();
 
-		// 移動先のセル座標を設定
-		currentVelocity = Vec2(0, 0);
+		//////////////////////
+		// プレイヤーの移動
+		//////////////////////
+
+		// 速度を0で初期化する
+		playerVelocity = Vec2(0, 0);
+		// プレイヤー移動中フラグ
+		bool isPlayerMoving(false);
+		// キーボードで８方向移動
 		if (KeyDown.pressed()) { // ↓ キー	
-			currentVelocity.y = walkSpeed;
-			direction = 0;
+			playerVelocity.y = playerWalkSpeed;
+			playerDirection = 0;
+			isPlayerMoving = true;
 		}
 		if (KeyUp.pressed()) { // ↑ キー
-			currentVelocity.y = -walkSpeed;
-			direction = 3;
+			playerVelocity.y = -playerWalkSpeed;
+			playerDirection = 3;
+			isPlayerMoving = true;
 		}
 		if (KeyLeft.pressed()) { // ← キー
-			currentVelocity.x = -walkSpeed;
-			direction = 1;
+			playerVelocity.x = -playerWalkSpeed;
+			playerDirection = 1;
+			isPlayerMoving = true;
+			if (KeyDown.pressed()) playerDirection = 4; // 左下
+			else if (KeyUp.pressed()) playerDirection = 5; // 左上
 		}
 		if (KeyRight.pressed()) { // → キー
-			currentVelocity.x = walkSpeed;
-			direction = 2;
+			playerVelocity.x = playerWalkSpeed;
+			playerDirection = 2;
+			isPlayerMoving = true;
+			if (KeyDown.pressed()) playerDirection = 6; // 右下
+			else if (KeyUp.pressed()) playerDirection = 7; // 右上
 		}
 
 		// 移動制限処理
 		{
-			Vec2 nextPos = currentPosition + currentVelocity*Vec2(1, 0);
-			Point nextCell(static_cast<int32>(nextPos.x / MapChip::MapChipSize), static_cast<int32>(nextPos.y / MapChip::MapChipSize));
-			//Print << nextPos << nextCell;
-			//Print << mapLayer1;
-
-			if (mapLayer1[nextCell.y][nextCell.x] != 0) {
-				if (currentVelocity.x > 0) {
-					nextPos.x = nextCell.x * MapChip::MapChipSize - 1;
+			// x方向の移動制限
+			Vec2 nextPos = playerPosition + playerVelocity*Vec2(1, 0);
+			// 右方向に移動中の場合
+			if (playerVelocity.x > 0) {
+				// 当たり判定右上のセル座標
+				Point upperRightCell(
+					static_cast<int32>((nextPos.x + playerCollisionPoint.x + playerCollisionSize.x - 1) / MapChip::MapChipSize),
+					static_cast<int32>((nextPos.y + playerCollisionPoint.y) / MapChip::MapChipSize)
+				);
+				// 当たり判定の右下のセル座標
+				Point lowerRightCell(
+					static_cast<int32>((nextPos.x + playerCollisionPoint.x + playerCollisionSize.x - 1) / MapChip::MapChipSize),
+					static_cast<int32>((nextPos.y + playerCollisionPoint.y + playerCollisionSize.y - 1) / MapChip::MapChipSize)
+				);
+				// 右上もしくは右下が壁に接触した場合
+				if (mapLayer1[upperRightCell.y][upperRightCell.x] != 0 || mapLayer1[lowerRightCell.y][lowerRightCell.x] != 0) {
+					// x座標を壁の左側の側面に矯正する
+					nextPos.x = upperRightCell.x * MapChip::MapChipSize - 1 - (playerCollisionPoint.x + playerCollisionSize.x - 1);
 				}
-				else {
-					nextPos.x = (nextCell.x + 1) * MapChip::MapChipSize;
+			}
+			// 左方向に移動中の場合
+			else {
+				// 当たり判定左上のセル座標
+				Point upperLeftCell(
+					static_cast<int32>((nextPos.x + playerCollisionPoint.x) / MapChip::MapChipSize),
+					static_cast<int32>((nextPos.y + playerCollisionPoint.y) / MapChip::MapChipSize)
+				);
+				// 当たり判定の左下のセル座標
+				Point lowerLeftCell(
+					static_cast<int32>((nextPos.x + playerCollisionPoint.x) / MapChip::MapChipSize),
+					static_cast<int32>((nextPos.y + playerCollisionPoint.y + playerCollisionSize.y - 1) / MapChip::MapChipSize)
+				);
+				// 左上もしくは左下が壁に接触した場合
+				if (mapLayer1[upperLeftCell.y][upperLeftCell.x] != 0 || mapLayer1[lowerLeftCell.y][lowerLeftCell.x] != 0) {
+					// x座標を壁の右側の側面に矯正する
+					nextPos.x = (upperLeftCell.x + 1) * MapChip::MapChipSize - (playerCollisionPoint.x);
 				}
 			}
 
-			nextPos += currentVelocity * Vec2(0, 1);
-			nextCell = Point(static_cast<int32>(nextPos.x / MapChip::MapChipSize), static_cast<int32>(nextPos.y / MapChip::MapChipSize));
-
-			if (mapLayer1[nextCell.y][nextCell.x] != 0) {
-				if (currentVelocity.y > 0) {
-					nextPos.y = nextCell.y * MapChip::MapChipSize - 1;
-				}
-				else {
-					nextPos.y = (nextCell.y + 1) * MapChip::MapChipSize;
+			// y方向の移動制限
+			nextPos += playerVelocity * Vec2(0, 1);
+			// 下方向に移動中の場合
+			if (playerVelocity.y > 0) {
+				// 当たり判定左下のセル座標
+				Point lowerLeftCell(
+					static_cast<int32>((nextPos.x + playerCollisionPoint.x) / MapChip::MapChipSize),
+					static_cast<int32>((nextPos.y + playerCollisionPoint.y + playerCollisionSize.y - 1) / MapChip::MapChipSize)
+				);
+				// 当たり判定の右下のセル座標
+				Point lowerRightCell(
+					static_cast<int32>((nextPos.x + playerCollisionPoint.x + playerCollisionSize.x - 1) / MapChip::MapChipSize),
+					static_cast<int32>((nextPos.y + playerCollisionPoint.y + playerCollisionSize.y - 1) / MapChip::MapChipSize)
+				);
+				// 左下もしくは右下が壁に接触した場合
+				if (mapLayer1[lowerLeftCell.y][lowerLeftCell.x] != 0 || mapLayer1[lowerRightCell.y][lowerRightCell.x] != 0) {
+					// x座標を壁の左側の側面に矯正する
+					nextPos.y = lowerLeftCell.y * MapChip::MapChipSize - 1 - (playerCollisionPoint.y + playerCollisionSize.y - 1);
 				}
 			}
-			currentPosition = nextPos;
+			// 上方向に移動中の場合
+			else {
+				// 当たり判定左上のセル座標
+				Point upperLeftCell(
+					static_cast<int32>((nextPos.x + playerCollisionPoint.x) / MapChip::MapChipSize),
+					static_cast<int32>((nextPos.y + playerCollisionPoint.y) / MapChip::MapChipSize)
+				);
+				// 当たり判定の右上のセル座標
+				Point upperRightCell(
+					static_cast<int32>((nextPos.x + playerCollisionPoint.x + playerCollisionSize.x - 1) / MapChip::MapChipSize),
+					static_cast<int32>((nextPos.y + playerCollisionPoint.y) / MapChip::MapChipSize)
+				);
+				// 左上もしくは左下が壁に接触した場合
+				if (mapLayer1[upperLeftCell.y][upperLeftCell.x] != 0 || mapLayer1[upperRightCell.y][upperRightCell.x] != 0) {
+					// x座標を壁の右側の側面に矯正する
+					nextPos.y = (upperLeftCell.y + 1) * MapChip::MapChipSize - (playerCollisionPoint.y);
+				}
+			}
+
+			playerPosition = nextPos;
 		}
         
         // 対応した階段の1マス右にワープする
         for(int32 i = 0; i < STAIRS; i++){
             if(playerCircle.intersects(upstairRects[i])){
                 downstairposes[i] = { downstairposes[i].x + 3 * MapChip::MapChipSize / 2, downstairposes[i].y + MapChip::MapChipSize / 2 + 1 };
-                currentPosition=downstairposes[i];
+                playerPosition=downstairposes[i];
             }else if(playerCircle.intersects(downstairRects[i])){
                 upstairposes[i] = { upstairposes[i].x + 3 * MapChip::MapChipSize / 2, upstairposes[i].y + MapChip::MapChipSize / 2 + 1 };
-                currentPosition=upstairposes[i];
+                playerPosition=upstairposes[i];
             }
         }
 
@@ -172,11 +257,18 @@ void Main()
             
 			{
 				// 歩行のアニメーションのインデックス (0, 1, 2)
-				int32 animationIndex = 1;
-
-				PlayerTexture((20 * animationIndex), (28 * direction), 20, 28).draw(currentPosition.x - 10, currentPosition.y - 21);
-                playerCircle = Circle{ currentPosition.x, currentPosition.y, 1 };
+                playerCircle = Circle{ playerPosition.x, playerPosition.y, 1 };
                 playerCircle.draw();
+				
+				int32 animationIndex;
+				if (isPlayerMoving) animationIndex = static_cast<int32>(Scene::Time() * 10 / 2) % 3;
+				else animationIndex = 0;
+
+				PlayerTexture((playerTextureSize.x * animationIndex), (playerTextureSize.y * playerDirection), playerTextureSize.x, playerTextureSize.y)
+					.draw(
+						static_cast<int32>(playerPosition.x - playerTextureCenter.x),
+						static_cast<int32>(playerPosition.y - playerTextureCenter.y)
+					);
 			}
 		}
 
