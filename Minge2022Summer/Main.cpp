@@ -36,12 +36,29 @@ void Main()
 	// 中心の相対座標（テクスチャの左上からの相対座標
 	const Vec2 playerTextureCenter{ 10, 20 };
 	// 当たり判定の起点の座標（中心からの相対座標）
-	const Vec2 playerCollisionPoint{ -8, -8 };
+	const Vec2 playerCollisionPoint{ -7, -7 };
 	// 当たり判定の幅、高さ
-	const Vec2 playerCollisionSize{ 16, 16 };
+	const Vec2 playerCollisionSize{ 14, 14 };
 
 	// 現在の座標
+    
+    // 階段の場所を保存しておく配列
+    Point upstairposes[STAIRS];
+    Point downstairposes[STAIRS];
+    
+    // 階段の当たり判定の位置を保存しておく配列とその初期化
+    Rect upstairRects[STAIRS];
+    Rect downstairRects[STAIRS];
+    for(int32 i = 0; i < STAIRS; i++){
+        upstairRects[i] = Rect(0, 0, 0, 0);
+        downstairRects[i] = Rect(0, 0, 0, 0);
+    }
+    
+    // プレイヤーの当たり判定の位置を初期化しておく 階段の当たり判定と違う位置に当たり判定を初期化する必要があるため、1200, 1200
+    Circle playerCircle = Circle(1000, 1000, 0);
+
 	Vec2 playerPosition{ 6 * 16, 6 * 16 };
+
 	// 現在の移動速度
 	Vec2 playerVelocity{ 0, 0 };
 	// 移動速度
@@ -176,6 +193,17 @@ void Main()
 
 			playerPosition = nextPos;
 		}
+        
+        // 対応した階段の1マス右にワープする
+        for(int32 i = 0; i < STAIRS; i++){
+            if(playerCircle.intersects(upstairRects[i])){
+                downstairposes[i] = { downstairposes[i].x + 3 * MapChip::MapChipSize / 2, downstairposes[i].y + MapChip::MapChipSize / 2 + 1 };
+                playerPosition=downstairposes[i];
+            }else if(playerCircle.intersects(downstairRects[i])){
+                upstairposes[i] = { upstairposes[i].x + 3 * MapChip::MapChipSize / 2, upstairposes[i].y + MapChip::MapChipSize / 2 + 1 };
+                playerPosition=upstairposes[i];
+            }
+        }
 
 		////////////////////////////////
 		//
@@ -202,6 +230,13 @@ void Main()
 					if (const int32 chipIndex = mapLayer0[y][x];
 						chipIndex != 0) // 0 の場合は描画しない
 					{
+                        // 階段がある場所を保持しておく
+                        if(chipIndex / STAIRS == 3){
+                            upstairposes[chipIndex % STAIRS] = pos;
+                        }else if(chipIndex / STAIRS == 4){
+                            downstairposes[chipIndex % STAIRS] = pos;
+                        }
+                        
 						mapchip.get(chipIndex).draw(pos);
 					}
 
@@ -213,9 +248,17 @@ void Main()
 					}
 				}
 			}
-
+            
+            // それぞれの階段に別々の当たり判定を配置
+            for(int32 i = 0; i < STAIRS; i++){
+                upstairRects[i] = Rect(upstairposes[i], MapChip::MapChipSize);
+                downstairRects[i] = Rect(downstairposes[i], MapChip::MapChipSize);
+            }
+            
 			{
 				// 歩行のアニメーションのインデックス (0, 1, 2)
+                playerCircle = Circle{ playerPosition.x, playerPosition.y, 1 };
+                playerCircle.draw();
 				
 				int32 animationIndex;
 				if (isPlayerMoving) animationIndex = static_cast<int32>(Scene::Time() * 10 / 2) % 3;
