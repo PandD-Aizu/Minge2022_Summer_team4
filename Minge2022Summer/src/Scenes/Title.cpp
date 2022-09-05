@@ -1,36 +1,29 @@
-﻿# include "../common.hpp"
+﻿# include "Title.hpp"
 
-class Title : public App::Scene
+
+
+Title::Title(const InitData& init)
+	: IScene{ init }
 {
-public:
+	Print << U"Title::Title()";
+}
 
-	Title(const InitData& init)
-		: IScene{ init }
+void Title::update()
+{
+	// 左クリックで
+	if (MouseL.down())
 	{
-		Print << U"Title::Title()";
+		// ゲームシーンに遷移
+		changeScene(U"Game");
 	}
+}
 
-	~Title()
-	{
-		Print << U"Title::~Title()";
-	}
+void Title::draw() const
+{
+	Scene::SetBackground(ColorF{ 0.3, 0.4, 0.5 });
 
-	void update() override
-	{
-		// 左クリックで
-		if (MouseL.down())
-		{
-			// ゲームシーンに遷移
-			changeScene(U"Game");
-		}
-	}
+	FontAsset(U"TitleFont")(U"My Game").drawAt(400, 100);
 
-	void draw() const override
-	{
-		Scene::SetBackground(ColorF{ 0.3, 0.4, 0.5 });
+	Circle{ Cursor::Pos(), 50 }.draw(Palette::Orange);
+}
 
-		FontAsset(U"TitleFont")(U"My Game").drawAt(400, 100);
-
-		Circle{ Cursor::Pos(), 50 }.draw(Palette::Orange);
-	}
-};
