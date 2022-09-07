@@ -35,7 +35,7 @@
 		2C5C470F26B4F08A005E8C85 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C470D26B4F08A005E8C85 /* libopus.a */; };
 		2C5C471126B4F08E005E8C85 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C471026B4F08E005E8C85 /* libzlib.a */; };
 		2C6906D82298140F00A427D0 /* engine in Resources */ = {isa = PBXBuildFile; fileRef = 2C6906D72298140F00A427D0 /* engine */; };
-		2C69E20628C4790100770312 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C69E20428C4790100770312 /* Main.cpp */; };
+		2CC83E4D28C853DB00B5F757 /* src in Resources */ = {isa = PBXBuildFile; fileRef = 2CC83E4C28C853DB00B5F757 /* src */; };
 		2CD8412C283263B2005013A6 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD8412B283263B2005013A6 /* libboost_filesystem.a */; };
 /* End PBXBuildFile section */
 
@@ -70,9 +70,7 @@
 		2C5C470D26B4F08A005E8C85 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libopus.a; path = ../../lib/macOS/opus/libopus.a; sourceTree = "<group>"; };
 		2C5C471026B4F08E005E8C85 /* libzlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlib.a; path = ../../lib/macOS/zlib/libzlib.a; sourceTree = "<group>"; };
 		2C6906D72298140F00A427D0 /* engine */ = {isa = PBXFileReference; lastKnownFileType = folder; name = engine; path = App/engine; sourceTree = "<group>"; };
-		2C69E20328C4790100770312 /* MapChip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MapChip.hpp; sourceTree = "<group>"; };
-		2C69E20428C4790100770312 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
-		2C69E20528C4790100770312 /* LoadCSV.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LoadCSV.hpp; sourceTree = "<group>"; };
+		2CC83E4C28C853DB00B5F757 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
 		2CD8412B283263B2005013A6 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../lib/macOS/boost/libboost_filesystem.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,9 +115,7 @@
 		2C1778791CE0A9D800BB8AD0 = {
 			isa = PBXGroup;
 			children = (
-				2C69E20528C4790100770312 /* LoadCSV.hpp */,
-				2C69E20428C4790100770312 /* Main.cpp */,
-				2C69E20328C4790100770312 /* MapChip.hpp */,
+				2CC83E4C28C853DB00B5F757 /* src */,
 				2C6906D72298140F00A427D0 /* engine */,
 				2C1778921CE0A9EA00BB8AD0 /* Info.plist */,
 				2C1778A21CE0B65500BB8AD0 /* icon.icns */,
@@ -226,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CC83E4D28C853DB00B5F757 /* src in Resources */,
 				2C6906D82298140F00A427D0 /* engine in Resources */,
 				2C1778A31CE0B65500BB8AD0 /* icon.icns in Resources */,
 			);
@@ -238,7 +235,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C69E20628C4790100770312 /* Main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
