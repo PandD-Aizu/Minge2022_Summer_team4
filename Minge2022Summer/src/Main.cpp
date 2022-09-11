@@ -2,6 +2,7 @@
 # include "common.hpp"
 # include "Scenes/Game.hpp"
 # include "Scenes/Title.hpp"
+# include "Scenes/GameClear.hpp"
 
 void Main()
 {
@@ -20,6 +21,9 @@ void Main()
 
 	// ゲームシーン（名前は "Game"）を登録
 	manager.add<Game>(U"Game");
+
+	// ゲームクリアーシーン（名前は "GameClear"）を登録
+	manager.add<GameClear>(U"GameClear");
 
 	while (System::Update())
 	{
