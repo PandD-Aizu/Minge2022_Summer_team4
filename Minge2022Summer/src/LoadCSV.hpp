@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 // CSV ファイルから int32 の二次元配列を読み込む
 Grid<int32> LoadCSV(FilePathView path)
