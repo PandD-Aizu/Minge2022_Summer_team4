@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 # include "../common.hpp"
 # include "../MapChip.hpp"
 
@@ -39,6 +39,10 @@ private:
     
     // プレイヤー移動中フラグ
     bool isPlayerMoving;
+
+
+	// ゲームクリア領域
+	Circle gameClearBody{ Vec2{ 16 * 16 + 8, 16 * 4 + 8}, 8 };
 
 public:
 	Game(const InitData& init);

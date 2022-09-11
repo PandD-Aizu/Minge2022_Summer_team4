@@ -15,6 +15,7 @@ void GameClear::update()
 	if (SimpleGUI::ButtonAt(U"次のステージ", Vec2{ Scene::Width() / 2, Scene::Height() / 2 + 50 }))
 	{
 		// 次のステージへ進む処理
+		changeScene(U"Game");
 	}
 }
 
