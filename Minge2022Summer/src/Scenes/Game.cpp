@@ -1,4 +1,4 @@
-#include "Game.hpp"
+﻿#include "Game.hpp"
 # include "../LoadCSV.hpp"
 
 
@@ -149,6 +149,16 @@ void Game::update()
         }
         playerPosition = nextPos;
     }
+	// ゲームクリア領域の当たり判定
+	if (gameClearBody.intersects(Rect{
+		static_cast<int32>(playerPosition.x + playerCollisionPoint.x),
+		static_cast<int32>(playerPosition.y + playerCollisionPoint.y),
+		static_cast<int32>(playerCollisionSize.x),
+		static_cast<int32>(playerCollisionSize.y)
+		}))
+	{
+		changeScene(U"GameClear");
+	}
 }
 
 void Game::draw() const
@@ -180,7 +190,10 @@ void Game::draw() const
                 }
             }
         }
-        
+
+		// ゲームクリア領域
+		gameClearBody.draw(Color{ 255, 255, 0 });
+
         {
             // 歩行のアニメーションのインデックス (0, 1, 2)
             int32 animationIndex;
