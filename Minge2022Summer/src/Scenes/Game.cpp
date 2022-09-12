@@ -1,10 +1,15 @@
 ﻿#include "Game.hpp"
 # include "../LoadCSV.hpp"
 
-
 Game::Game(const InitData& init)
 : IScene{ init }
 {
+
+	camera.setScreen(Rect(Scene::Size()));
+	camera.setTargetScale(2);
+	camera.setRestrictedRect(RectF(-200, -200, 1000, 1000));
+	camera.setMinScale(0.5);
+	camera.setMaxScale(4.0);
     
     mapLayer0 = LoadCSV(U"layer0.csv");
     mapLayer1 = LoadCSV(U"layer1.csv");
@@ -27,6 +32,9 @@ Game::Game(const InitData& init)
 
 void Game::update()
 {
+	camera.update();
+	camera.setCenter(playerPosition);
+	
     //camera.update();
     //const auto t = camera.createTransformer();
     
@@ -159,13 +167,17 @@ void Game::update()
 	{
 		changeScene(U"GameClear");
 	}
+
 }
 
 void Game::draw() const
 {
     {
+		auto t = camera.createTransformer();
+		//auto sv = camera.createScopedViewport();
+
         // renderTexture を描画先として設定
-        const ScopedRenderTarget2D rt{ renderTexture };
+        // const ScopedRenderTarget2D rt{ renderTexture };
         
         // マップ
         for (int32 y = 0; y < MapSize.y; ++y)
@@ -212,10 +224,10 @@ void Game::draw() const
     
     {
         // テクスチャ拡大描画時にフィルタリング（なめらかなな拡大処理）をしないサンプラーステートを適用
-        const ScopedRenderStates2D sampler{ SamplerState::ClampNearest };
+        //const ScopedRenderStates2D sampler{ SamplerState::ClampNearest };
         
         // renderTexture を 2 倍のサイズでシーンに描画
-        renderTexture.scaled(2).draw();
+        //renderTexture.scaled(2).draw();
     }
     {
         // 中心とズームアップ倍率の目標値をセットして、時間をかけて変更する
