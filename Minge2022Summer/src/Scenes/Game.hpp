@@ -34,7 +34,8 @@ private:
     // 当たり判定の幅、高さ
     const Vec2 playerCollisionSize{ 16, 16 };
 
-	// 方向: (基準4 上:-1 下:+1 左:-3 右:+3) 
+	// 方向: (基準4から 上:-1 下:+1 左:-3 右:+3)
+	// 0:↖  1:←  2:↙  3:↑  4:停止  5:↓  6:↗  7:→  8:↘
 	int32 playerDirection = 4;
 	int32 lastPlayerDirection = 7;
     

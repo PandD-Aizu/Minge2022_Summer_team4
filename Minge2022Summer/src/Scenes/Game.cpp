@@ -195,11 +195,11 @@ void Game::draw() const
             // 歩行のアニメーションのインデックス(x, y)
             Vec2 animationIndex{ 0, 0 };
 
-			// 横方向のインデックス
+			// 横方向のインデックス（歩行モーション）
             if (playerDirection == 4) animationIndex.x = 0;
             else animationIndex.x = static_cast<int32>(Scene::Time() * 10 / 2) % 6;
 
-			// 縦方向のインデックス
+			// 縦方向のインデックス（プレイヤーの向き）
 			// プレイヤーが移動中でない場合は、最後に向いていた方向を使用する
 			if (playerDirection == 4) animationIndex.y = lastPlayerDirection;
 			else animationIndex.y = playerDirection;
