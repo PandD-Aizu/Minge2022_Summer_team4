@@ -30,39 +30,36 @@ void Game::update()
     //camera.update();
     //const auto t = camera.createTransformer();
     
-    // 移動先のセル座標を設定
     //////////////////////
     // プレイヤーの移動
     //////////////////////
     
-    // 速度を0で初期化する
+    // プレイヤーの移動速度を0で初期化する
     playerVelocity = Vec2(0, 0);
+
+	// 前フレームのプレイヤーの向きを保存
+	if (playerDirection != 4) lastPlayerDirection = playerDirection;
+	// プレイヤーの向きを初期化
+	playerDirection = 4;
+
     // キーボードで８方向移動
     if (KeyDown.pressed()) { // ↓ キー
-        playerVelocity.y = playerWalkSpeed;
-        playerDirection = 0;
-        isPlayerMoving = true;
+        playerVelocity.y += playerWalkSpeed;
+        playerDirection += 1;
     }
     if (KeyUp.pressed()) { // ↑ キー
-        playerVelocity.y = -playerWalkSpeed;
-        playerDirection = 3;
-        isPlayerMoving = true;
+        playerVelocity.y -= playerWalkSpeed;
+        playerDirection -= 1;
     }
     if (KeyLeft.pressed()) { // ← キー
         
-        playerVelocity.x = -playerWalkSpeed;
-        playerDirection = 1;
-        isPlayerMoving = true;
-        if (KeyDown.pressed()) playerDirection = 4; // 左下
-        else if (KeyUp.pressed()) playerDirection = 5; // 左上
+        playerVelocity.x -= playerWalkSpeed;
+        playerDirection -= 3;
     }
     if (KeyRight.pressed()) { // → キー
         
-        playerVelocity.x = playerWalkSpeed;
-        playerDirection = 2;
-        isPlayerMoving = true;
-        if (KeyDown.pressed()) playerDirection = 6; // 右下
-        else if (KeyUp.pressed()) playerDirection = 7; // 右上
+        playerVelocity.x += playerWalkSpeed;
+        playerDirection += 3;
     }
     
     // 移動制限処理あ
@@ -195,12 +192,20 @@ void Game::draw() const
 		gameClearBody.draw(Color{ 255, 255, 0 });
 
         {
-            // 歩行のアニメーションのインデックス (0, 1, 2)
-            int32 animationIndex;
-            if (isPlayerMoving) animationIndex = static_cast<int32>(Scene::Time() * 10 / 2) % 3;
-            else animationIndex = 0;
-            
-            PlayerTexture((playerTextureSize.x * animationIndex), (playerTextureSize.y * playerDirection), playerTextureSize.x, playerTextureSize.y)
+            // 歩行のアニメーションのインデックス(x, y)
+            Vec2 animationIndex{ 0, 0 };
+
+			// 横方向のインデックス
+            if (playerDirection == 4) animationIndex.x = 0;
+            else animationIndex.x = static_cast<int32>(Scene::Time() * 10 / 2) % 6;
+
+			// 縦方向のインデックス
+			// プレイヤーが移動中でない場合は、最後に向いていた方向を使用する
+			if (playerDirection == 4) animationIndex.y = lastPlayerDirection;
+			else animationIndex.y = playerDirection;
+
+			// 描画
+            PlayerTexture((playerTextureSize.x * animationIndex.x), (playerTextureSize.y * animationIndex.y), playerTextureSize.x, playerTextureSize.y)
                 .draw(
                       static_cast<int32>(playerPosition.x - playerTextureCenter.x),
                       static_cast<int32>(playerPosition.y - playerTextureCenter.y)
