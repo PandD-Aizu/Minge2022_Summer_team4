@@ -150,7 +150,7 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Player.cpp">
+    <ClCompile Include="src\Character.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -800,7 +800,7 @@
     <ClInclude Include="src\MapChip.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Player.hpp">
+    <ClInclude Include="src\Character.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

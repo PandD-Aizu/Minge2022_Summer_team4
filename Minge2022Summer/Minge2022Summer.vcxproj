@@ -114,7 +114,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Character.cpp" />
     <ClCompile Include="src\Scenes\Game.cpp" />
     <ClCompile Include="src\Scenes\Title.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -319,7 +319,7 @@
     <ClInclude Include="src\common.hpp" />
     <ClInclude Include="src\LoadCSV.hpp" />
     <ClInclude Include="src\MapChip.hpp" />
-    <ClInclude Include="src\Player.hpp" />
+    <ClInclude Include="src\Character.hpp" />
     <ClInclude Include="src\Scenes\Game.hpp" />
     <ClInclude Include="src\Scenes\Title.hpp" />
     <ClInclude Include="stdafx.h" />

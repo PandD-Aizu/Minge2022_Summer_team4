@@ -1,6 +1,6 @@
-﻿# include "Player.hpp"
+﻿# include "Character.hpp"
 
-Player::Player() {
+Character::Character() {
 	// 現在の座標
 	playerPosition = Vec2{ 6 * 16, 6 * 16 };
 	// 現在の移動速度
@@ -8,42 +8,53 @@ Player::Player() {
 }
 
 
-//プレイヤーの移動
-void Player::checkPlayerMove() {
+
+//キャラクターの移動
+void Character::characterDirection() {
 	// 速度を0で初期化する
 	playerVelocity = Vec2(0, 0);
+
+
+	// 前フレームのプレイヤーの向きを保存
+	if (playerDirection != 4) lastPlayerDirection = playerDirection;
+	// プレイヤーの向きを初期化
+	playerDirection = 4;
+
+
+	// キー操作によりプレイヤーに加算される速度
+	Vec2 deltaPlayerVelocity{ 0, 0 };
+
 	// キーボードで８方向移動
 	if (KeyDown.pressed()) { // ↓ キー
-		playerVelocity.y = playerWalkSpeed;
-		playerDirection = 0;
-		isPlayerMoving = true;
+		deltaPlayerVelocity.y += playerWalkSpeed;
+		playerDirection += 1;
 	}
 	if (KeyUp.pressed()) { // ↑ キー
-		playerVelocity.y = -playerWalkSpeed;
-		playerDirection = 3;
-		isPlayerMoving = true;
+		deltaPlayerVelocity.y -= playerWalkSpeed;
+		playerDirection -= 1;
 	}
 	if (KeyLeft.pressed()) { // ← キー
 
-		playerVelocity.x = -playerWalkSpeed;
-		playerDirection = 1;
-		isPlayerMoving = true;
-		if (KeyDown.pressed()) playerDirection = 4; // 左下
-		else if (KeyUp.pressed()) playerDirection = 5; // 左上
+		deltaPlayerVelocity.x -= playerWalkSpeed;
+		playerDirection -= 3;
 	}
 	if (KeyRight.pressed()) { // → キー
 
-		playerVelocity.x = playerWalkSpeed;
-		playerDirection = 2;
-		isPlayerMoving = true;
-		if (KeyDown.pressed()) playerDirection = 6; // 右下
-		else if (KeyUp.pressed()) playerDirection = 7; // 右上
+		deltaPlayerVelocity.x += playerWalkSpeed;
+		playerDirection += 3;
 	}
+
+	// 斜め移動の際は速さを 1/√2 にする
+	if (playerDirection % 2 == 0) deltaPlayerVelocity *= 1 / Math::Sqrt(2);
+
+	// キー操作による速度を適用
+	playerVelocity += deltaPlayerVelocity;
+
 }
 
 
 //移動制限
-void Player::movementRestriction(Grid<int> mapLayer1) {
+void Character::movementRestriction(Grid<int> mapLayer1) {
 	// x方向の移動制限
 	nextPos = playerPosition + playerVelocity * Vec2(1, 0);
 	// 右方向に移動中の場合
@@ -127,20 +138,28 @@ void Player::movementRestriction(Grid<int> mapLayer1) {
 }
 
 
-void Player::moveNextPosition() {
+void Character::moveNextPosition() {
 	playerPosition = nextPos;
 }
 
 
-void Player::drawWalk() const {
-	// 歩行のアニメーションのインデックス (0, 1, 2)
-	int32 animationIndex;
-	if (isPlayerMoving) animationIndex = static_cast<int32>(Scene::Time() * 10 / 2) % 3;
-	else animationIndex = 0;
+void Character::drawWalk() const {
+	// 歩行のアニメーションのインデックス(x, y)
+	Vec2 animationIndex{ 0, 0 };
 
-	PlayerTexture((playerTextureSize.x * animationIndex), (playerTextureSize.y * playerDirection), playerTextureSize.x, playerTextureSize.y)
+	// 横方向のインデックス（歩行モーション）
+	if (playerDirection == 4) animationIndex.x = 0;
+	else animationIndex.x = static_cast<int32>(Scene::Time() * 10 / 2) % 6;
+
+	// 縦方向のインデックス（プレイヤーの向き）
+	// プレイヤーが移動中でない場合は、最後に向いていた方向を使用する
+	if (playerDirection == 4) animationIndex.y = lastPlayerDirection;
+	else animationIndex.y = playerDirection;
+
+	// 描画
+	PlayerTexture((playerTextureSize.x * animationIndex.x), (playerTextureSize.y * animationIndex.y), playerTextureSize.x, playerTextureSize.y)
 		.draw(
-			  static_cast<int32>(playerPosition.x - playerTextureCenter.x),
-			  static_cast<int32>(playerPosition.y - playerTextureCenter.y)
+			  playerPosition.x - playerTextureCenter.x,
+					playerPosition.y - playerTextureCenter.y
 		);
 }

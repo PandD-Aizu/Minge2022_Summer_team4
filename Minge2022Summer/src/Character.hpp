@@ -2,7 +2,7 @@
 # include "common.hpp"
 # include "MapChip.hpp"
 
-class Player {
+class Character {
 private:
 
 	Vec2 playerPosition;
@@ -11,7 +11,7 @@ private:
 
 
 	// テクスチャ読み込み
-	const Texture PlayerTexture{ U"playerSprite2.png" };
+	const Texture PlayerTexture{ U"playerSprite.png" };
 	// テクスチャのサイズ
 	const Vec2 playerTextureSize{ 20, 28 };
 	// 中心の相対座標（テクスチャの左上からの相対座標
@@ -21,11 +21,12 @@ private:
 	// 当たり判定の幅、高さ
 	const Vec2 playerCollisionSize{ 16, 16 };
 
-	// 方向: (下: 0, 左: 1, 右: 2, 上: 3) 
-	int32 playerDirection = 0;
+	// 方向: (基準4から 上:-1 下:+1 左:-3 右:+3)
+	// 0:↖  1:←  2:↙  3:↑  4:停止  5:↓  6:↗  7:→  8:↘
+	int32 playerDirection = 4;
+	int32 lastPlayerDirection = 7;
 
-	// プレイヤー移動中フラグ
-	bool isPlayerMoving;
+	
 
 
 	//プレイヤーの移動に使う
@@ -34,9 +35,9 @@ private:
 	
 
 public:
-	Player();
+	Character();
 
-	void checkPlayerMove();			//プレイヤーの方向を決める
+	void characterDirection();			//プレイヤーの方向を決める
 	void movementRestriction(Grid<int>);		//移動制限
 	void moveNextPosition();		//プレイヤーの移動
 
