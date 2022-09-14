@@ -42,25 +42,37 @@ void Game::update()
 	// プレイヤーの向きを初期化
 	playerDirection = 4;
 
-    // キーボードで８方向移動
-    if (KeyDown.pressed()) { // ↓ キー
-        playerVelocity.y += playerWalkSpeed;
-        playerDirection += 1;
-    }
-    if (KeyUp.pressed()) { // ↑ キー
-        playerVelocity.y -= playerWalkSpeed;
-        playerDirection -= 1;
-    }
-    if (KeyLeft.pressed()) { // ← キー
-        
-        playerVelocity.x -= playerWalkSpeed;
-        playerDirection -= 3;
-    }
-    if (KeyRight.pressed()) { // → キー
-        
-        playerVelocity.x += playerWalkSpeed;
-        playerDirection += 3;
-    }
+	// プレイヤーの移動操作
+	{
+		// キー操作によりプレイヤーに加算される速度
+		Vec2 deltaPlayerVelocity{ 0, 0 };
+
+		// キーボードで８方向移動
+		if (KeyDown.pressed()) { // ↓ キー
+			deltaPlayerVelocity.y += playerWalkSpeed;
+			playerDirection += 1;
+		}
+		if (KeyUp.pressed()) { // ↑ キー
+			deltaPlayerVelocity.y -= playerWalkSpeed;
+			playerDirection -= 1;
+		}
+		if (KeyLeft.pressed()) { // ← キー
+
+			deltaPlayerVelocity.x -= playerWalkSpeed;
+			playerDirection -= 3;
+		}
+		if (KeyRight.pressed()) { // → キー
+
+			deltaPlayerVelocity.x += playerWalkSpeed;
+			playerDirection += 3;
+		}
+
+		// 斜め移動の際は速さを 1/√2 にする
+		if (playerDirection % 2 == 0) deltaPlayerVelocity *= 1 / Math::Sqrt(2);
+
+		// キー操作による速度を適用
+		playerVelocity += deltaPlayerVelocity;
+	}
     
     // 移動制限処理あ
     {
@@ -207,8 +219,8 @@ void Game::draw() const
 			// 描画
             PlayerTexture((playerTextureSize.x * animationIndex.x), (playerTextureSize.y * animationIndex.y), playerTextureSize.x, playerTextureSize.y)
                 .draw(
-                      static_cast<int32>(playerPosition.x - playerTextureCenter.x),
-                      static_cast<int32>(playerPosition.y - playerTextureCenter.y)
+                      playerPosition.x - playerTextureCenter.x,
+                      playerPosition.y - playerTextureCenter.y
                       );
             
             
