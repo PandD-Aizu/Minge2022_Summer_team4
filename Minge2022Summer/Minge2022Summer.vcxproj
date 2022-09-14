@@ -321,6 +321,7 @@
     <ClInclude Include="src\MapChip.hpp" />
     <ClInclude Include="src\Scenes\Game.hpp" />
     <ClInclude Include="src\Scenes\GameClear.hpp" />
+    <ClInclude Include="src\Scenes\myCamera.hpp" />
     <ClInclude Include="src\Scenes\Title.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

@@ -1,14 +1,15 @@
 ﻿#pragma once
 # include "../common.hpp"
 # include "../MapChip.hpp"
+# include "myCamera.hpp"
 
 
 class Game : public App::Scene {
 private:
+	MyCamera camera;
 	// マップチップ用テクスチャ
 	MapChip mapchip;
 
-	Camera2D camera;
 	RenderTexture renderTexture;
 
 	// マップのセルの数（横 20, 縦 15 マス）
