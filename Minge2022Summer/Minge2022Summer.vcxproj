@@ -116,6 +116,7 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Character.cpp" />
     <ClCompile Include="src\Scenes\Game.cpp" />
+    <ClCompile Include="src\Scenes\GameClear.cpp" />
     <ClCompile Include="src\Scenes\Title.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -123,6 +124,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\Downloads\playerSprite.png" />
     <Image Include="App\engine\texture\box-shadow\128.png" />
     <Image Include="App\engine\texture\box-shadow\16.png" />
     <Image Include="App\engine\texture\box-shadow\256.png" />
@@ -321,6 +323,8 @@
     <ClInclude Include="src\MapChip.hpp" />
     <ClInclude Include="src\Character.hpp" />
     <ClInclude Include="src\Scenes\Game.hpp" />
+    <ClInclude Include="src\Scenes\GameClear.hpp" />
+    <ClInclude Include="src\Scenes\myCamera.hpp" />
     <ClInclude Include="src\Scenes\Title.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

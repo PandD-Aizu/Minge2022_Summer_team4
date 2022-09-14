@@ -150,7 +150,11 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+
     <ClCompile Include="src\Character.cpp">
+
+    <ClCompile Include="src\Scenes\GameClear.cpp">
+
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -226,6 +230,9 @@
     </Image>
     <Image Include="App\example\obj\siv3d-kun-eye.png">
       <Filter>Resource Files\example\obj</Filter>
+    </Image>
+    <Image Include="..\..\..\Downloads\playerSprite.png">
+      <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -800,7 +807,14 @@
     <ClInclude Include="src\MapChip.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+
     <ClInclude Include="src\Character.hpp">
+
+    <ClInclude Include="src\Scenes\GameClear.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\myCamera.hpp">
+
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

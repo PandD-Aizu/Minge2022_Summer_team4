@@ -2,14 +2,16 @@
 # include "../common.hpp"
 # include "../MapChip.hpp"
 # include "../Character.hpp"
+# include "myCamera.hpp"
+
 
 
 class Game : public App::Scene {
 private:
+	MyCamera camera;
 	// マップチップ用テクスチャ
 	MapChip mapchip;
 
-	Camera2D camera;
 	RenderTexture renderTexture;
 
 	// マップのセルの数（横 20, 縦 15 マス）
@@ -22,7 +24,14 @@ private:
     // プレイヤーの初期化
     ////////////////////////
 
+
 	Character player;
+
+
+    
+	// ゲームクリア領域
+	Circle gameClearBody{ Vec2{ 16 * 16 + 8, 16 * 4 + 8}, 8 };
+
 
 public:
 	Game(const InitData& init);
