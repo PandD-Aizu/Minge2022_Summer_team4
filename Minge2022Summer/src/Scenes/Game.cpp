@@ -4,13 +4,6 @@
 Game::Game(const InitData& init)
 : IScene{ init }
 {
-
-	camera.setScreen(Rect(Scene::Size()));
-	camera.setTargetScale(2);
-	camera.setRestrictedRect(RectF(-200, -200, 1000, 1000));
-	camera.setMinScale(0.5);
-	camera.setMaxScale(4.0);
-    
     mapLayer0 = LoadCSV(U"layer0.csv");
     mapLayer1 = LoadCSV(U"layer1.csv");
     
@@ -24,9 +17,14 @@ Game::Game(const InitData& init)
     // 現在の移動速度
     playerVelocity = Vec2{ 0, 0 };
     
-    
     // マップを 320x240 のレンダーテクスチャに描画し、それを最終的に 2 倍サイズで描画する
     renderTexture = RenderTexture{ 320, 240 };
+
+	// カメラの位置と大きさを初期化
+	camera.setScreen(Rect(Scene::Size()));
+	camera.setScale(2);
+	camera.setTargetScale(2);
+	camera.setCenter(playerPosition);
 }
 
 

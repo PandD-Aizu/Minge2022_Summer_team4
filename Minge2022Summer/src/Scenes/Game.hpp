@@ -1,12 +1,12 @@
 ﻿#pragma once
 # include "../common.hpp"
 # include "../MapChip.hpp"
-# include "../../TinyCamera.hpp"
+# include "myCamera.hpp"
 
 
 class Game : public App::Scene {
 private:
-	TinyCamera camera;
+	MyCamera camera;
 	// マップチップ用テクスチャ
 	MapChip mapchip;
 

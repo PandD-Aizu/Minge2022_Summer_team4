@@ -803,7 +803,7 @@
     <ClInclude Include="src\Scenes\GameClear.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TinyCamera.hpp">
+    <ClInclude Include="src\Scenes\myCamera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
