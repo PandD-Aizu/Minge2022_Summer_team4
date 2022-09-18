@@ -132,11 +132,24 @@ void Character::moveRestriction(Grid<int> mapLayer1) {
 		if (mapLayer1[upperLeftCell.y][upperLeftCell.x] != 0 || mapLayer1[upperRightCell.y][upperRightCell.x] != 0) {
 			// x座標を壁の右側の側面に矯正する
 			nextPos.y = (upperLeftCell.y + 1) * MapChip::MapChipSize - (characterCollisionPoint.y);
-
+			
 		}
 	}
 }
 
+// 地面マップとの当たり判定
+void Character::groundMapChipCollision(Grid<int> mapLayer1) {
+	Point cellCordinate{
+		static_cast<int32>(nextPos.x / MapChip::MapChipSize),
+		static_cast<int32>(nextPos.y / MapChip::MapChipSize)
+	};
+	Print << cellCordinate << mapLayer1[cellCordinate.y][cellCordinate.x];
+	// 落とし穴との当たり判定
+	if (mapLayer1[cellCordinate.y][cellCordinate.x] == 5) {
+		nextPos.x = (cellCordinate.x - 0.5) * MapChip::MapChipSize;
+		nextPos.y = (cellCordinate.y + 0.5) * MapChip::MapChipSize;
+	}
+}
 
 void Character::moveNextPosition() {
 	characterPosition = nextPos;

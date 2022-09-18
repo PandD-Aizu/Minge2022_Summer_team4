@@ -48,7 +48,8 @@ void Game::update()
 
 	//移動制限処理
 	player.moveRestriction(mapLayer1);
-   
+	player.groundMapChipCollision(mapLayer0);
+
 	//プレイヤーの移動
 	player.moveNextPosition();
 	
