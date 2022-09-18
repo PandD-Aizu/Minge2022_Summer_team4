@@ -3,6 +3,7 @@
 # include "../MapChip.hpp"
 # include "../Character.hpp"
 # include "myCamera.hpp"
+# include "../Player.hpp"
 
 
 
@@ -25,7 +26,7 @@ private:
     ////////////////////////
 
 
-	Character player;
+	Player player;
 
 
     

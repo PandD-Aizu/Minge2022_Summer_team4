@@ -24,7 +24,7 @@ Game::Game(const InitData& init)
 	camera.setScreen(Rect(Scene::Size()));
 	camera.setScale(2);
 	camera.setTargetScale(2);
-	camera.setCenter(playerPosition);
+	camera.setCenter(player.characterPosition);
 }
 
 
@@ -32,7 +32,7 @@ void Game::update()
 {
 
 	camera.update();
-	camera.setCenter(playerPosition);
+	camera.setCenter(player.characterPosition);
 
     //camera.update();
     //const auto t = camera.createTransformer();
@@ -42,12 +42,12 @@ void Game::update()
     //////////////////////
 
 	//プレイヤーの方向の変更
-	player.characterDirection();
+	player.decideCharacterDirection();
     
 
 
 	//移動制限処理
-	player.movementRestriction(mapLayer1);
+	player.moveRestriction(mapLayer1);
    
 	//プレイヤーの移動
 	player.moveNextPosition();
@@ -56,10 +56,10 @@ void Game::update()
     
 	// ゲームクリア領域の当たり判定
 	if (gameClearBody.intersects(Rect{
-		static_cast<int32>(playerPosition.x + playerCollisionPoint.x),
-		static_cast<int32>(playerPosition.y + playerCollisionPoint.y),
-		static_cast<int32>(playerCollisionSize.x),
-		static_cast<int32>(playerCollisionSize.y)
+		static_cast<int32>(player.characterPosition.x + player.characterCollisionPoint.x),
+		static_cast<int32>(player.characterPosition.y + player.characterCollisionPoint.y),
+		static_cast<int32>(player.characterCollisionSize.x),
+		static_cast<int32>(player.characterCollisionSize.y)
 		}))
 	{
 		changeScene(U"GameClear");
