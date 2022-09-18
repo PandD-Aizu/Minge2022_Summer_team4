@@ -15,11 +15,21 @@ void Title::update()
 
         
 	// 左クリックで
-	if (SimpleGUI::Button(U"スタート", Vec2{ 160, 120 }, 320))
+	if (SimpleGUI::Button(U"ステージ1", Vec2{ 160, 120 }, 320))
 	{
 		// ゲームシーンに遷移
 		changeScene(U"Game");
 	}
+    if (SimpleGUI::Button(U"ステージ2", Vec2{ 160, 220 }, 320))
+    {
+        // ゲームシーンに遷移
+        //changeScene(U"Game2");
+   }
+    if (SimpleGUI::Button(U"ステージ3", Vec2{ 160, 320 }, 320))
+    {
+        // ゲームシーンに遷移
+        //changeScene(U"Game3");
+   }
 }
 
 void Title::draw() const
