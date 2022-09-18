@@ -25,6 +25,9 @@ void Main()
 	// ゲームクリアーシーン（名前は "GameClear"）を登録
 	manager.add<GameClear>(U"GameClear");
 
+	//ゲームオーバーシーン（名前は"GameOver"）を登録
+	manager.add<GameOver>(U"GameClear");
+
 	while (System::Update())
 	{
 		if (not manager.update())

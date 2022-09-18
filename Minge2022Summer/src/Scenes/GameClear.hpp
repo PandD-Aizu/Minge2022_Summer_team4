@@ -10,3 +10,14 @@ public:
 	void update() override;
 	void draw() const override;
 };
+
+
+class GameOver : public App::Scene {
+private:
+	Font gameClearFont{ 60 };
+public:
+	GameOver(const InitData& init);
+
+	void update() override;
+	void draw() const override;
+};
