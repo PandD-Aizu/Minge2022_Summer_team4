@@ -2,14 +2,24 @@
 # include "../../common.hpp"
 
 class Stair {
+private:
 	Vec2 inPos;
 	Vec2 outPos;
 	int id;
 	bool isReversable;
 
-	Stair(Vec2 inPos, Vec2 outPos);
+	// テクスチャ読み込み
+	const Texture texture{ U"mahoujin.png" };
+	// テクスチャのサイズ
+	const Vec2 size{ 34, 34 };
 
-	void transportPlayer(Vec2 * playerPos) {
+public:
+	Stair(Vec2 _inPos, Vec2 _outPos) {
+		inPos = _inPos;
+		outPos = _outPos;
+	}
+
+	void update(Vec2 * playerPos) {
 		if (inPos.distanceFrom(*playerPos) <= 20) {
 			*playerPos = outPos + Vec2{ 30,0 };
 		}
@@ -19,7 +29,7 @@ class Stair {
 	}
 
 	void draw() const {
-		Rect{ inPos.x, inPos.y, 20, 20 }.draw(Palette::Aqua);
-		Rect{ outPos.x, outPos.y, 20, 20 }.draw(Palette::Cyan);
+		texture(0, 0, size.x, size.y).drawAt(inPos.x, inPos.y);
+		texture(0, 0, size.x, size.y).drawAt(outPos.x, outPos.y);
 	}
 };

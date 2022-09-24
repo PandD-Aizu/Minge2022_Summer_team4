@@ -2,6 +2,7 @@
 # include "../common.hpp"
 # include "../MapChip.hpp"
 # include "myCamera.hpp"
+# include "Objects/Stair.hpp"
 
 
 class Game : public App::Scene {
@@ -19,6 +20,7 @@ private:
 	Vec2 playerPosition;
 	Vec2 playerVelocity;
 	double playerWalkSpeed = 1;
+	Array<Stair*> stairs;
     
     ////////////////////////
     // プレイヤーの初期化
