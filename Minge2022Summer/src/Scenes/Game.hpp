@@ -27,6 +27,7 @@ private:
     Grid<int> mapLayer1;
     Grid<int> mapLayer2;
 	Array<Stair*> stairs;
+    Vec2 enemiespos[MAXENEMIESNUM];
 
     
     ////////////////////////

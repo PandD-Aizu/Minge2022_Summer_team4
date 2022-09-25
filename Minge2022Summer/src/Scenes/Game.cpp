@@ -4,6 +4,9 @@
 Game::Game(const InitData& init)
 : IScene{ init }
 {
+    for(int32 i=0;i<MAXENEMIESNUM;i++){
+        enemiespos[i]={1000,1000};
+    }
     stairs << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 150 }, true);
     countswordzombies=0;
     mapLayer0 = LoadCSV(U"layer0.csv");
@@ -49,7 +52,11 @@ void Game::update()
 
     //camera.update();
     //const auto t = camera.createTransformer();
-    
+    for(int32 i=0;i<countswordzombies;i++){
+        enemiespos[i]=swordzombie[i].sendmypos();
+    }
+    player.getenemiespos(enemiespos);
+    player.update();
     //////////////////////
     // プレイヤーの移動
     //////////////////////
@@ -70,9 +77,6 @@ void Game::update()
         swordzombie[i].getplayerpos(player.pos);
         swordzombie[i].update();
     }
-//    if(SwordZombie::touchplayer){
-//        changeScene(U"GameClear");
-//    }
 
 	// ゲームクリア領域の当たり判定
 	if (gameClearBody.intersects(Rect{
@@ -84,6 +88,9 @@ void Game::update()
 	{
 		changeScene(U"GameClear");
 	}
+    if(player.died()){
+        changeScene(U"GameClear");
+    }
 }
 
 void Game::draw() const

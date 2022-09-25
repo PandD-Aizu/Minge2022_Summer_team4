@@ -1,5 +1,22 @@
 ﻿# include "Player.hpp"
-
+Player::Player(){
+    hp=1;
+    for(int32 i=0;i<MAXENEMIESNUM;i++){
+        enemiespos[i]={1000,1000};
+    }
+}
+void Player::update(){
+    for(int32 i=0;i<MAXENEMIESNUM;i++){
+        if(enemiespos[i].distanceFrom(pos)<8){
+            hp--;
+        }
+    }
+}
+void Player::getenemiespos(Vec2 pos[MAXENEMIESNUM]){
+    for(int32 i=0;i<MAXENEMIESNUM;i++){
+        enemiespos[i]=pos[i];
+    }
+}
 void Player::drawWalk() const {
 	// 歩行のアニメーションのインデックス(x, y)
 	Vec2 animationIndex{ 0, 0 };
@@ -20,4 +37,10 @@ void Player::drawWalk() const {
 					pos.y - textureCenter.y
 		);
 }
-
+bool Player::died(){
+    if(hp<=0){
+        return true;
+    }else{
+        return false;
+    }
+}
