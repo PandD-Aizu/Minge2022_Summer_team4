@@ -3,6 +3,7 @@
 # include "../MapChip.hpp"
 # include "../Character.hpp"
 # include "myCamera.hpp"
+# include "Objects/Stair.hpp"
 # include "../Player.hpp"
 # include "Enemies/SwordZombie.hpp"
 
@@ -25,6 +26,7 @@ private:
 	Grid<int> mapLayer0;
     Grid<int> mapLayer1;
     Grid<int> mapLayer2;
+	Array<Stair*> stairs;
 
     
     ////////////////////////
