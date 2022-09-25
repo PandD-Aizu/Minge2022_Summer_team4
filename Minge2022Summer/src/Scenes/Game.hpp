@@ -3,6 +3,7 @@
 # include "../MapChip.hpp"
 # include "../Character.hpp"
 # include "myCamera.hpp"
+# include "Objects/Stair.hpp"
 # include "../Player.hpp"
 
 
@@ -19,7 +20,7 @@ private:
 	Size MapSize{20, 15};
 	Grid<int> mapLayer0;
 	Grid<int> mapLayer1;
-
+	Array<Stair*> stairs;
     
     ////////////////////////
     // プレイヤーの初期化
@@ -27,8 +28,6 @@ private:
 
 
 	Player player;
-
-
     
 	// ゲームクリア領域
 	Circle gameClearBody{ Vec2{ 16 * 16 + 8, 16 * 4 + 8}, 8 };

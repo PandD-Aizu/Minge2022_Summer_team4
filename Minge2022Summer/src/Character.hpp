@@ -54,7 +54,5 @@ public:
 	void moveRestriction(Grid<int>);		//移動制限
 	void moveNextPosition();		//プレイヤーの移動
 
-	
-	
 };
 

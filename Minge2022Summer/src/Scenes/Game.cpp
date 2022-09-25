@@ -2,23 +2,20 @@
 # include "../LoadCSV.hpp"
 
 Game::Game(const InitData& init)
-: IScene{ init }
+	: IScene{ init }
 {
-    mapLayer0 = LoadCSV(U"layer0.csv");
-    mapLayer1 = LoadCSV(U"layer1.csv");
-    
-    if ((mapLayer0.size() != MapSize) || (mapLayer1.size() != MapSize)) {
-        // MapSize と、ロードしたデータのサイズが一致しない場合のエラー
-        throw Error{ U"mapLayer0: {}, mapLayer1: {}"_fmt(mapLayer0.size(), mapLayer1.size()) };
-    }
-    
-    //// 現在の座標
-    //playerPosition = Vec2{ 6 * 16, 6 * 16 };
-    //// 現在の移動速度
-    //playerVelocity = Vec2{ 0, 0 };
-    
-    // マップを 320x240 のレンダーテクスチャに描画し、それを最終的に 2 倍サイズで描画する
-    renderTexture = RenderTexture{ 320, 240 };
+	stairs << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 150 }, true);
+
+	mapLayer0 = LoadCSV(U"layer0.csv");
+	mapLayer1 = LoadCSV(U"layer1.csv");
+
+	if ((mapLayer0.size() != MapSize) || (mapLayer1.size() != MapSize)) {
+		// MapSize と、ロードしたデータのサイズが一致しない場合のエラー
+		throw Error{ U"mapLayer0: {}, mapLayer1: {}"_fmt(mapLayer0.size(), mapLayer1.size()) };
+	}
+
+	// マップを 320x240 のレンダーテクスチャに描画し、それを最終的に 2 倍サイズで描画する
+	renderTexture = RenderTexture{ 320, 240 };
 
 	// カメラの位置と大きさを初期化
 	camera.setScreen(Rect(Scene::Size()));
@@ -30,6 +27,10 @@ Game::Game(const InitData& init)
 
 void Game::update()
 {
+	// オブジェクトの状態更新
+	{
+		for (const auto& stair : stairs)  stair->update(&player.characterPosition);
+	}
 
 	camera.update();
 	camera.setCenter(player.characterPosition);
@@ -51,9 +52,7 @@ void Game::update()
    
 	//プレイヤーの移動
 	player.moveNextPosition();
-	
 
-    
 	// ゲームクリア領域の当たり判定
 	if (gameClearBody.intersects(Rect{
 		static_cast<int32>(player.characterPosition.x + player.characterCollisionPoint.x),
@@ -101,33 +100,18 @@ void Game::draw() const
             }
         }
 
+		// オブジェクトの描画
+		{
+			for (const auto& stair : stairs)  stair->draw();
+		}
+
 		// ゲームクリア領域
 		gameClearBody.draw(Color{ 255, 255, 0 });
 
         {
-
-
 			//歩行アニメーションのインデックス(0, 1, 2)
-			player.drawWalk();
-
-
-
-            
+			player.drawWalk();  
         }
     }
-    
-    {
-        // テクスチャ拡大描画時にフィルタリング（なめらかなな拡大処理）をしないサンプラーステートを適用
-        //const ScopedRenderStates2D sampler{ SamplerState::ClampNearest };
-        
-        // renderTexture を 2 倍のサイズでシーンに描画
-        //renderTexture.scaled(2).draw();
-    }
-    {
-        // 中心とズームアップ倍率の目標値をセットして、時間をかけて変更する
-        //camera.setTargetCenter(Vec2{ Scene::Width()/2, Scene::Height()/2});
-        //camera.setTargetScale(1.0);
-    }
-    //camera.draw(Palette::Orange);
 }
 
