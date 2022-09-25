@@ -17,7 +17,7 @@ private:
 	RenderTexture renderTexture;
 
 	// マップのセルの数（横 20, 縦 15 マス）
-	Size MapSize{20, 15};
+	Size MapSize{26, 50};
 	Grid<int> mapLayer0;
 	Grid<int> mapLayer1;
 	Array<Stair*> stairs;
