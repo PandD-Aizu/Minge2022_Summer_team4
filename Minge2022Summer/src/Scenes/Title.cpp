@@ -25,6 +25,7 @@ void Title::update()
 void Title::draw() const
 {
 	Scene::SetBackground(ColorF{ 0.3, 0.4, 0.5 });
+	bg.draw();
 
 	FontAsset(U"TitleFont")(U"My Game").drawAt(400, 100);
 

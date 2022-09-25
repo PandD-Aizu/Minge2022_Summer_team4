@@ -22,4 +22,5 @@ void GameClear::update()
 void GameClear::draw() const
 {
 	Scene::SetBackground(Color{ 255, 255, 224 });
+	bg.draw();
 }
