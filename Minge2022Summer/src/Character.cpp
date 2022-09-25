@@ -146,7 +146,7 @@ void Character::groundMapChipCollision(Grid<int> mapLayer0) {
 	};
 
 	// 落とし穴との当たり判定
-	if (mapLayer0[cellCordinate.y][cellCordinate.x] == 5) {
+	if (mapLayer0[cellCordinate.y][cellCordinate.x] == 6) {
 		nextPos.x = (cellCordinate.x - 0.5) * MapChip::MapChipSize;
 		nextPos.y = (cellCordinate.y + 0.5) * MapChip::MapChipSize;
 	}
