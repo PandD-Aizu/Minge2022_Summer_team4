@@ -6,7 +6,7 @@ void Player::drawWalk() const {
 
 	// 横方向のインデックス（歩行モーション）
 	if (characterDirection == 4) animationIndex.x = 0;
-	else animationIndex.x = static_cast<int32>(Scene::Time() * 10 / 2) % 6;
+	else animationIndex.x = static_cast<int32>(Scene::Time() * 10) % 6;
 
 	// 縦方向のインデックス（プレイヤーの向き）
 	// プレイヤーが移動中でない場合は、最後に向いていた方向を使用する
