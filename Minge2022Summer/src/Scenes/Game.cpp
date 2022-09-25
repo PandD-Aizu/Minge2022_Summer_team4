@@ -5,7 +5,7 @@ Game::Game(const InitData& init)
 	: IScene{ init }
 {
 	stairs << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 150 }, true);
-	damageFloors << new DamageFloor(Vec2 {250, 200});
+	damageFloors << new DamageFloor(Vec2 {250, 200}, 3);
 
 	mapLayer0 = LoadCSV(U"layer0.csv");
 	mapLayer1 = LoadCSV(U"layer1.csv");
