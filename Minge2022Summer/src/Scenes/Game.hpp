@@ -4,6 +4,9 @@
 # include "../Character.hpp"
 # include "myCamera.hpp"
 # include "../Player.hpp"
+# include "Enemies/SwordZombie.hpp"
+
+#define MAXSWORDZOMBIESNUM 10
 
 
 
@@ -15,10 +18,13 @@ private:
 
 	RenderTexture renderTexture;
 
+    SwordZombie swordzombie[MAXSWORDZOMBIESNUM];
+    int32 countswordzombies;
 	// マップのセルの数（横 20, 縦 15 マス）
 	Size MapSize{20, 15};
 	Grid<int> mapLayer0;
-	Grid<int> mapLayer1;
+    Grid<int> mapLayer1;
+    Grid<int> mapLayer2;
 
     
     ////////////////////////

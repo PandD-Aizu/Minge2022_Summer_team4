@@ -4,9 +4,23 @@
 Game::Game(const InitData& init)
 : IScene{ init }
 {
+    countswordzombies=0;
     mapLayer0 = LoadCSV(U"layer0.csv");
     mapLayer1 = LoadCSV(U"layer1.csv");
-    
+    mapLayer2 = LoadCSV(U"layer2.csv");
+    for (int32 y = 0; y < MapSize.y; ++y)
+    {
+        for (int32 x = 0; x < MapSize.x; ++x)
+        {
+            const Point pos{ (x * MapChip::MapChipSize), (y * MapChip::MapChipSize) };
+            if (mapLayer2[y][x] == 5)
+            {
+                swordzombie[countswordzombies].getmypos(pos);
+                countswordzombies++;
+            }
+        }
+    }
+
     if ((mapLayer0.size() != MapSize) || (mapLayer1.size() != MapSize)) {
         // MapSize と、ロードしたデータのサイズが一致しない場合のエラー
         throw Error{ U"mapLayer0: {}, mapLayer1: {}"_fmt(mapLayer0.size(), mapLayer1.size()) };
@@ -47,13 +61,17 @@ void Game::update()
 
 
 	//移動制限処理
-	player.moveRestriction(mapLayer1);
-   
+    player.moveRestriction(mapLayer1);
 	//プレイヤーの移動
-	player.moveNextPosition();
-	
+    player.moveNextPosition();
 
-    
+    for(int32 i=0;i<countswordzombies;i++){
+        swordzombie[i].moveRestriction(mapLayer1);
+        swordzombie[i].moveNextPosition();
+        swordzombie[i].getplayerpos(player.characterPosition);
+        swordzombie[i].update();
+    }
+
 	// ゲームクリア領域の当たり判定
 	if (gameClearBody.intersects(Rect{
 		static_cast<int32>(player.characterPosition.x + player.characterCollisionPoint.x),
@@ -64,8 +82,6 @@ void Game::update()
 	{
 		changeScene(U"GameClear");
 	}
-
-
 }
 
 void Game::draw() const
@@ -99,6 +115,9 @@ void Game::draw() const
                     mapchip.get(chipIndex).draw(pos);
                 }
             }
+        }
+        for(int32 i=0;i<countswordzombies;i++){
+            swordzombie[i].draw();
         }
 
 		// ゲームクリア領域
