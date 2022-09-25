@@ -5,6 +5,7 @@ Game::Game(const InitData& init)
 	: IScene{ init }
 {
 	stairs << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 150 }, true);
+	damageFloors << new DamageFloor(Vec2 {250, 200});
 
 	mapLayer0 = LoadCSV(U"layer0.csv");
 	mapLayer1 = LoadCSV(U"layer1.csv");
@@ -30,6 +31,7 @@ void Game::update()
 	// オブジェクトの状態更新
 	{
 		for (const auto& stair : stairs)  stair->update(&player.characterPosition);
+		for (const auto& DamageFloor : damageFloors)  DamageFloor->update();		//ダメージ床
 	}
 
 	camera.update();
@@ -103,6 +105,7 @@ void Game::draw() const
 		// オブジェクトの描画
 		{
 			for (const auto& stair : stairs)  stair->draw();
+			for (const auto& DamageFloor : damageFloors)  DamageFloor->draw();
 		}
 
 		// ゲームクリア領域

@@ -5,6 +5,7 @@
 # include "myCamera.hpp"
 # include "Objects/Stair.hpp"
 # include "../Player.hpp"
+# include "Objects/DamageFloor.hpp"
 
 
 
@@ -21,6 +22,7 @@ private:
 	Grid<int> mapLayer0;
 	Grid<int> mapLayer1;
 	Array<Stair*> stairs;
+	Array<DamageFloor*> damageFloors;
     
     ////////////////////////
     // プレイヤーの初期化
