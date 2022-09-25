@@ -4,6 +4,7 @@ private:
     Vec2 playerpos;
     MapChip mapchip;
     double speed;
+    bool touchplayer;
 public:
     SwordZombie();
     void update();

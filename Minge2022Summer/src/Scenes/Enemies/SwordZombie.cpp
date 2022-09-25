@@ -2,27 +2,31 @@
 SwordZombie::SwordZombie(){
     playerpos={1000,1000};
     speed=0.25;
-    characterVelocity={0,0};
+    velocity={0,0};
+    touchplayer=false;
 }
 void SwordZombie::update(){
-    if(characterPosition.x<playerpos.x){
-        characterVelocity.x=speed;
+    if(pos.x<playerpos.x){
+        velocity.x=speed;
     }
-    if(characterPosition.x>playerpos.x){
-        characterVelocity.x=-speed;
+    if(pos.x>playerpos.x){
+        velocity.x=-speed;
     }
-    if(characterPosition.y<playerpos.y){
-        characterVelocity.y=speed;
+    if(pos.y<playerpos.y){
+        velocity.y=speed;
     }
-    if(characterPosition.y>playerpos.y){
-        characterVelocity.y=-speed;
+    if(pos.y>playerpos.y){
+        velocity.y=-speed;
+    }
+    if(pos.distanceFrom(playerpos)<8){
+        touchplayer=true;
     }
 }
 void SwordZombie::draw()const{
-    mapchip.get(5).draw(characterPosition.x-characterCollisionSize.x/2,characterPosition.y-characterCollisionSize.y/2);
+    mapchip.get(5).draw(pos.x-collisionSize.x/2,pos.y-collisionSize.y/2);
 }
-void SwordZombie::getmypos(Point pos){
-    characterPosition={pos.x+characterCollisionSize.x/2,pos.y+characterCollisionSize.y/2};
+void SwordZombie::getmypos(Point mypos){
+    pos={mypos.x+collisionSize.x/2,mypos.y+collisionSize.y/2};
 }
 void SwordZombie::getplayerpos(Vec2 pos){
     playerpos=pos;

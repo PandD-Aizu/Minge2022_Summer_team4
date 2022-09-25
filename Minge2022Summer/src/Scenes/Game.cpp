@@ -33,7 +33,7 @@ Game::Game(const InitData& init)
 	camera.setScreen(Rect(Scene::Size()));
 	camera.setScale(2);
 	camera.setTargetScale(2);
-	camera.setCenter(player.characterPosition);
+	camera.setCenter(player.pos);
 }
 
 
@@ -41,11 +41,11 @@ void Game::update()
 {
 	// オブジェクトの状態更新
 	{
-		for (const auto& stair : stairs)  stair->update(&player.characterPosition);
+		for (const auto& stair : stairs)  stair->update(&player.pos);
 	}
 
 	camera.update();
-	camera.setCenter(player.characterPosition);
+	camera.setCenter(player.pos);
 
     //camera.update();
     //const auto t = camera.createTransformer();
@@ -55,7 +55,7 @@ void Game::update()
     //////////////////////
 
 	//プレイヤーの方向の変更
-	player.decideCharacterDirection();
+	player.decideDirection();
     
 
 
@@ -67,16 +67,19 @@ void Game::update()
     for(int32 i=0;i<countswordzombies;i++){
         swordzombie[i].moveRestriction(mapLayer1);
         swordzombie[i].moveNextPosition();
-        swordzombie[i].getplayerpos(player.characterPosition);
+        swordzombie[i].getplayerpos(player.pos);
         swordzombie[i].update();
     }
+//    if(SwordZombie::touchplayer){
+//        changeScene(U"GameClear");
+//    }
 
 	// ゲームクリア領域の当たり判定
 	if (gameClearBody.intersects(Rect{
-		static_cast<int32>(player.characterPosition.x + player.characterCollisionPoint.x),
-		static_cast<int32>(player.characterPosition.y + player.characterCollisionPoint.y),
-		static_cast<int32>(player.characterCollisionSize.x),
-		static_cast<int32>(player.characterCollisionSize.y)
+		static_cast<int32>(player.pos.x + player.collisionPoint.x),
+		static_cast<int32>(player.pos.y + player.collisionPoint.y),
+		static_cast<int32>(player.collisionSize.x),
+		static_cast<int32>(player.collisionSize.y)
 		}))
 	{
 		changeScene(U"GameClear");
