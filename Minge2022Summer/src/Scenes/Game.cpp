@@ -4,7 +4,7 @@
 Game::Game(const InitData& init)
 	: IScene{ init }
 {
-	stairs << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 150 });
+	stairs << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 150 }, true);
 
 	mapLayer0 = LoadCSV(U"layer0.csv");
 	mapLayer1 = LoadCSV(U"layer1.csv");
@@ -212,6 +212,12 @@ void Game::draw() const
 	// ゲームクリア領域
 	gameClearBody.draw(Color{ 255, 255, 0 });
 
+
+	// オブジェクトの描画
+	{
+		for (const auto& stair : stairs)  stair->draw();
+	}
+
 	{
 		// 歩行のアニメーションのインデックス (0, 1, 2)
 		int32 animationIndex;
@@ -225,11 +231,6 @@ void Game::draw() const
 			);
 
 
-	}
-
-	// オブジェクトの描画
-	{
-		for (const auto& stair : stairs)  stair->draw();
 	}
 
 	{
