@@ -7,7 +7,7 @@ Game::Game(const InitData& init)
     for(int32 i=0;i<MAXENEMIESNUM;i++){
         enemiespos[i]={1000,1000};
     }
-    stairs << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 150 }, true);
+    stairs << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
     countswordzombies=0;
     mapLayer0 = LoadCSV(U"layer0.csv");
     mapLayer1 = LoadCSV(U"layer1.csv");
@@ -68,6 +68,7 @@ void Game::update()
 
 	//移動制限処理
     player.moveRestriction(mapLayer1);
+    player.groundMapChipCollision(mapLayer0);
 	//プレイヤーの移動
     player.moveNextPosition();
 

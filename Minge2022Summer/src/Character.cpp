@@ -137,6 +137,20 @@ void Character::moveRestriction(Grid<int> mapLayer1) {
 	}
 }
 
+// 地面マップとの当たり判定
+void Character::groundMapChipCollision(Grid<int> mapLayer0) {
+	// キャラクターが載っている地面マップのセル座標
+	Point cellCordinate{
+		static_cast<int32>(nextPos.x / MapChip::MapChipSize),
+		static_cast<int32>(nextPos.y / MapChip::MapChipSize)
+	};
+
+	// 落とし穴との当たり判定
+	if (mapLayer0[cellCordinate.y][cellCordinate.x] == 5) {
+		nextPos.x = (cellCordinate.x - 0.5) * MapChip::MapChipSize;
+		nextPos.y = (cellCordinate.y + 0.5) * MapChip::MapChipSize;
+	}
+}
 
 void Character::moveNextPosition() {
 	pos = nextPos;

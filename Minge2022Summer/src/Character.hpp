@@ -52,6 +52,7 @@ public:
 
 	void decideDirection();			//プレイヤーの方向を決める
 	void moveRestriction(Grid<int>);		//移動制限
+	void groundMapChipCollision(Grid<int>);        //マップチップとの当たり判定処理
 	void moveNextPosition();		//プレイヤーの移動
 
 };
