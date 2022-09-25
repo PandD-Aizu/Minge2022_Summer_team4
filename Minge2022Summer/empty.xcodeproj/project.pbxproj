@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2C1778A31CE0B65500BB8AD0 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C1778A21CE0B65500BB8AD0 /* icon.icns */; };
+		2C2137F828D6F1DD00298E62 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2137F728D6F1DD00298E62 /* Character.cpp */; };
+		2C2137FD28D6F58E00298E62 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2137FB28D6F58E00298E62 /* Player.cpp */; };
 		2C5C46DD26B4F00D005E8C85 /* libcurl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C46DC26B4F00D005E8C85 /* libcurl.tbd */; };
 		2C5C46DF26B4F014005E8C85 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C46DE26B4F014005E8C85 /* AudioToolbox.framework */; };
 		2C5C46E126B4F01C005E8C85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C46E026B4F01C005E8C85 /* AVFoundation.framework */; };
@@ -46,6 +48,11 @@
 		2C1778841CE0A9EA00BB8AD0 /* empty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = empty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1778921CE0A9EA00BB8AD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C1778A21CE0B65500BB8AD0 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		2C2137F628D6F1DD00298E62 /* Character.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Character.hpp; path = src/Character.hpp; sourceTree = SOURCE_ROOT; };
+		2C2137F728D6F1DD00298E62 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Character.cpp; path = src/Character.cpp; sourceTree = SOURCE_ROOT; };
+		2C2137F928D6F23C00298E62 /* myCamera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = myCamera.hpp; sourceTree = "<group>"; };
+		2C2137FB28D6F58E00298E62 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		2C2137FC28D6F58E00298E62 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		2C5C46DC26B4F00D005E8C85 /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
 		2C5C46DE26B4F014005E8C85 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2C5C46E026B4F01C005E8C85 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -144,6 +151,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2C2137FA28D6F24900298E62 /* Enemies */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enemies;
+			sourceTree = "<group>";
+		};
 		2CC7F9861F45930A0071A239 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +196,10 @@
 			isa = PBXGroup;
 			children = (
 				F2FCF15B28CD388A00E40211 /* Scenes */,
+				2C2137FB28D6F58E00298E62 /* Player.cpp */,
+				2C2137FC28D6F58E00298E62 /* Player.hpp */,
+				2C2137F728D6F1DD00298E62 /* Character.cpp */,
+				2C2137F628D6F1DD00298E62 /* Character.hpp */,
 				F2FCF16028CD388A00E40211 /* MapChip.hpp */,
 				F2FCF16128CD388A00E40211 /* LoadCSV.hpp */,
 				F2FCF16228CD388A00E40211 /* common.hpp */,
@@ -193,6 +211,8 @@
 		F2FCF15B28CD388A00E40211 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				2C2137FA28D6F24900298E62 /* Enemies */,
+				2C2137F928D6F23C00298E62 /* myCamera.hpp */,
 				398F50AB28CDD4F7006D7A50 /* GameClear.cpp */,
 				398F50AA28CDD4F7006D7A50 /* GameClear.hpp */,
 				F2FCF15C28CD388A00E40211 /* Game.hpp */,
@@ -273,7 +293,9 @@
 			files = (
 				F2FCF16628CD388A00E40211 /* Main.cpp in Sources */,
 				F2FCF16528CD388A00E40211 /* Title.cpp in Sources */,
+				2C2137FD28D6F58E00298E62 /* Player.cpp in Sources */,
 				F2FCF16428CD388A00E40211 /* Game.cpp in Sources */,
+				2C2137F828D6F1DD00298E62 /* Character.cpp in Sources */,
 				398F50AC28CDD4F8006D7A50 /* GameClear.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
