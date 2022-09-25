@@ -7,7 +7,7 @@ Player::Player(){
 }
 void Player::update(){
     for(int32 i=0;i<MAXENEMIESNUM;i++){
-        if(enemiespos[i].distanceFrom(pos)<8){
+        if(enemiespos[i].distanceFrom(pos)<16){
             hp--;
         }
     }
