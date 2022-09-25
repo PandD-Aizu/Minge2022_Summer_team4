@@ -4,7 +4,7 @@
 Game::Game(const InitData& init)
 	: IScene{ init }
 {
-	stairs << new Stair(Vec2{ 150, 150 }, Vec2{ 100, 100 });
+	stairs << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 150 });
 
 	mapLayer0 = LoadCSV(U"layer0.csv");
 	mapLayer1 = LoadCSV(U"layer1.csv");
@@ -36,7 +36,7 @@ void Game::update()
 	// オブジェクトの状態更新
 	{
 		for (const auto& stair : stairs)  stair->update(&playerPosition);
-	}
+	} 
 	camera.update();
 	camera.setCenter(playerPosition);
 
