@@ -6,11 +6,12 @@ private:
 	Vec2 inPos;
 	Vec2 outPos;
 	bool isReversable;
+	bool reverseLock;
 	const Texture texture;
 	const Vec2 size;
 
 public:
-	Stair(Vec2 _inPos, Vec2 _outPos, bool _isReversable) : texture(Texture{U"mahoujin.png"}), size(Vec2{34,34}) {
+	Stair(Vec2 _inPos, Vec2 _outPos, bool _isReversable) : texture(Texture{U"mahoujin.png"}), size(Vec2{34,34}), reverseLock(false) {
 		inPos = _inPos;
 		outPos = _outPos;
 		isReversable = _isReversable;
@@ -18,11 +19,17 @@ public:
 	}
 
 	void update(Vec2 * playerPos) {
-		if (inPos.distanceFrom(*playerPos) <= 10) {
-			*playerPos = outPos + Vec2{ 30,0 };
+		if (inPos.distanceFrom(*playerPos) <= 10 && !reverseLock) {
+			*playerPos = outPos;
+			reverseLock = true;
 		}
-		if (outPos.distanceFrom(*playerPos) <= 10 && isReversable) {
-			*playerPos = inPos + Vec2{ 30,0 };
+		if (outPos.distanceFrom(*playerPos) <= 10 && isReversable && !reverseLock) {
+			*playerPos = inPos;
+			reverseLock = true;
+		}
+
+		if (inPos.distanceFrom(*playerPos) > 20 && outPos.distanceFrom(*playerPos) > 20) {
+			reverseLock = false;
 		}
 
 		animIndex = static_cast<int32>(Scene::Time() * 10 / 2) % animNum;
