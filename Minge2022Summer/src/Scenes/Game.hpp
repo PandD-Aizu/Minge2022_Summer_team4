@@ -25,8 +25,8 @@ private:
 	Size MapSize{26, 50};
 	Grid<int> mapLayer0;
     Grid<int> mapLayer1;
-    Grid<int> mapLayer2;
 	Array<Stair*> stairs;
+    Array<Enemy*> enemies;
     Vec2 enemiespos[MAXENEMIESNUM];
 
     

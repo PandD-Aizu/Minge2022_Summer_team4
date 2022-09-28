@@ -10,6 +10,7 @@
 		2C1778A31CE0B65500BB8AD0 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C1778A21CE0B65500BB8AD0 /* icon.icns */; };
 		2C2137F828D6F1DD00298E62 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2137F728D6F1DD00298E62 /* Character.cpp */; };
 		2C2137FD28D6F58E00298E62 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2137FB28D6F58E00298E62 /* Player.cpp */; };
+		2C33F94828E4065200079803 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C33F94628E4065200079803 /* Enemy.cpp */; };
 		2C5C46DD26B4F00D005E8C85 /* libcurl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C46DC26B4F00D005E8C85 /* libcurl.tbd */; };
 		2C5C46DF26B4F014005E8C85 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C46DE26B4F014005E8C85 /* AudioToolbox.framework */; };
 		2C5C46E126B4F01C005E8C85 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C46E026B4F01C005E8C85 /* AVFoundation.framework */; };
@@ -54,6 +55,8 @@
 		2C2137F928D6F23C00298E62 /* myCamera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = myCamera.hpp; sourceTree = "<group>"; };
 		2C2137FB28D6F58E00298E62 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		2C2137FC28D6F58E00298E62 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		2C33F94628E4065200079803 /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
+		2C33F94728E4065200079803 /* Enemy.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Enemy.hpp; sourceTree = "<group>"; };
 		2C5C46DC26B4F00D005E8C85 /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
 		2C5C46DE26B4F014005E8C85 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2C5C46E026B4F01C005E8C85 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -161,6 +164,8 @@
 			children = (
 				2CDF46CE28D7184800D71A73 /* SwordZombie.cpp */,
 				2CDF46CF28D7184800D71A73 /* SwordZombie.hpp */,
+				2C33F94628E4065200079803 /* Enemy.cpp */,
+				2C33F94728E4065200079803 /* Enemy.hpp */,
 			);
 			path = Enemies;
 			sourceTree = "<group>";
@@ -308,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C33F94828E4065200079803 /* Enemy.cpp in Sources */,
 				2CDF46D028D7184800D71A73 /* SwordZombie.cpp in Sources */,
 				F2FCF16628CD388A00E40211 /* Main.cpp in Sources */,
 				F2FCF16528CD388A00E40211 /* Title.cpp in Sources */,

@@ -70,7 +70,7 @@ void Character::moveRestriction(Grid<int> mapLayer1) {
 							 static_cast<int32>((nextPos.y + collisionPoint.y + collisionSize.y - 1) / MapChip::MapChipSize)
 		);
 		// 右上もしくは右下が壁に接触した場合
-		if (mapLayer1[upperRightCell.y][upperRightCell.x] != 0 || mapLayer1[lowerRightCell.y][lowerRightCell.x] != 0) {
+		if (mapLayer1[upperRightCell.y][upperRightCell.x] == 2 || mapLayer1[lowerRightCell.y][lowerRightCell.x] == 2) {
 			// x座標を壁の左側の側面に矯正する
 			nextPos.x = upperRightCell.x * MapChip::MapChipSize - 1 - (collisionPoint.x + collisionSize.x - 1);
 		}
@@ -88,7 +88,7 @@ void Character::moveRestriction(Grid<int> mapLayer1) {
 							static_cast<int32>((nextPos.y + collisionPoint.y + collisionSize.y - 1) / MapChip::MapChipSize)
 		);
 		// 左上もしくは左下が壁に接触した場合
-		if (mapLayer1[upperLeftCell.y][upperLeftCell.x] != 0 || mapLayer1[lowerLeftCell.y][lowerLeftCell.x] != 0) {
+		if (mapLayer1[upperLeftCell.y][upperLeftCell.x] == 2 || mapLayer1[lowerLeftCell.y][lowerLeftCell.x] == 2) {
 			// x座標を壁の右側の側面に矯正する
 			nextPos.x = (upperLeftCell.x + 1) * MapChip::MapChipSize - (collisionPoint.x);
 
@@ -110,7 +110,7 @@ void Character::moveRestriction(Grid<int> mapLayer1) {
 							 static_cast<int32>((nextPos.y + collisionPoint.y + collisionSize.y - 1) / MapChip::MapChipSize)
 		);
 		// 左下もしくは右下が壁に接触した場合
-		if (mapLayer1[lowerLeftCell.y][lowerLeftCell.x] != 0 || mapLayer1[lowerRightCell.y][lowerRightCell.x] != 0) {
+		if (mapLayer1[lowerLeftCell.y][lowerLeftCell.x] == 2 || mapLayer1[lowerRightCell.y][lowerRightCell.x] == 2) {
 			// x座標を壁の左側の側面に矯正する
 			nextPos.y = lowerLeftCell.y * MapChip::MapChipSize - 1 - (collisionPoint.y + collisionSize.y - 1);
 
@@ -129,7 +129,7 @@ void Character::moveRestriction(Grid<int> mapLayer1) {
 							 static_cast<int32>((nextPos.y + collisionPoint.y) / MapChip::MapChipSize)
 		);
 		// 左上もしくは左下が壁に接触した場合
-		if (mapLayer1[upperLeftCell.y][upperLeftCell.x] != 0 || mapLayer1[upperRightCell.y][upperRightCell.x] != 0) {
+		if (mapLayer1[upperLeftCell.y][upperLeftCell.x] == 2 || mapLayer1[upperRightCell.y][upperRightCell.x] == 2) {
 			// x座標を壁の右側の側面に矯正する
 			nextPos.y = (upperLeftCell.y + 1) * MapChip::MapChipSize - (collisionPoint.y);
 

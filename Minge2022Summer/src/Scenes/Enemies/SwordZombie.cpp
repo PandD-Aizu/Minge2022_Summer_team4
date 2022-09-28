@@ -4,7 +4,7 @@ SwordZombie::SwordZombie(){
     speed=0.25;
     velocity={0,0};
 }
-void SwordZombie::update(){
+void SwordZombie::update(Vec2 playerpos){
     if(pos.x<playerpos.x){
         velocity.x=speed;
     }
@@ -23,9 +23,6 @@ void SwordZombie::draw()const{
 }
 void SwordZombie::getmypos(Point mypos){
     pos={mypos.x+collisionSize.x/2,mypos.y+collisionSize.y/2};
-}
-void SwordZombie::getplayerpos(Vec2 pos){
-    playerpos=pos;
 }
 Vec2 SwordZombie::sendmypos(){
     return pos;

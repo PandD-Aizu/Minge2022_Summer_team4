@@ -11,13 +11,12 @@ Game::Game(const InitData& init)
     countswordzombies=0;
     mapLayer0 = LoadCSV(U"layer0.csv");
     mapLayer1 = LoadCSV(U"layer1.csv");
-    mapLayer2 = LoadCSV(U"layer2.csv");
     for (int32 y = 0; y < MapSize.y; ++y)
     {
         for (int32 x = 0; x < MapSize.x; ++x)
         {
             const Point pos{ (x * MapChip::MapChipSize), (y * MapChip::MapChipSize) };
-            if (mapLayer2[y][x] == 5)
+            if (mapLayer1[y][x] == 5)
             {
                 swordzombie[countswordzombies].getmypos(pos);
                 countswordzombies++;
@@ -75,8 +74,7 @@ void Game::update()
     for(int32 i=0;i<countswordzombies;i++){
         swordzombie[i].moveRestriction(mapLayer1);
         swordzombie[i].moveNextPosition();
-        swordzombie[i].getplayerpos(player.pos);
-        swordzombie[i].update();
+        swordzombie[i].update(player.pos);
     }
 
 	// ゲームクリア領域の当たり判定
@@ -120,7 +118,7 @@ void Game::draw() const
                 
                 // 障害物のマップチップ
                 if (const int32 chipIndex = mapLayer1[y][x];
-                    chipIndex != 0) // 0 の場合は描画しない
+                    chipIndex == 2) // 0 の場合は描画しない
                 {
                     mapchip.get(chipIndex).draw(pos);
                 }
