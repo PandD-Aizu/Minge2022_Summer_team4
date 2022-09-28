@@ -5,6 +5,9 @@
 # include "myCamera.hpp"
 # include "Objects/Stair.hpp"
 # include "../Player.hpp"
+# include "Enemies/SwordZombie.hpp"
+
+#define MAXSWORDZOMBIESNUM 10
 
 
 
@@ -16,11 +19,16 @@ private:
 
 	RenderTexture renderTexture;
 
+    SwordZombie swordzombie[MAXSWORDZOMBIESNUM];
+    int32 countswordzombies;
 	// マップのセルの数（横 20, 縦 15 マス）
 	Size MapSize{26, 50};
 	Grid<int> mapLayer0;
-	Grid<int> mapLayer1;
+    Grid<int> mapLayer1;
 	Array<Stair*> stairs;
+    Array<Enemy*> enemies;
+    Vec2 enemiespos[MAXENEMIESNUM];
+
     
     ////////////////////////
     // プレイヤーの初期化
@@ -28,6 +36,8 @@ private:
 
 
 	Player player;
+
+
     
 	// ゲームクリア領域
 	Circle gameClearBody{ Vec2{ 16 * 16 + 8, 16 * 4 + 8}, 8 };
