@@ -36,6 +36,7 @@ Game::Game(const InitData& init)
 	camera.setScale(2);
 	camera.setTargetScale(2);
 	camera.setCenter(player.pos);
+	camera.setFollowingSpeed(0.05);
 }
 
 
@@ -46,8 +47,21 @@ void Game::update()
 		for (const auto& stair : stairs)  stair->update(&player.pos);
 	}
 
+	// カメラの移動
+	{
+		Vec2 cursorPos{ Cursor::Pos() };
+
+		if (cursorPos.x < 0) cursorPos.x = 0;
+		if (cursorPos.x > Scene::Width()) cursorPos.x = Scene::Width();
+		if (cursorPos.y < 0) cursorPos.y = 0;
+		if (cursorPos.y > Scene::Height()) cursorPos.y = Scene::Height();
+
+		camera.setTargetCenter(
+			player.pos + (cursorPos - Vec2(Scene::Width() / 2, Scene::Height() / 2)) / 5
+		);
+	}
+
 	camera.update();
-	camera.setCenter(player.pos);
 
     //camera.update();
     //const auto t = camera.createTransformer();
