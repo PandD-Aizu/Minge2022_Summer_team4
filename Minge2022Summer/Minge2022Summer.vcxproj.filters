@@ -165,6 +165,9 @@
     <ClCompile Include="src\Scenes\Enemies\SwordZombie.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\LoadCSV.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="App\icon.ico">
@@ -807,9 +810,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\common.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\LoadCSV.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\MapChip.hpp">

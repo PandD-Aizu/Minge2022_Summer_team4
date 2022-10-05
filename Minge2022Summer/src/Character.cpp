@@ -1,60 +1,35 @@
 ﻿# include "Character.hpp"
+# include "common.hpp"
 
 Character::Character() {
 	// 現在の座標
 	pos = Vec2{ 6 * 16, 6 * 16 };
 	// 現在の移動速度
 	velocity = Vec2{ 0, 0 };
+
+	mapLayer0 = LoadCSV(U"layer0.csv");
+	mapLayer1 = LoadCSV(U"layer1.csv");
+}
+
+
+void Character::update() {
+
+	//decideDirection();	//キャラクターの移動関数
+
+	moveRestriction(mapLayer1);
+
+	groundMapChipCollision(mapLayer0);
+
+	moveNextPosition();
 }
 
 
 
-//キャラクターの移動
-void Character::decideDirection() {
-	// 速度を0で初期化する
-	velocity = Vec2(0, 0);
 
-
-	// 前フレームのプレイヤーの向きを保存
-	if (direction != 4) lastDirection = direction;
-	// プレイヤーの向きを初期化
-	direction = 4;
-
-
-	// キー操作によりプレイヤーに加算される速度
-	Vec2 deltaPlayerVelocity{ 0, 0 };
-
-	// キーボードで８方向移動
-	if (KeyDown.pressed()) { // ↓ キー
-		deltaPlayerVelocity.y += walkSpeed;
-		direction += 1;
-	}
-	if (KeyUp.pressed()) { // ↑ キー
-		deltaPlayerVelocity.y -= walkSpeed;
-		direction -= 1;
-	}
-	if (KeyLeft.pressed()) { // ← キー
-
-		deltaPlayerVelocity.x -= walkSpeed;
-		direction -= 3;
-	}
-	if (KeyRight.pressed()) { // → キー
-
-		deltaPlayerVelocity.x += walkSpeed;
-		direction += 3;
-	}
-
-	// 斜め移動の際は速さを 1/√2 にする
-	if (direction % 2 == 0) deltaPlayerVelocity *= 1 / Math::Sqrt(2);
-
-	// キー操作による速度を適用
-	velocity += deltaPlayerVelocity;
-
-}
 
 
 //移動制限
-void Character::moveRestriction(Grid<int> mapLayer1) {
+void Character::moveRestriction(Grid<int> mapLayer) {
 	// x方向の移動制限
 	nextPos = pos + velocity * Vec2(1, 0);
 	// 右方向に移動中の場合
@@ -70,7 +45,7 @@ void Character::moveRestriction(Grid<int> mapLayer1) {
 							 static_cast<int32>((nextPos.y + collisionPoint.y + collisionSize.y - 1) / MapChip::MapChipSize)
 		);
 		// 右上もしくは右下が壁に接触した場合
-		if (mapLayer1[upperRightCell.y][upperRightCell.x] == 2 || mapLayer1[lowerRightCell.y][lowerRightCell.x] == 2) {
+		if (mapLayer[upperRightCell.y][upperRightCell.x] == 2 || mapLayer[lowerRightCell.y][lowerRightCell.x] == 2) {
 			// x座標を壁の左側の側面に矯正する
 			nextPos.x = upperRightCell.x * MapChip::MapChipSize - 1 - (collisionPoint.x + collisionSize.x - 1);
 		}
@@ -88,7 +63,7 @@ void Character::moveRestriction(Grid<int> mapLayer1) {
 							static_cast<int32>((nextPos.y + collisionPoint.y + collisionSize.y - 1) / MapChip::MapChipSize)
 		);
 		// 左上もしくは左下が壁に接触した場合
-		if (mapLayer1[upperLeftCell.y][upperLeftCell.x] == 2 || mapLayer1[lowerLeftCell.y][lowerLeftCell.x] == 2) {
+		if (mapLayer[upperLeftCell.y][upperLeftCell.x] == 2 || mapLayer[lowerLeftCell.y][lowerLeftCell.x] == 2) {
 			// x座標を壁の右側の側面に矯正する
 			nextPos.x = (upperLeftCell.x + 1) * MapChip::MapChipSize - (collisionPoint.x);
 
@@ -156,5 +131,25 @@ void Character::moveNextPosition() {
 	pos = nextPos;
 }
 
+void Character::draw() const{
+	// 歩行のアニメーションのインデックス(x, y)
+	Vec2 animationIndex{ 0, 0 };
+
+	// 横方向のインデックス（歩行モーション）
+	if (direction == 4) animationIndex.x = 0;
+	else animationIndex.x = static_cast<int32>(Scene::Time() * 10) % 6;
+
+	// 縦方向のインデックス（プレイヤーの向き）
+	// プレイヤーが移動中でない場合は、最後に向いていた方向を使用する
+	if (direction == 4) animationIndex.y = lastDirection;
+	else animationIndex.y = direction;
+
+	// 描画
+	CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
+		.draw(
+			  pos.x - textureCenter.x,
+					pos.y - textureCenter.y
+		);
+}
 
 
