@@ -2,4 +2,6 @@
 class Enemy : public Character{
 private:
 public:
+	Vec2 playerPos;
+	void getPlayerPos(Vec2);
 };

@@ -19,7 +19,6 @@ private:
 
 	RenderTexture renderTexture;
 
-    SwordZombie swordzombie[MAXSWORDZOMBIESNUM];
     int32 countswordzombies;
 	// マップのセルの数（横 20, 縦 15 マス）
 	Size MapSize{26, 50};
@@ -29,15 +28,7 @@ private:
     Array<Enemy*> enemies;
     Vec2 enemiespos[MAXENEMIESNUM];
 
-    
-    ////////////////////////
-    // プレイヤーの初期化
-    ////////////////////////
-
-
 	Player player;
-
-
     
 	// ゲームクリア領域
 	Circle gameClearBody{ Vec2{ 16 * 16 + 8, 16 * 4 + 8}, 8 };

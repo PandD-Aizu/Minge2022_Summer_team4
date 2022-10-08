@@ -46,6 +46,7 @@ void Player::draw() const {
 					pos.y - textureCenter.y
 		);
 }
+
 bool Player::died(){
     if(hp<=0){
         return true;
