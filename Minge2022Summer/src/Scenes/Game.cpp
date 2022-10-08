@@ -67,7 +67,6 @@ void Game::update()
 	camera.update();
 
 	// プレイヤーの状態更新
-	player.getenemiespos(enemiespos);
 	player.update();
 
 
@@ -78,6 +77,7 @@ void Game::update()
 	for (auto& enemy : enemies) {
 		enemy->getPlayerPos(player.pos);
 		enemy->update();
+		player.detectEnemyCollision(enemy);
 	}
 
 	// ゲームクリア領域の当たり判定

@@ -1,5 +1,6 @@
 ﻿#pragma once
 # include "Character.hpp"
+# include "Scenes/Enemies/Enemy.hpp"
 #define MAXENEMIESNUM 100
 
 class Player : public Character{
@@ -12,9 +13,9 @@ private:
 public:
     Player();
     void update();
-    void getenemiespos(Vec2[]);
 	void draw() const;		//プレイヤーの歩行の描画
     bool died();
 	void decideDirection();
+	void detectEnemyCollision(Enemy*);
 
 };

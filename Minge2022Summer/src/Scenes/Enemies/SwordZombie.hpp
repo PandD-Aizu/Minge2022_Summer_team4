@@ -1,4 +1,5 @@
-﻿#include"Enemy.hpp"
+﻿# pragma once
+#include"Enemy.hpp"
 class SwordZombie : public Enemy{
 private:
     MapChip mapchip;

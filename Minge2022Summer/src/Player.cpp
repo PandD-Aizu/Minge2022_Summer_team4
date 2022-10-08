@@ -1,4 +1,5 @@
 ﻿# include "Player.hpp"
+
 Player::Player(){
     hp=1;
     for(int32 i=0;i<MAXENEMIESNUM;i++){
@@ -21,11 +22,12 @@ void Player::update(){
 	moveNextPosition();
 }
 
-void Player::getenemiespos(Vec2 pos[MAXENEMIESNUM]){
-    for(int32 i=0;i<MAXENEMIESNUM;i++){
-        enemiespos[i]=pos[i];
-    }
+void Player::detectEnemyCollision(Enemy * enemy) {
+	if (enemy->pos.distanceFrom(pos) < 16) {
+		hp--;
+	}
 }
+
 void Player::draw() const {
 	// 歩行のアニメーションのインデックス(x, y)
 	Vec2 animationIndex{ 0, 0 };
