@@ -1,5 +1,5 @@
 ﻿#include "Game.hpp"
-# include "../LoadCSV.hpp"
+//# include "../LoadCSV.hpp"
 
 Game::Game(const InitData& init)
 : IScene{ init }
@@ -56,20 +56,20 @@ void Game::update()
     }
     player.getenemiespos(enemiespos);
     player.update();
-    //////////////////////
-    // プレイヤーの移動
-    //////////////////////
+ //   //////////////////////
+ //   // プレイヤーの移動
+ //   //////////////////////
 
-	//プレイヤーの方向の変更
-	player.decideDirection();
-    
+	////プレイヤーの方向の変更
+	//player.decideDirection();
+ //   
 
 
-	//移動制限処理
-    player.moveRestriction(mapLayer1);
-    player.groundMapChipCollision(mapLayer0);
-	//プレイヤーの移動
-    player.moveNextPosition();
+	////移動制限処理
+ //   player.moveRestriction(mapLayer1);
+ //   player.groundMapChipCollision(mapLayer0);
+	////プレイヤーの移動
+ //   player.moveNextPosition();
 
     for(int32 i=0;i<countswordzombies;i++){
         swordzombie[i].moveRestriction(mapLayer1);
@@ -138,7 +138,7 @@ void Game::draw() const
 
         {
 			//歩行アニメーションのインデックス(0, 1, 2)
-			player.drawWalk();
+			player.draw();
         }
     }
 }

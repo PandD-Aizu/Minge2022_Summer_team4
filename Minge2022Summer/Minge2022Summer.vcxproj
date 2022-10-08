@@ -113,6 +113,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\LoadCSV.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Character.cpp" />
     <ClCompile Include="src\Player.cpp" />
@@ -322,7 +323,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\common.hpp" />
-    <ClInclude Include="src\LoadCSV.hpp" />
     <ClInclude Include="src\MapChip.hpp" />
     <ClInclude Include="src\Character.hpp" />
     <ClInclude Include="src\Player.hpp" />
