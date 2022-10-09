@@ -38,6 +38,7 @@
 		2C5C470F26B4F08A005E8C85 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C470D26B4F08A005E8C85 /* libopus.a */; };
 		2C5C471126B4F08E005E8C85 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C471026B4F08E005E8C85 /* libzlib.a */; };
 		2C6906D82298140F00A427D0 /* engine in Resources */ = {isa = PBXBuildFile; fileRef = 2C6906D72298140F00A427D0 /* engine */; };
+		2CCB96B428F29E3800BEB395 /* LoadCSV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB96B328F29E3800BEB395 /* LoadCSV.cpp */; };
 		2CD8412C283263B2005013A6 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD8412B283263B2005013A6 /* libboost_filesystem.a */; };
 		2CDF46D028D7184800D71A73 /* SwordZombie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46CE28D7184800D71A73 /* SwordZombie.cpp */; };
 		398F50AC28CDD4F8006D7A50 /* GameClear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398F50AB28CDD4F7006D7A50 /* GameClear.cpp */; };
@@ -86,6 +87,7 @@
 		2C6906D72298140F00A427D0 /* engine */ = {isa = PBXFileReference; lastKnownFileType = folder; name = engine; path = App/engine; sourceTree = "<group>"; };
 		2C7AE38928E02D2600306D27 /* Stair.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stair.hpp; sourceTree = "<group>"; };
 		2C7AE38A28E02D2600306D27 /* Object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Object.hpp; sourceTree = "<group>"; };
+		2CCB96B328F29E3800BEB395 /* LoadCSV.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadCSV.cpp; sourceTree = "<group>"; };
 		2CD8412B283263B2005013A6 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../lib/macOS/boost/libboost_filesystem.a; sourceTree = "<group>"; };
 		2CDF46CE28D7184800D71A73 /* SwordZombie.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SwordZombie.cpp; sourceTree = "<group>"; };
 		2CDF46CF28D7184800D71A73 /* SwordZombie.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SwordZombie.hpp; sourceTree = "<group>"; };
@@ -96,7 +98,6 @@
 		F2FCF15E28CD388A00E40211 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		F2FCF15F28CD388A00E40211 /* Title.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Title.cpp; sourceTree = "<group>"; };
 		F2FCF16028CD388A00E40211 /* MapChip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MapChip.hpp; sourceTree = "<group>"; };
-		F2FCF16128CD388A00E40211 /* LoadCSV.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LoadCSV.hpp; sourceTree = "<group>"; };
 		F2FCF16228CD388A00E40211 /* common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = common.hpp; sourceTree = "<group>"; };
 		F2FCF16328CD388A00E40211 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -222,7 +223,7 @@
 				2C2137F728D6F1DD00298E62 /* Character.cpp */,
 				2C2137F628D6F1DD00298E62 /* Character.hpp */,
 				F2FCF16028CD388A00E40211 /* MapChip.hpp */,
-				F2FCF16128CD388A00E40211 /* LoadCSV.hpp */,
+				2CCB96B328F29E3800BEB395 /* LoadCSV.cpp */,
 				F2FCF16228CD388A00E40211 /* common.hpp */,
 				F2FCF16328CD388A00E40211 /* Main.cpp */,
 			);
@@ -316,6 +317,7 @@
 				2C33F94828E4065200079803 /* Enemy.cpp in Sources */,
 				2CDF46D028D7184800D71A73 /* SwordZombie.cpp in Sources */,
 				F2FCF16628CD388A00E40211 /* Main.cpp in Sources */,
+				2CCB96B428F29E3800BEB395 /* LoadCSV.cpp in Sources */,
 				F2FCF16528CD388A00E40211 /* Title.cpp in Sources */,
 				2C2137FD28D6F58E00298E62 /* Player.cpp in Sources */,
 				F2FCF16428CD388A00E40211 /* Game.cpp in Sources */,
