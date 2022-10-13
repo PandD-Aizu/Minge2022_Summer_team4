@@ -4,10 +4,7 @@
 Game::Game(const InitData& init)
 	: IScene{ init }
 {
-	for (int32 i = 0; i < MAXENEMIESNUM; i++) {
-		enemiespos[i] = { 1000,1000 };
-	}
-	stairs << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
+	objects << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
 	countswordzombies = 0;
 	mapLayer0 = LoadCSV(U"layer0.csv");
 	mapLayer1 = LoadCSV(U"layer1.csv");
@@ -47,7 +44,7 @@ void Game::update()
 {
 	// オブジェクトの状態更新
 	{
-		for (const auto& stair : stairs)  stair->update(&player.pos);
+		for (const auto& obj : objects)  obj->update();
 	}
 
 	// カメラの移動
@@ -78,6 +75,11 @@ void Game::update()
 		enemy->getPlayerPos(player.pos);
 		enemy->update();
 		player.detectEnemyCollision(enemy);
+	}
+
+	for (auto& obj : objects) {
+		obj->update();
+		player.detectObjCollision(obj);
 	}
 
 	// ゲームクリア領域の当たり判定
@@ -133,7 +135,7 @@ void Game::draw() const
 
 		// オブジェクトの描画
 		{
-			for (const auto& stair : stairs)  stair->draw();
+			for (const auto& obj : objects)  obj->draw();
 		}
 
 		// ゲームクリア領域

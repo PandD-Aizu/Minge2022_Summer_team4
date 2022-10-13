@@ -3,7 +3,7 @@
 # include "../MapChip.hpp"
 # include "../Character.hpp"
 # include "myCamera.hpp"
-# include "Objects/Stair.hpp"
+# include "Objects/Object.hpp"
 # include "../Player.hpp"
 # include "Enemies/SwordZombie.hpp"
 
@@ -24,9 +24,8 @@ private:
 	Size MapSize{26, 50};
 	Grid<int> mapLayer0;
     Grid<int> mapLayer1;
-	Array<Stair*> stairs;
     Array<Enemy*> enemies;
-    Vec2 enemiespos[MAXENEMIESNUM];
+	Array<Object*> objects;
 
 	Player player;
     
