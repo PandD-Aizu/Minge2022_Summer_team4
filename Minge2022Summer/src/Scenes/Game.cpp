@@ -42,9 +42,23 @@ Game::Game(const InitData& init)
 
 void Game::update()
 {
+	// =========== デバッグ ==========
+	if (KeyB.down()) objects << new Bomb(player.pos); // 敵用の爆弾の設置
+	// ===============================
+
 	// オブジェクトの状態更新
 	{
-		for (const auto& obj : objects)  obj->update();
+		for (auto obj = objects.begin(); obj != objects.end(); obj++) {
+			(*obj)->update();
+
+			// 削除フラグ確認
+			if ((*obj)->destructorFlag) {
+				delete* obj;
+				obj = objects.erase(obj);
+
+				if (obj == objects.end()) break; // 削除した結果末尾だったらループを抜ける
+			}
+		}
 	}
 
 	// カメラの移動

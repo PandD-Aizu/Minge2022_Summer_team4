@@ -45,6 +45,12 @@ void Player::detectObjCollision(Object* obj) {
 			stair->reverseLock = false;
 		}
 	}
+
+	if (Bomb* bomb = dynamic_cast<Bomb*>(obj)) {
+		if (bomb->state && bomb->position.distanceFrom(pos) <= bomb->range) {
+			this->hp--;
+		}
+	}
 }
 
 void Player::draw() const {
