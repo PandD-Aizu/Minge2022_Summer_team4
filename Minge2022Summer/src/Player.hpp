@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 # include "Character.hpp"
 # include "Scenes/Enemies/Enemy.hpp"
 #define MAXENEMIESNUM 100
@@ -9,7 +9,6 @@ private:
 	const Texture CharacterTexture{ U"playerSprite.png" };
     
     int hp;
-    Vec2 enemiespos[MAXENEMIESNUM];
 public:
     Player();
     void update();

@@ -1,4 +1,4 @@
-﻿# include "Character.hpp"
+# include "Character.hpp"
 # include "common.hpp"
 
 Character::Character() {
@@ -6,9 +6,6 @@ Character::Character() {
 	pos = Vec2{ 6 * 16, 6 * 16 };
 	// 現在の移動速度
 	velocity = Vec2{ 0, 0 };
-
-	mapLayer0 = LoadCSV(U"layer0.csv");
-	mapLayer1 = LoadCSV(U"layer1.csv");
 }
 
 

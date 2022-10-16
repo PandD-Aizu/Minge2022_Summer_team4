@@ -1,6 +1,5 @@
-﻿#pragma once
+#pragma once
 # include "common.hpp"
-# include "MapChip.hpp"
 
 /*
 * 使い方

@@ -41,8 +41,9 @@
 		2CCB96B428F29E3800BEB395 /* LoadCSV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB96B328F29E3800BEB395 /* LoadCSV.cpp */; };
 		2CD8412C283263B2005013A6 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD8412B283263B2005013A6 /* libboost_filesystem.a */; };
 		2CDF46D028D7184800D71A73 /* SwordZombie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46CE28D7184800D71A73 /* SwordZombie.cpp */; };
+		398DBC0728FBF836003FFC6F /* MapChip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2FCF16028CD388A00E40211 /* MapChip.cpp */; };
 		398F50AC28CDD4F8006D7A50 /* GameClear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398F50AB28CDD4F7006D7A50 /* GameClear.cpp */; };
-		F2FCF16428CD388A00E40211 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2FCF15E28CD388A00E40211 /* Game.cpp */; };
+		F2FCF16428CD388A00E40211 /* Stage1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2FCF15E28CD388A00E40211 /* Stage1.cpp */; };
 		F2FCF16528CD388A00E40211 /* Title.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2FCF15F28CD388A00E40211 /* Title.cpp */; };
 		F2FCF16628CD388A00E40211 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2FCF16328CD388A00E40211 /* Main.cpp */; };
 /* End PBXBuildFile section */
@@ -93,11 +94,11 @@
 		2CDF46CF28D7184800D71A73 /* SwordZombie.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SwordZombie.hpp; sourceTree = "<group>"; };
 		398F50AA28CDD4F7006D7A50 /* GameClear.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameClear.hpp; sourceTree = "<group>"; };
 		398F50AB28CDD4F7006D7A50 /* GameClear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameClear.cpp; sourceTree = "<group>"; };
-		F2FCF15C28CD388A00E40211 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
+		F2FCF15C28CD388A00E40211 /* Stage1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stage1.hpp; sourceTree = "<group>"; };
 		F2FCF15D28CD388A00E40211 /* Title.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Title.hpp; sourceTree = "<group>"; };
-		F2FCF15E28CD388A00E40211 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		F2FCF15E28CD388A00E40211 /* Stage1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stage1.cpp; sourceTree = "<group>"; };
 		F2FCF15F28CD388A00E40211 /* Title.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Title.cpp; sourceTree = "<group>"; };
-		F2FCF16028CD388A00E40211 /* MapChip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MapChip.hpp; sourceTree = "<group>"; };
+		F2FCF16028CD388A00E40211 /* MapChip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapChip.cpp; sourceTree = "<group>"; };
 		F2FCF16228CD388A00E40211 /* common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = common.hpp; sourceTree = "<group>"; };
 		F2FCF16328CD388A00E40211 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -222,7 +223,7 @@
 				2C2137FC28D6F58E00298E62 /* Player.hpp */,
 				2C2137F728D6F1DD00298E62 /* Character.cpp */,
 				2C2137F628D6F1DD00298E62 /* Character.hpp */,
-				F2FCF16028CD388A00E40211 /* MapChip.hpp */,
+				F2FCF16028CD388A00E40211 /* MapChip.cpp */,
 				2CCB96B328F29E3800BEB395 /* LoadCSV.cpp */,
 				F2FCF16228CD388A00E40211 /* common.hpp */,
 				F2FCF16328CD388A00E40211 /* Main.cpp */,
@@ -238,9 +239,9 @@
 				2C2137F928D6F23C00298E62 /* myCamera.hpp */,
 				398F50AB28CDD4F7006D7A50 /* GameClear.cpp */,
 				398F50AA28CDD4F7006D7A50 /* GameClear.hpp */,
-				F2FCF15C28CD388A00E40211 /* Game.hpp */,
+				F2FCF15C28CD388A00E40211 /* Stage1.hpp */,
 				F2FCF15D28CD388A00E40211 /* Title.hpp */,
-				F2FCF15E28CD388A00E40211 /* Game.cpp */,
+				F2FCF15E28CD388A00E40211 /* Stage1.cpp */,
 				F2FCF15F28CD388A00E40211 /* Title.cpp */,
 			);
 			path = Scenes;
@@ -314,13 +315,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				398DBC0728FBF836003FFC6F /* MapChip.cpp in Sources */,
 				2C33F94828E4065200079803 /* Enemy.cpp in Sources */,
 				2CDF46D028D7184800D71A73 /* SwordZombie.cpp in Sources */,
 				F2FCF16628CD388A00E40211 /* Main.cpp in Sources */,
 				2CCB96B428F29E3800BEB395 /* LoadCSV.cpp in Sources */,
 				F2FCF16528CD388A00E40211 /* Title.cpp in Sources */,
 				2C2137FD28D6F58E00298E62 /* Player.cpp in Sources */,
-				F2FCF16428CD388A00E40211 /* Game.cpp in Sources */,
+				F2FCF16428CD388A00E40211 /* Stage1.cpp in Sources */,
 				2C2137F828D6F1DD00298E62 /* Character.cpp in Sources */,
 				398F50AC28CDD4F8006D7A50 /* GameClear.cpp in Sources */,
 			);

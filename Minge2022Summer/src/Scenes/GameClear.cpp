@@ -1,4 +1,4 @@
-﻿# include "GameClear.hpp"
+# include "GameClear.hpp"
 
 GameClear::GameClear(const InitData& init)
 	: IScene{ init }
@@ -15,7 +15,7 @@ void GameClear::update()
 	if (btn.mouseOver() && MouseL.pressed())
 	{
 		// 次のステージに遷移
-		changeScene(U"Game");
+		changeScene(U"Stage1");
 	}
 }
 

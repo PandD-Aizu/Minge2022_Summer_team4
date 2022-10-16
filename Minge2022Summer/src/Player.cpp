@@ -1,18 +1,10 @@
-﻿# include "Player.hpp"
+# include "Player.hpp"
 
 Player::Player(){
     hp=1;
-    for(int32 i=0;i<MAXENEMIESNUM;i++){
-        enemiespos[i]={1000,1000};
-    }
 }
 
 void Player::update(){
-    for(int32 i=0;i<MAXENEMIESNUM;i++){
-        if(enemiespos[i].distanceFrom(pos)<16){
-            hp--;
-        }
-    }
 	decideDirection();
 
 	moveRestriction(mapLayer1);

@@ -1,10 +1,9 @@
-﻿#pragma once
 # include "common.hpp"
 
 // CSV ファイルから int32 の二次元配列を読み込む
 Grid<int32> LoadCSV(FilePathView path)
 {
-	// CSC ファイルを読み込む
+	// CSV ファイルを読み込む
 	CSV csv{ path };
 
 	// 読み込みに失敗したら
