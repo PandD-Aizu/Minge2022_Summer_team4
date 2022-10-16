@@ -1,6 +1,8 @@
 ﻿#pragma once
 # include "Character.hpp"
 # include "Scenes/Enemies/Enemy.hpp"
+# include "Scenes/Objects/Object.hpp"
+
 #define MAXENEMIESNUM 100
 
 class Player : public Character{
@@ -17,5 +19,6 @@ public:
     bool died();
 	void decideDirection();
 	void detectEnemyCollision(Enemy*);
+	void detectObjCollision(Object*);
 
 };

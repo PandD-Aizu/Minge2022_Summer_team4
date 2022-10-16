@@ -121,6 +121,7 @@
     <ClCompile Include="src\Scenes\Enemies\SwordZombie.cpp" />
     <ClCompile Include="src\Scenes\Game.cpp" />
     <ClCompile Include="src\Scenes\GameClear.cpp" />
+    <ClCompile Include="src\Scenes\Objects\Stair.cpp" />
     <ClCompile Include="src\Scenes\Title.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

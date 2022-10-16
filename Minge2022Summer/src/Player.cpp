@@ -22,9 +22,28 @@ void Player::update(){
 	moveNextPosition();
 }
 
-void Player::detectEnemyCollision(Enemy * enemy) {
-	if (enemy->pos.distanceFrom(pos) < 16) {
+void Player::detectEnemyCollision(Enemy * enm) {
+	if (enm->pos.distanceFrom(pos) < 16) {
 		hp--;
+	}
+}
+
+
+void Player::detectObjCollision(Object* obj) {
+	if (Stair* stair = dynamic_cast<Stair*>(obj)) {
+		
+		if (stair->inPos.distanceFrom(pos) <= 10 && !(stair->reverseLock)) {
+			pos = stair->outPos;
+			stair->reverseLock = true;
+		}
+		if (stair->outPos.distanceFrom(pos) <= 10 && stair->isReversable && !(stair->reverseLock)) {
+			pos = stair->inPos;
+			stair->reverseLock = true;
+		}
+
+		if (stair->inPos.distanceFrom(pos) > 20 && stair->outPos.distanceFrom(pos) > 20) {
+			stair->reverseLock = false;
+		}
 	}
 }
 
