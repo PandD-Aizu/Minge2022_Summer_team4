@@ -10,7 +10,7 @@ private:
 	// テクスチャ読み込み
 	const Texture CharacterTexture{ U"playerSprite.png" };
 
-	int playerDirection;
+	int direction;
     
     int hp;
     Vec2 enemiespos[MAXENEMIESNUM];
