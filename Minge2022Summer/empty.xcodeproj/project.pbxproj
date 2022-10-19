@@ -41,6 +41,7 @@
 		2CCB96B428F29E3800BEB395 /* LoadCSV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB96B328F29E3800BEB395 /* LoadCSV.cpp */; };
 		2CD8412C283263B2005013A6 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD8412B283263B2005013A6 /* libboost_filesystem.a */; };
 		2CDF46D028D7184800D71A73 /* SwordZombie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46CE28D7184800D71A73 /* SwordZombie.cpp */; };
+		2CF69C5E29001ACA00D317C5 /* Stair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CF69C5D29001ACA00D317C5 /* Stair.cpp */; };
 		398F50AC28CDD4F8006D7A50 /* GameClear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398F50AB28CDD4F7006D7A50 /* GameClear.cpp */; };
 		F2FCF16428CD388A00E40211 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2FCF15E28CD388A00E40211 /* Game.cpp */; };
 		F2FCF16528CD388A00E40211 /* Title.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2FCF15F28CD388A00E40211 /* Title.cpp */; };
@@ -91,6 +92,7 @@
 		2CD8412B283263B2005013A6 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../lib/macOS/boost/libboost_filesystem.a; sourceTree = "<group>"; };
 		2CDF46CE28D7184800D71A73 /* SwordZombie.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SwordZombie.cpp; sourceTree = "<group>"; };
 		2CDF46CF28D7184800D71A73 /* SwordZombie.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SwordZombie.hpp; sourceTree = "<group>"; };
+		2CF69C5D29001ACA00D317C5 /* Stair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stair.cpp; sourceTree = "<group>"; };
 		398F50AA28CDD4F7006D7A50 /* GameClear.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameClear.hpp; sourceTree = "<group>"; };
 		398F50AB28CDD4F7006D7A50 /* GameClear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameClear.cpp; sourceTree = "<group>"; };
 		F2FCF15C28CD388A00E40211 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				2C7AE38A28E02D2600306D27 /* Object.hpp */,
+				2CF69C5D29001ACA00D317C5 /* Stair.cpp */,
 				2C7AE38928E02D2600306D27 /* Stair.hpp */,
 			);
 			path = Objects;
@@ -315,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C33F94828E4065200079803 /* Enemy.cpp in Sources */,
+				2CF69C5E29001ACA00D317C5 /* Stair.cpp in Sources */,
 				2CDF46D028D7184800D71A73 /* SwordZombie.cpp in Sources */,
 				F2FCF16628CD388A00E40211 /* Main.cpp in Sources */,
 				2CCB96B428F29E3800BEB395 /* LoadCSV.cpp in Sources */,

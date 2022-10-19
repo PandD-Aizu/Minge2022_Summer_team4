@@ -1,4 +1,5 @@
 ﻿# include "Player.hpp"
+# include "Math.h"
 
 Player::Player(){
     hp=1;
@@ -20,6 +21,8 @@ void Player::update(){
 	groundMapChipCollision(mapLayer0);
 
 	moveNextPosition();
+
+	changeDirection();
 }
 
 void Player::detectEnemyCollision(Enemy * enm) {
@@ -63,8 +66,10 @@ void Player::draw() const {
 
 	// 縦方向のインデックス（プレイヤーの向き）
 	// プレイヤーが移動中でない場合は、最後に向いていた方向を使用する
-	if (direction == 4) animationIndex.y = lastDirection;
-	else animationIndex.y = direction;
+	//if (direction == 4) animationIndex.y = lastDirection;
+	//else animationIndex.y = direction;
+
+	animationIndex.y = direction;
 
 	// 描画
 	CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
@@ -123,5 +128,44 @@ void Player::decideDirection() {
 
 	// キー操作による速度を適用
 	velocity += deltaVelocity;
+
+}
+
+void Player::changeDirection() {
+	//プレイヤーの向きをマウスの方向に変更する関数です。
+	double theta;
+
+	theta = atan2(-(Cursor::Pos().y - Scene::Height() / 2) , Cursor::Pos().x - Scene::Width() / 2);
+
+	if (theta < 0) {
+		theta = theta + 2 * Math::Pi;
+	}
+
+	theta = theta * 360 / (2 * Math::Pi);
+
+	if ((theta >= 0 && theta < 22.5) || (theta >= 337.5) && theta < 360) {	//右向き→
+		direction = 7;
+	}
+	else if (theta < 67.5) {		//右上
+		direction = 6;
+	}
+	else if (theta < 112.5) {		//上
+		direction = 3;
+	}
+	else if (theta < 157.5) {		//左上
+		direction = 0;
+	}
+	else if (theta < 202.5) {		//左
+		direction = 1;
+	}
+	else if (theta < 247.5) {		//左下
+		direction = 2;
+	}
+	else if (theta < 292.5) {		//下
+		direction = 5;
+	}
+	else {							//右下
+		direction = 8;
+	}
 
 }
