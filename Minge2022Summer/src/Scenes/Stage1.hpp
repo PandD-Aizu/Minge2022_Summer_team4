@@ -7,11 +7,8 @@
 # include "../Player.hpp"
 # include "Enemies/SwordZombie.hpp"
 
-#define MAXSWORDZOMBIESNUM 10
 
-
-
-class Game : public App::Scene {
+class Stage1 : public App::Scene {
 private:
 	MyCamera camera;
 	// マップチップ用テクスチャ
@@ -34,7 +31,7 @@ private:
 
 
 public:
-	Game(const InitData& init);
+	Stage1(const InitData& init);
 
 	void update() override;
 	void draw() const override;

@@ -1,7 +1,7 @@
-﻿#include "Game.hpp"
+﻿#include "Stage1.hpp"
 //# include "../LoadCSV.hpp"
 
-Game::Game(const InitData& init)
+Stage1::Stage1(const InitData& init)
 	: IScene{ init }
 {
 	objects << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
@@ -40,7 +40,7 @@ Game::Game(const InitData& init)
 }
 
 
-void Game::update()
+void Stage1::update()
 {
 	// =========== デバッグ ==========
 	if (KeyB.down()) objects << new Bomb(player.pos); // 敵用の爆弾の設置
@@ -111,7 +111,7 @@ void Game::update()
 	}
 }
 
-void Game::draw() const
+void Stage1::draw() const
 {
 	{
 		auto t = camera.createTransformer();

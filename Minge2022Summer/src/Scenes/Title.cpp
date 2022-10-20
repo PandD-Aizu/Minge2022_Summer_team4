@@ -14,7 +14,7 @@ void Title::update()
 	if (btn.mouseOver() && MouseL.pressed())
 	{
 		// ゲームシーンに遷移
-		changeScene(U"Game");
+		changeScene(U"Stage1");
 	}
 }
 
