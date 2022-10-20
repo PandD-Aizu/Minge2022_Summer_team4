@@ -113,11 +113,19 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\LoadCSV.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Character.cpp" />
+    <ClCompile Include="src\MapChip.cpp" />
     <ClCompile Include="src\Player.cpp" />
-    <ClCompile Include="src\Scenes\Game.cpp" />
+    <ClCompile Include="src\Scenes\Enemies\Enemy.cpp" />
+    <ClCompile Include="src\Scenes\Enemies\SwordZombie.cpp" />
+    <ClCompile Include="src\Scenes\Stage1.cpp" />
     <ClCompile Include="src\Scenes\GameClear.cpp" />
+    <ClCompile Include="src\Scenes\Objects\Bomb.cpp" />
+    <ClCompile Include="src\Scenes\Objects\Stair.cpp" />
+    <ClCompile Include="src\Scenes\Stage2.cpp" />
+    <ClCompile Include="src\Scenes\Stage3.cpp" />
     <ClCompile Include="src\Scenes\Title.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -320,16 +328,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\common.hpp" />
-    <ClInclude Include="src\LoadCSV.hpp" />
-    <ClInclude Include="src\MapChip.hpp" />
     <ClInclude Include="src\Character.hpp" />
     <ClInclude Include="src\Player.hpp" />
-    <ClInclude Include="src\Scenes\Game.hpp" />
+    <ClInclude Include="src\Scenes\Enemies\Enemy.hpp" />
+    <ClInclude Include="src\Scenes\Enemies\SwordZombie.hpp" />
+    <ClInclude Include="src\Scenes\Stage1.hpp" />
     <ClInclude Include="src\Scenes\GameClear.hpp" />
     <ClInclude Include="src\Scenes\myCamera.hpp" />
     <ClInclude Include="src\Scenes\Objects\DamageFloor.hpp" />
     <ClInclude Include="src\Scenes\Objects\Object.hpp" />
-    <ClInclude Include="src\Scenes\Objects\Stair.hpp" />
+    <ClInclude Include="src\Scenes\Stage2.hpp" />
+    <ClInclude Include="src\Scenes\Stage3.hpp" />
     <ClInclude Include="src\Scenes\Title.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
