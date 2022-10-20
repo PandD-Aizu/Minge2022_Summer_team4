@@ -124,6 +124,8 @@
     <ClCompile Include="src\Scenes\GameClear.cpp" />
     <ClCompile Include="src\Scenes\Objects\Bomb.cpp" />
     <ClCompile Include="src\Scenes\Objects\Stair.cpp" />
+    <ClCompile Include="src\Scenes\Stage2.cpp" />
+    <ClCompile Include="src\Scenes\Stage3.cpp" />
     <ClCompile Include="src\Scenes\Title.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -334,6 +336,8 @@
     <ClInclude Include="src\Scenes\GameClear.hpp" />
     <ClInclude Include="src\Scenes\myCamera.hpp" />
     <ClInclude Include="src\Scenes\Objects\Object.hpp" />
+    <ClInclude Include="src\Scenes\Stage2.hpp" />
+    <ClInclude Include="src\Scenes\Stage3.hpp" />
     <ClInclude Include="src\Scenes\Title.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

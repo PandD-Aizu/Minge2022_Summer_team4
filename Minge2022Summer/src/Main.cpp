@@ -1,6 +1,8 @@
 ﻿//# include <Siv3D.hpp>
 # include "common.hpp"
 # include "Scenes/Stage1.hpp"
+# include "Scenes/Stage2.hpp"
+# include "Scenes/Stage3.hpp"
 # include "Scenes/Title.hpp"
 # include "Scenes/GameClear.hpp"
 
@@ -25,6 +27,8 @@ void Main()
 
 	// ゲームシーン（名前は "Stage"）を登録
 	manager.add<Stage1>(U"Stage1");
+	manager.add<Stage2>(U"Stage2");
+	manager.add<Stage3>(U"Stage3");
 
 	// ゲームクリアーシーン（名前は "GameClear"）を登録
 	manager.add<GameClear>(U"GameClear");
