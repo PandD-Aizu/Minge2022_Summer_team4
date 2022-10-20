@@ -116,6 +116,7 @@
     <ClCompile Include="src\LoadCSV.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Character.cpp" />
+    <ClCompile Include="src\MapChip.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Scenes\Enemies\Enemy.cpp" />
     <ClCompile Include="src\Scenes\Enemies\SwordZombie.cpp" />
@@ -325,7 +326,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\common.hpp" />
-    <ClInclude Include="src\MapChip.hpp" />
     <ClInclude Include="src\Character.hpp" />
     <ClInclude Include="src\Player.hpp" />
     <ClInclude Include="src\Scenes\Enemies\Enemy.hpp" />
@@ -334,7 +334,6 @@
     <ClInclude Include="src\Scenes\GameClear.hpp" />
     <ClInclude Include="src\Scenes\myCamera.hpp" />
     <ClInclude Include="src\Scenes\Objects\Object.hpp" />
-    <ClInclude Include="src\Scenes\Objects\Stair.hpp" />
     <ClInclude Include="src\Scenes\Title.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

@@ -1,6 +1,5 @@
 ﻿#pragma once
 # include "../common.hpp"
-# include "../MapChip.hpp"
 # include "../Character.hpp"
 # include "myCamera.hpp"
 # include "Objects/Object.hpp"
@@ -19,8 +18,6 @@ private:
     int32 countswordzombies;
 	// マップのセルの数（横 20, 縦 15 マス）
 	Size MapSize{26, 50};
-	Grid<int> mapLayer0;
-    Grid<int> mapLayer1;
     Array<Enemy*> enemies;
 	Array<Object*> objects;
 

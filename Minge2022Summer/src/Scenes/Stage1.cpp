@@ -1,13 +1,14 @@
 ﻿#include "Stage1.hpp"
 //# include "../LoadCSV.hpp"
 
+
 Stage1::Stage1(const InitData& init)
 	: IScene{ init }
 {
 	objects << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
 	countswordzombies = 0;
-	mapLayer0 = LoadCSV(U"layer0.csv");
-	mapLayer1 = LoadCSV(U"layer1.csv");
+	mapLayer0 = LoadCSV(U"maps/stage1/layer0.csv");
+	mapLayer1 = LoadCSV(U"maps/stage1/layer1.csv");
 
 	// layer1上の敵を読み込む
 	for (int32 y = 0; y < MapSize.y; ++y)

@@ -16,9 +16,9 @@ void Player::update(){
     }
 	decideDirection();
 
-	moveRestriction(mapLayer1);
+	moveRestriction();
 
-	groundMapChipCollision(mapLayer0);
+	groundMapChipCollision();
 
 	moveNextPosition();
 

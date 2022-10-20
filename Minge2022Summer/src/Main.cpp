@@ -4,8 +4,12 @@
 # include "Scenes/Title.hpp"
 # include "Scenes/GameClear.hpp"
 
+Grid<int> mapLayer0;
+Grid<int> mapLayer1;
+
 void Main()
 {
+
 	// ウィンドウを 640x480 にリサイズする
 	//Scene::SetResizeMode(ResizeMode::Keep);
 	Window::Resize(640, 480);
