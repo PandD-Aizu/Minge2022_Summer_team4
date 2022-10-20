@@ -7,9 +7,12 @@ Player::Player(){
 }
 
 void Player::update(){
+	// cb->time = static_cast<float>(Math::Sin(Scene::Time()) * 720_deg);
+	cb->time = invinceT;
+
 	if (invinceT > 0) {
 		invinceT--;
-		ps = rgbShader;
+		ps = blinkShader;
 	}
 	else {
 		ps = defaultShader;
@@ -79,6 +82,9 @@ void Player::draw() const {
 
 	animationIndex.y = direction;
 	{
+		// 定数バッファを、ピクセルシェーダの定数バッファスロット 1 に設定
+		Graphics2D::SetPSConstantBuffer(1, cb);
+
 		const ScopedCustomShader2D shader{ ps };
 		// 描画
 		CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
