@@ -2,18 +2,19 @@
 # include "Math.h"
 
 Player::Player(){
-    hp=1;
-    for(int32 i=0;i<MAXENEMIESNUM;i++){
-        enemiespos[i]={1000,1000};
-    }
+    hp=10;
+	invinceT = 0;
 }
 
 void Player::update(){
-    for(int32 i=0;i<MAXENEMIESNUM;i++){
-        if(enemiespos[i].distanceFrom(pos)<16){
-            hp--;
-        }
-    }
+	if (invinceT > 0) {
+		invinceT--;
+		ps = rgbShader;
+	}
+	else {
+		ps = defaultShader;
+	}
+
 	decideDirection();
 
 	moveRestriction();
@@ -27,7 +28,7 @@ void Player::update(){
 
 void Player::detectEnemyCollision(Enemy * enm) {
 	if (enm->pos.distanceFrom(pos) < 16) {
-		hp--;
+		damaged();
 	}
 }
 
@@ -51,8 +52,15 @@ void Player::detectObjCollision(Object* obj) {
 
 	if (Bomb* bomb = dynamic_cast<Bomb*>(obj)) {
 		if (bomb->state && bomb->position.distanceFrom(pos) <= bomb->range) {
-			this->hp--;
+			damaged();
 		}
+	}
+}
+
+void Player::damaged() {
+	if (invinceT == 0) {
+		hp--;
+		invinceT = 100;
 	}
 }
 
@@ -70,13 +78,12 @@ void Player::draw() const {
 	//else animationIndex.y = direction;
 
 	animationIndex.y = direction;
-
-	// 描画
-	CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
-		.draw(
-			  pos.x - textureCenter.x,
-					pos.y - textureCenter.y
-		);
+	{
+		const ScopedCustomShader2D shader{ ps };
+		// 描画
+		CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
+			.draw(pos.x - textureCenter.x, pos.y - textureCenter.y);
+	}
 }
 
 bool Player::died(){

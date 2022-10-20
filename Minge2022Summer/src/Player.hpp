@@ -3,21 +3,24 @@
 # include "Scenes/Enemies/Enemy.hpp"
 # include "Scenes/Objects/Object.hpp"
 
-#define MAXENEMIESNUM 100
-
 class Player : public Character{
 private:
 	// テクスチャ読み込み
 	const Texture CharacterTexture{ U"playerSprite.png" };
 
+	PixelShader ps;
+	const PixelShader rgbShader = HLSL{ U"Shaders/rgb_shift.hlsl", U"PS" };
+	const PixelShader defaultShader = HLSL{ U"Shaders/default2d.hlsl", U"PS_Texture" };
+
 	int direction;
-    
     int hp;
-    Vec2 enemiespos[MAXENEMIESNUM];
+	int invinceT;
+
 public:
     Player();
     void update();
 	void draw() const;		//プレイヤーの歩行の描画
+	void damaged();
     bool died();
 	void decideDirection();
 	void detectEnemyCollision(Enemy*);
