@@ -15,7 +15,7 @@ void GameClear::update()
 	if (btn.mouseOver() && MouseL.pressed())
 	{
 		// 次のステージに遷移
-		changeScene(U"Game");
+		changeScene(U"Title");
 	}
 }
 

@@ -6,9 +6,6 @@ Character::Character() {
 	pos = Vec2{ 6 * 16, 6 * 16 };
 	// 現在の移動速度
 	velocity = Vec2{ 0, 0 };
-
-	mapLayer0 = LoadCSV(U"layer0.csv");
-	mapLayer1 = LoadCSV(U"layer1.csv");
 }
 
 
@@ -16,20 +13,16 @@ void Character::update() {
 
 	//decideDirection();	//キャラクターの移動関数
 
-	moveRestriction(mapLayer1);
+	moveRestriction();
 
-	groundMapChipCollision(mapLayer0);
+	groundMapChipCollision();
 
 	moveNextPosition();
 }
 
 
-
-
-
-
 //移動制限
-void Character::moveRestriction(Grid<int> mapLayer) {
+void Character::moveRestriction() {
 	// x方向の移動制限
 	nextPos = pos + velocity * Vec2(1, 0);
 	// 右方向に移動中の場合
@@ -45,7 +38,7 @@ void Character::moveRestriction(Grid<int> mapLayer) {
 							 static_cast<int32>((nextPos.y + collisionPoint.y + collisionSize.y - 1) / MapChip::MapChipSize)
 		);
 		// 右上もしくは右下が壁に接触した場合
-		if (mapLayer[upperRightCell.y][upperRightCell.x] == 2 || mapLayer[lowerRightCell.y][lowerRightCell.x] == 2) {
+		if (mapLayer1[upperRightCell.y][upperRightCell.x] == 2 || mapLayer1[lowerRightCell.y][lowerRightCell.x] == 2) {
 			// x座標を壁の左側の側面に矯正する
 			nextPos.x = upperRightCell.x * MapChip::MapChipSize - 1 - (collisionPoint.x + collisionSize.x - 1);
 		}
@@ -63,7 +56,7 @@ void Character::moveRestriction(Grid<int> mapLayer) {
 							static_cast<int32>((nextPos.y + collisionPoint.y + collisionSize.y - 1) / MapChip::MapChipSize)
 		);
 		// 左上もしくは左下が壁に接触した場合
-		if (mapLayer[upperLeftCell.y][upperLeftCell.x] == 2 || mapLayer[lowerLeftCell.y][lowerLeftCell.x] == 2) {
+		if (mapLayer1[upperLeftCell.y][upperLeftCell.x] == 2 || mapLayer1[lowerLeftCell.y][lowerLeftCell.x] == 2) {
 			// x座標を壁の右側の側面に矯正する
 			nextPos.x = (upperLeftCell.x + 1) * MapChip::MapChipSize - (collisionPoint.x);
 
@@ -113,7 +106,7 @@ void Character::moveRestriction(Grid<int> mapLayer) {
 }
 
 // 地面マップとの当たり判定
-void Character::groundMapChipCollision(Grid<int> mapLayer0) {
+void Character::groundMapChipCollision() {
 	// キャラクターが載っている地面マップのセル座標
 	Point cellCordinate{
 		static_cast<int32>(nextPos.x / MapChip::MapChipSize),

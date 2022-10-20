@@ -11,10 +11,17 @@ Title::Title(const InitData& init)
 void Title::update()
 {
 	// 左クリックで
-	if (btn.mouseOver() && MouseL.pressed())
-	{
+	if (btn1.mouseOver() && MouseL.pressed()) {
 		// ゲームシーンに遷移
-		changeScene(U"Game");
+		changeScene(U"Stage1");
+	}
+	if (btn2.mouseOver() && MouseL.pressed()) {
+		// ゲームシーンに遷移
+		changeScene(U"Stage2");
+	}
+	if (btn3.mouseOver() && MouseL.pressed()) {
+		// ゲームシーンに遷移
+		changeScene(U"Stage3");
 	}
 }
 
@@ -24,6 +31,8 @@ void Title::draw() const
 	bg.draw();
 
 	FontAsset(U"TitleFont")(U"My Game").draw();
-	btn(btnTexture).draw();
+	btn1(btnTexture1).draw();
+	btn2(btnTexture2).draw();
+	btn3(btnTexture3).draw();
 }
 

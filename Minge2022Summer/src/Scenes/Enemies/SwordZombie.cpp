@@ -19,7 +19,7 @@ void SwordZombie::update(){
         velocity.y=-speed;
     }
 
-	moveRestriction(mapLayer1);
+	moveRestriction();
 	moveNextPosition();
 }
 void SwordZombie::draw() const {

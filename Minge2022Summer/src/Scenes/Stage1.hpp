@@ -1,17 +1,13 @@
 ﻿#pragma once
 # include "../common.hpp"
-# include "../MapChip.hpp"
 # include "../Character.hpp"
 # include "myCamera.hpp"
 # include "Objects/Object.hpp"
 # include "../Player.hpp"
 # include "Enemies/SwordZombie.hpp"
 
-#define MAXSWORDZOMBIESNUM 10
 
-
-
-class Game : public App::Scene {
+class Stage1 : public App::Scene {
 private:
 	MyCamera camera;
 	// マップチップ用テクスチャ
@@ -22,8 +18,6 @@ private:
     int32 countswordzombies;
 	// マップのセルの数（横 20, 縦 15 マス）
 	Size MapSize{26, 50};
-	Grid<int> mapLayer0;
-    Grid<int> mapLayer1;
     Array<Enemy*> enemies;
 	Array<Object*> objects;
 
@@ -34,7 +28,7 @@ private:
 
 
 public:
-	Game(const InitData& init);
+	Stage1(const InitData& init);
 
 	void update() override;
 	void draw() const override;

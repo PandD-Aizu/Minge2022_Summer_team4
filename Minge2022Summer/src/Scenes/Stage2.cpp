@@ -1,13 +1,14 @@
-﻿#include "Game.hpp"
+﻿#include "Stage2.hpp"
 //# include "../LoadCSV.hpp"
 
-Game::Game(const InitData& init)
+
+Stage2::Stage2(const InitData& init)
 	: IScene{ init }
 {
 	objects << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
 	countswordzombies = 0;
-	mapLayer0 = LoadCSV(U"layer0.csv");
-	mapLayer1 = LoadCSV(U"layer1.csv");
+	mapLayer0 = LoadCSV(U"maps/Stage2/layer0.csv");
+	mapLayer1 = LoadCSV(U"maps/Stage2/layer1.csv");
 
 	// layer1上の敵を読み込む
 	for (int32 y = 0; y < MapSize.y; ++y)
@@ -15,7 +16,7 @@ Game::Game(const InitData& init)
 		for (int32 x = 0; x < MapSize.x; ++x)
 		{
 			const Point pos{ (x * MapChip::MapChipSize), (y * MapChip::MapChipSize) };
-			switch(mapLayer1[y][x])
+			switch (mapLayer1[y][x])
 			{
 			case 5:
 				enemies << new SwordZombie(pos);
@@ -40,7 +41,7 @@ Game::Game(const InitData& init)
 }
 
 
-void Game::update()
+void Stage2::update()
 {
 	// =========== デバッグ ==========
 	if (KeyB.down()) objects << new Bomb(player.pos); // 敵用の爆弾の設置
@@ -111,7 +112,7 @@ void Game::update()
 	}
 }
 
-void Game::draw() const
+void Stage2::draw() const
 {
 	{
 		auto t = camera.createTransformer();

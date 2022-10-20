@@ -1,6 +1,5 @@
 ﻿#pragma once
 # include "common.hpp"
-# include "MapChip.hpp"
 
 /*
 * 使い方
@@ -36,8 +35,6 @@ protected:
 	int32 direction = 4;
 	int32 lastDirection = 7;
 
-	Grid<int> mapLayer0;
-	Grid<int> mapLayer1;
 	
 
 
@@ -58,8 +55,8 @@ public:
 
 	virtual void update();
 	//void decideDirection();			//プレイヤーの方向を決める
-	void moveRestriction(Grid<int>);		//移動制限
-	void groundMapChipCollision(Grid<int>);        //マップチップとの当たり判定処理
+	void moveRestriction();		//移動制限
+	void groundMapChipCollision();        //マップチップとの当たり判定処理
 	void moveNextPosition();		//プレイヤーの移動
 
 	virtual void draw() const;
