@@ -11,7 +11,9 @@ private:
 	const Texture CharacterTexture{ U"playerSprite.png" };
 
 	int direction;
-    
+
+	int playerDirection;
+
     int hp;
     Vec2 enemiespos[MAXENEMIESNUM];
 public:
