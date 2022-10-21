@@ -118,11 +118,16 @@ void Character::groundMapChipCollision() {
 		nextPos.x = (cellCordinate.x - 0.5) * MapChip::MapChipSize;
 		nextPos.y = (cellCordinate.y + 0.5) * MapChip::MapChipSize;
 	}
+
 }
+
+
 
 void Character::moveNextPosition() {
 	pos = nextPos;
 }
+
+
 
 void Character::draw() const{
 	// 歩行のアニメーションのインデックス(x, y)

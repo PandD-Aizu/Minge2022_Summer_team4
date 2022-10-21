@@ -2,32 +2,40 @@
 # include "Math.h"
 
 Player::Player(){
-    hp=1;
-    for(int32 i=0;i<MAXENEMIESNUM;i++){
-        enemiespos[i]={1000,1000};
-    }
+    hp=10;
+	invinceT = 0;
 }
 
 void Player::update(){
-    for(int32 i=0;i<MAXENEMIESNUM;i++){
-        if(enemiespos[i].distanceFrom(pos)<16){
-            hp--;
-        }
-    }
+	// cb->time = static_cast<float>(Math::Sin(Scene::Time()) * 720_deg);
+	cb->time = invinceT;
+
+	if (invinceT > 0) {
+		invinceT--;
+		ps = blinkShader;
+	}
+	else {
+		ps = defaultShader;
+	}
+
 	decideDirection();
 
 	moveRestriction();
+
+	spikeCollision();
 
 	groundMapChipCollision();
 
 	moveNextPosition();
 
 	changeDirection();
+
+	
 }
 
 void Player::detectEnemyCollision(Enemy * enm) {
 	if (enm->pos.distanceFrom(pos) < 16) {
-		hp--;
+		damaged();
 	}
 }
 
@@ -51,8 +59,15 @@ void Player::detectObjCollision(Object* obj) {
 
 	if (Bomb* bomb = dynamic_cast<Bomb*>(obj)) {
 		if (bomb->state && bomb->position.distanceFrom(pos) <= bomb->range) {
-			this->hp--;
+			damaged();
 		}
+	}
+}
+
+void Player::damaged() {
+	if (invinceT == 0) {
+		hp--;
+		invinceT = 100;
 	}
 }
 
@@ -69,14 +84,16 @@ void Player::draw() const {
 	//if (direction == 4) animationIndex.y = lastDirection;
 	//else animationIndex.y = direction;
 
-	animationIndex.y = direction;
+	animationIndex.y = playerDirection;
+	{
+		// 定数バッファを、ピクセルシェーダの定数バッファスロット 1 に設定
+		Graphics2D::SetPSConstantBuffer(1, cb);
 
-	// 描画
-	CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
-		.draw(
-			  pos.x - textureCenter.x,
-					pos.y - textureCenter.y
-		);
+		const ScopedCustomShader2D shader{ ps };
+		// 描画
+		CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
+			.draw(pos.x - textureCenter.x, pos.y - textureCenter.y);
+	}
 }
 
 bool Player::died(){
@@ -144,28 +161,58 @@ void Player::changeDirection() {
 	theta = theta * 360 / (2 * Math::Pi);
 
 	if ((theta >= 0 && theta < 22.5) || (theta >= 337.5) && theta < 360) {	//右向き→
-		direction = 7;
+		playerDirection = 7;
 	}
 	else if (theta < 67.5) {		//右上
-		direction = 6;
+		playerDirection = 6;
 	}
 	else if (theta < 112.5) {		//上
-		direction = 3;
+		playerDirection = 3;
 	}
 	else if (theta < 157.5) {		//左上
-		direction = 0;
+		playerDirection = 0;
 	}
 	else if (theta < 202.5) {		//左
-		direction = 1;
+		playerDirection = 1;
 	}
 	else if (theta < 247.5) {		//左下
-		direction = 2;
+		playerDirection = 2;
 	}
 	else if (theta < 292.5) {		//下
-		direction = 5;
+		playerDirection = 5;
 	}
 	else {							//右下
-		direction = 8;
+		playerDirection = 8;
 	}
 
+}
+
+
+//とげとの当たり判定を行う
+void Player::spikeCollision() {
+	// キャラクターが載っている地面マップのセル座標
+	Point cellCordinate{
+		static_cast<int32>(nextPos.x / MapChip::MapChipSize),
+		static_cast<int32>(nextPos.y / MapChip::MapChipSize)
+	};
+
+	//とげとの当たり判定
+	if (spike(mapLayer0[cellCordinate.y][cellCordinate.x]) == 4) {
+		damaged();
+	}
+
+}
+
+int32 Player::spike(int32 chipIndex)
+{
+	if (chipIndex / 10 == 1) {
+		if (chipIndex % 10 != 0) {
+			chipIndex = static_cast<int32>(Scene::Time() * 1 / (chipIndex % 10)) % 2 + 3;
+		}
+		else {
+			chipIndex = 1;
+		}
+	}
+
+	return chipIndex;
 }

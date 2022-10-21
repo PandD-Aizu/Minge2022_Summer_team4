@@ -6,6 +6,8 @@
 # include "Scenes/Title.hpp"
 # include "Scenes/GameClear.hpp"
 
+SIV3D_SET(EngineOption::Renderer::OpenGL);
+
 Grid<int> mapLayer0;
 Grid<int> mapLayer1;
 

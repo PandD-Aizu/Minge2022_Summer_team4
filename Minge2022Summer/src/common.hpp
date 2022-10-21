@@ -24,6 +24,9 @@ public:
 	// 指定したインデックスのマップチップを返す
 	TextureRegion get(int32 chipIndex) const;
 
+	// とげだった場合にインターバルとかの処理を行う
+	int32 spike(int32 chipIndex) const;
+
 private:
 
 	Texture m_base;
