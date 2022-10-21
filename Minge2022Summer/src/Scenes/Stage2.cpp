@@ -90,6 +90,7 @@ void Stage2::update()
 		enemy->getPlayerPos(player.pos);
 		enemy->update();
 		player.detectEnemyCollision(enemy);
+		enemy->emitObject(&objects);
 	}
 
 	for (auto& obj : objects) {

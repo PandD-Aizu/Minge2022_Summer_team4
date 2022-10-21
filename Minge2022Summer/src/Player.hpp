@@ -8,7 +8,7 @@
 class Player : public Character{
 private:
 	// テクスチャ読み込み
-	const Texture CharacterTexture{ U"playerSprite.png" };
+	const Texture CharacterTexture{ U"Sprites/player.png" };
 
 	int direction;
     

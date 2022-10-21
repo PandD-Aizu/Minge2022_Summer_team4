@@ -8,5 +8,5 @@ public:
     SwordZombie(Point);
     void update() override;
 	void draw()const override;
-	void emitObject(Array <Object*>) override {}
+	void emitObject(Array <Object*>*) override {}
 };

@@ -1,7 +1,7 @@
 ﻿#include"Bomber.hpp"
 
 Bomber::Bomber(Point mapPos){
-    speed=0.25;
+    speed=0.15;
     velocity={0,0};
 	pos = { mapPos.x + collisionSize.x / 2, mapPos.y + collisionSize.y / 2 };
 }
@@ -26,12 +26,12 @@ void Bomber::update(){
 	moveNextPosition();
 }
 void Bomber::draw() const {
-    mapchip.get(5).draw(pos.x-collisionSize.x/2,pos.y-collisionSize.y/2);
+    mapchip.get(6).draw(pos.x-collisionSize.x/2,pos.y-collisionSize.y/2);
 }
 
-void Bomber::emitObject(Array <Object *> objects) {
+void Bomber::emitObject(Array <Object *> *objects) {
 	if (plantCnt <= 0) {
-		objects << new Bomb(pos); // 敵用の爆弾の設置
+		*(objects) << new Bomb(pos); // 敵用の爆弾の設置
 		plantCnt = 100;
 	}
 }

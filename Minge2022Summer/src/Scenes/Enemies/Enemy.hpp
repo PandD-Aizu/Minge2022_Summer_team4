@@ -7,5 +7,5 @@ private:
 public:
 	Vec2 playerPos;
 	void getPlayerPos(Vec2);
-	virtual void emitObject(Array<Object*>) {}
+	virtual void emitObject(Array<Object*>*) {}
 };
