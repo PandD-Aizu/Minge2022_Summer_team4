@@ -2,18 +2,22 @@
 # include "Math.h"
 
 Player::Player(){
-    hp=1;
-    for(int32 i=0;i<MAXENEMIESNUM;i++){
-        enemiespos[i]={1000,1000};
-    }
+    hp=10;
+	invinceT = 0;
 }
 
 void Player::update(){
-    for(int32 i=0;i<MAXENEMIESNUM;i++){
-        if(enemiespos[i].distanceFrom(pos)<16){
-            hp--;
-        }
-    }
+	// cb->time = static_cast<float>(Math::Sin(Scene::Time()) * 720_deg);
+	cb->time = invinceT;
+
+	if (invinceT > 0) {
+		invinceT--;
+		ps = blinkShader;
+	}
+	else {
+		ps = defaultShader;
+	}
+
 	decideDirection();
 
 	moveRestriction();
@@ -27,7 +31,7 @@ void Player::update(){
 
 void Player::detectEnemyCollision(Enemy * enm) {
 	if (enm->pos.distanceFrom(pos) < 16) {
-		hp--;
+		damaged();
 	}
 }
 
@@ -51,8 +55,15 @@ void Player::detectObjCollision(Object* obj) {
 
 	if (Bomb* bomb = dynamic_cast<Bomb*>(obj)) {
 		if (bomb->state && bomb->position.distanceFrom(pos) <= bomb->range) {
-			this->hp--;
+			damaged();
 		}
+	}
+}
+
+void Player::damaged() {
+	if (invinceT == 0) {
+		hp--;
+		invinceT = 100;
 	}
 }
 
@@ -70,13 +81,15 @@ void Player::draw() const {
 	//else animationIndex.y = direction;
 
 	animationIndex.y = direction;
+	{
+		// 定数バッファを、ピクセルシェーダの定数バッファスロット 1 に設定
+		Graphics2D::SetPSConstantBuffer(1, cb);
 
-	// 描画
-	CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
-		.draw(
-			  pos.x - textureCenter.x,
-					pos.y - textureCenter.y
-		);
+		const ScopedCustomShader2D shader{ ps };
+		// 描画
+		CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
+			.draw(pos.x - textureCenter.x, pos.y - textureCenter.y);
+	}
 }
 
 bool Player::died(){
