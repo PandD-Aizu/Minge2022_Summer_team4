@@ -335,7 +335,6 @@
     <ClInclude Include="src\Scenes\Stage1.hpp" />
     <ClInclude Include="src\Scenes\GameClear.hpp" />
     <ClInclude Include="src\Scenes\myCamera.hpp" />
-    <ClInclude Include="src\Scenes\Objects\DamageFloor.hpp" />
     <ClInclude Include="src\Scenes\Objects\Object.hpp" />
     <ClInclude Include="src\Scenes\Stage2.hpp" />
     <ClInclude Include="src\Scenes\Stage3.hpp" />
