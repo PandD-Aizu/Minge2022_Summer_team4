@@ -88,7 +88,7 @@ void Stage1::update()
 
 	for (auto& enemy : enemies) {
 		enemy->getPlayerPos(player.pos);
-		enemy->update();
+		//enemy->update();
 		player.detectEnemyCollision(enemy);
 	}
 
