@@ -48,9 +48,16 @@ void main()
 	vec2 ga = texture(Texture0, UV).ga;
 	vec2 ba = texture(Texture0, UV + vec2(+0.02, 0.0)).ba;
 
-	vec4 a = vec4(1,1,1, (time/5)%2);
+	vec4 a = vec4(1,1,1, (time/10)%2);
     
 	vec4 texColor = texture(Texture0, UV);	
 
-	FragColor = texColor * a;
+	vec4 col;
+    if(time > 95) {
+        vec3 red = mix(vec3(1,0,0), texColor.rgb, 0.5);
+        col = vec4(red, texColor.a);
+    } else {
+        col = texColor * a;
+    }
+	FragColor = col;
 }
