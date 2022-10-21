@@ -23,5 +23,7 @@ public:
 	void detectEnemyCollision(Enemy*);
 	void changeDirection();		//プレイヤーの向きをマウスの方向に変更する
 	void detectObjCollision(Object*);
+	void togeCollision();
+	int32 toge(int32 chipIndex);
 
 };

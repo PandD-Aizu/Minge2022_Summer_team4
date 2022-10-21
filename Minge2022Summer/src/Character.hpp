@@ -56,7 +56,6 @@ public:
 	void moveRestriction();		//移動制限
 	void groundMapChipCollision();        //マップチップとの当たり判定処理
 	void moveNextPosition();		//プレイヤーの移動
-	int32 toge(int32 chipIndex);
 
 	virtual void draw() const;
 
