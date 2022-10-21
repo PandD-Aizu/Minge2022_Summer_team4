@@ -21,6 +21,10 @@ Stage2::Stage2(const InitData& init)
 			case 5:
 				enemies << new SwordZombie(pos);
 				break;
+
+			case 6:
+				enemies << new Bomber(pos);
+				break;
 			}
 		}
 	}
@@ -81,10 +85,6 @@ void Stage2::update()
 	// プレイヤーの状態更新
 	player.update();
 
-
-	//for (int32 i = 0; i < countswordzombies; i++) {
-	//	enemiespos[i] = swordzombie[i].sendmypos();
-	//}
 
 	for (auto& enemy : enemies) {
 		enemy->getPlayerPos(player.pos);

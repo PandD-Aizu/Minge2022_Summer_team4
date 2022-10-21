@@ -5,6 +5,7 @@
 # include "Objects/Object.hpp"
 # include "../Player.hpp"
 # include "Enemies/SwordZombie.hpp"
+# include "Enemies/Bomber.hpp"
 
 
 class Stage1 : public App::Scene {
