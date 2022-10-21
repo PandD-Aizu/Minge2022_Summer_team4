@@ -25,7 +25,7 @@ public:
 	TextureRegion get(int32 chipIndex) const;
 
 	// とげだった場合にインターバルとかの処理を行う
-	int32 toge(int32 chipIndex) const;
+	int32 spike(int32 chipIndex) const;
 
 private:
 

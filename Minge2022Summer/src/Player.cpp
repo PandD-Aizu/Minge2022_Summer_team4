@@ -22,7 +22,7 @@ void Player::update(){
 
 	moveRestriction();
 
-	togeCollision();
+	spikeCollision();
 
 	groundMapChipCollision();
 
@@ -189,7 +189,7 @@ void Player::changeDirection() {
 
 
 //とげとの当たり判定を行う
-void Player::togeCollision() {
+void Player::spikeCollision() {
 	// キャラクターが載っている地面マップのセル座標
 	Point cellCordinate{
 		static_cast<int32>(nextPos.x / MapChip::MapChipSize),
@@ -197,13 +197,13 @@ void Player::togeCollision() {
 	};
 
 	//とげとの当たり判定
-	if (toge(mapLayer0[cellCordinate.y][cellCordinate.x]) == 4) {
-		hp--;
+	if (spike(mapLayer0[cellCordinate.y][cellCordinate.x]) == 4) {
+		damaged();
 	}
 
 }
 
-int32 Player::toge(int32 chipIndex)
+int32 Player::spike(int32 chipIndex)
 {
 	if (chipIndex / 10 == 1) {
 		if (chipIndex % 10 != 0) {

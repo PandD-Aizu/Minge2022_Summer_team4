@@ -18,7 +18,7 @@ TextureRegion MapChip::get(int32 chipIndex) const
 
 	// インデックスが10番台なら6番のマップチップ（現在5番はソードゾンビに利用されている。場合によってはそこをとげにする）
 	if (chipIndex / 10 == 1) {
-		chipIndex = toge(chipIndex);
+		chipIndex = spike(chipIndex);
 	}
 
 	const int32 x = ((chipIndex % 8) * MapChipSize);
@@ -26,7 +26,7 @@ TextureRegion MapChip::get(int32 chipIndex) const
 	return m_base(x, y, MapChipSize);
 }
 
-int32 MapChip::toge(int32 chipIndex) const
+int32 MapChip::spike(int32 chipIndex) const
 {
 	if (chipIndex / 10 == 1) {
 		if (chipIndex % 10 != 0) {
