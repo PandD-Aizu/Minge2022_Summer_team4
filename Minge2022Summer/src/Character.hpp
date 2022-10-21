@@ -18,9 +18,7 @@ protected:
 	double walkSpeed = 1;
 
 	// テクスチャ読み込み
-	/*const Texture CharacterTexture{ U"playerSprite.png" };*/
-
-	const Texture CharacterTexture{ U"playerSprite.png" };
+	const Texture CharacterTexture;
 	
 	// テクスチャのサイズ
 	const Vec2 textureSize{ 20, 28 };

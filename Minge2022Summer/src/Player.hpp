@@ -12,7 +12,7 @@ struct Blink
 class Player : public Character{
 private:
 	// テクスチャ読み込み
-	const Texture CharacterTexture{ U"playerSprite.png" };
+	const Texture CharacterTexture{ U"Sprites/player.png" };
 
 	PixelShader ps;
 	const PixelShader rgbShader = GLSL{ U"Shaders/rgb_shift.frag", {{U"PSConstants2D", 0}} };

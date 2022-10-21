@@ -5,6 +5,7 @@
 # include "Objects/Object.hpp"
 # include "../Player.hpp"
 # include "Enemies/SwordZombie.hpp"
+# include "Enemies/Bomber.hpp"
 # include "Objects/DamageFloor.hpp"
 
 
