@@ -25,6 +25,8 @@ private:
     int hp;
 	int invinceT;
 
+
+	int playerDirection;
 public:
     Player();
     void update();

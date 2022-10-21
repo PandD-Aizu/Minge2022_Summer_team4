@@ -80,7 +80,7 @@ void Player::draw() const {
 	//if (direction == 4) animationIndex.y = lastDirection;
 	//else animationIndex.y = direction;
 
-	animationIndex.y = direction;
+	animationIndex.y = playerDirection;
 	{
 		// 定数バッファを、ピクセルシェーダの定数バッファスロット 1 に設定
 		Graphics2D::SetPSConstantBuffer(1, cb);
@@ -157,28 +157,28 @@ void Player::changeDirection() {
 	theta = theta * 360 / (2 * Math::Pi);
 
 	if ((theta >= 0 && theta < 22.5) || (theta >= 337.5) && theta < 360) {	//右向き→
-		direction = 7;
+		playerDirection = 7;
 	}
 	else if (theta < 67.5) {		//右上
-		direction = 6;
+		playerDirection = 6;
 	}
 	else if (theta < 112.5) {		//上
-		direction = 3;
+		playerDirection = 3;
 	}
 	else if (theta < 157.5) {		//左上
-		direction = 0;
+		playerDirection = 0;
 	}
 	else if (theta < 202.5) {		//左
-		direction = 1;
+		playerDirection = 1;
 	}
 	else if (theta < 247.5) {		//左下
-		direction = 2;
+		playerDirection = 2;
 	}
 	else if (theta < 292.5) {		//下
-		direction = 5;
+		playerDirection = 5;
 	}
 	else {							//右下
-		direction = 8;
+		playerDirection = 8;
 	}
 
 }
