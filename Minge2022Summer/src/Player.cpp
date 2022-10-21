@@ -22,11 +22,15 @@ void Player::update(){
 
 	moveRestriction();
 
+	spikeCollision();
+
 	groundMapChipCollision();
 
 	moveNextPosition();
 
 	changeDirection();
+
+	
 }
 
 void Player::detectEnemyCollision(Enemy * enm) {
@@ -181,4 +185,34 @@ void Player::changeDirection() {
 		playerDirection = 8;
 	}
 
+}
+
+
+//とげとの当たり判定を行う
+void Player::spikeCollision() {
+	// キャラクターが載っている地面マップのセル座標
+	Point cellCordinate{
+		static_cast<int32>(nextPos.x / MapChip::MapChipSize),
+		static_cast<int32>(nextPos.y / MapChip::MapChipSize)
+	};
+
+	//とげとの当たり判定
+	if (spike(mapLayer0[cellCordinate.y][cellCordinate.x]) == 4) {
+		damaged();
+	}
+
+}
+
+int32 Player::spike(int32 chipIndex)
+{
+	if (chipIndex / 10 == 1) {
+		if (chipIndex % 10 != 0) {
+			chipIndex = static_cast<int32>(Scene::Time() * 1 / (chipIndex % 10)) % 2 + 3;
+		}
+		else {
+			chipIndex = 1;
+		}
+	}
+
+	return chipIndex;
 }

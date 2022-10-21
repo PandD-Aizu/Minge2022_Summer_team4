@@ -26,8 +26,6 @@ protected:
 	const Vec2 textureSize{ 20, 28 };
 	// 中心の相対座標（テクスチャの左上からの相対座標
 	const Vec2 textureCenter{ 10, 20 };
-
-	
 	
 
 	// 方向: (基準4から 上:-1 下:+1 左:-3 右:+3)
@@ -35,7 +33,7 @@ protected:
 	int32 direction = 4;
 	int32 lastDirection = 7;
 
-	
+	int hp;
 
 
 	//プレイヤーの移動に使う
