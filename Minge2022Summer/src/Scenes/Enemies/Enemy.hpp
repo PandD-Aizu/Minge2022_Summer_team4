@@ -4,8 +4,16 @@
 
 class Enemy : public Character{
 private:
+	const Texture CharacterTexture;
 public:
 	Vec2 playerPos;
+
+	Enemy();
+	Enemy(String texture);
+
+	void ensureDirection(); // velocityの値を参照して、directionを決定する
+	void draw() const override;
+
 	void getPlayerPos(Vec2);
 	virtual void emitObject(Array<Object*>*) {}
 };

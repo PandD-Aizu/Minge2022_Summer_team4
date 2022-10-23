@@ -1,6 +1,8 @@
 ﻿#include"Bomber.hpp"
 
-Bomber::Bomber(Point mapPos){
+Bomber::Bomber(Point mapPos)
+	:Enemy(U"Sprites/bomber.png")
+{
     speed=0.15;
     velocity={0,0};
 	pos = { mapPos.x + collisionSize.x / 2, mapPos.y + collisionSize.y / 2 };
@@ -22,11 +24,13 @@ void Bomber::update(){
         velocity.y=-speed;
     }
 
+	ensureDirection();
 	moveRestriction();
 	moveNextPosition();
 }
 void Bomber::draw() const {
-    mapchip.get(6).draw(pos.x-collisionSize.x/2,pos.y-collisionSize.y/2);
+	Enemy::draw();
+    // mapchip.get(6).draw(pos.x-collisionSize.x/2,pos.y-collisionSize.y/2);
 }
 
 void Bomber::emitObject(Array <Object *> *objects) {
