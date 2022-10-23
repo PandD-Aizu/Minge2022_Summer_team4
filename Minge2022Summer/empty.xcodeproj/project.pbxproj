@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C1778A31CE0B65500BB8AD0 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 2C1778A21CE0B65500BB8AD0 /* icon.icns */; };
+		2C20A498290588AA005675D1 /* Bomber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C20A497290588AA005675D1 /* Bomber.cpp */; };
 		2C2137F828D6F1DD00298E62 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2137F728D6F1DD00298E62 /* Character.cpp */; };
 		2C2137FD28D6F58E00298E62 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C2137FB28D6F58E00298E62 /* Player.cpp */; };
 		2C33F94828E4065200079803 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C33F94628E4065200079803 /* Enemy.cpp */; };
@@ -56,6 +57,9 @@
 		2C1778841CE0A9EA00BB8AD0 /* empty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = empty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1778921CE0A9EA00BB8AD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C1778A21CE0B65500BB8AD0 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		2C20A495290588A0005675D1 /* DamageFloor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DamageFloor.hpp; sourceTree = "<group>"; };
+		2C20A496290588AA005675D1 /* Bomber.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bomber.hpp; sourceTree = "<group>"; };
+		2C20A497290588AA005675D1 /* Bomber.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bomber.cpp; sourceTree = "<group>"; };
 		2C2137F628D6F1DD00298E62 /* Character.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Character.hpp; path = src/Character.hpp; sourceTree = SOURCE_ROOT; };
 		2C2137F728D6F1DD00298E62 /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Character.cpp; path = src/Character.cpp; sourceTree = SOURCE_ROOT; };
 		2C2137F928D6F23C00298E62 /* myCamera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = myCamera.hpp; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 		2C2137FA28D6F24900298E62 /* Enemies */ = {
 			isa = PBXGroup;
 			children = (
+				2C20A497290588AA005675D1 /* Bomber.cpp */,
+				2C20A496290588AA005675D1 /* Bomber.hpp */,
 				2CDF46CE28D7184800D71A73 /* SwordZombie.cpp */,
 				2CDF46CF28D7184800D71A73 /* SwordZombie.hpp */,
 				2C33F94628E4065200079803 /* Enemy.cpp */,
@@ -184,6 +190,7 @@
 		2C7AE38828E02CFF00306D27 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				2C20A495290588A0005675D1 /* DamageFloor.hpp */,
 				2CA8569F2901721A00A846BB /* Bomb.cpp */,
 				2C7AE38A28E02D2600306D27 /* Object.hpp */,
 				2CF69C5D29001ACA00D317C5 /* Stair.cpp */,
@@ -337,6 +344,7 @@
 				F2FCF16628CD388A00E40211 /* Main.cpp in Sources */,
 				2CCB96B428F29E3800BEB395 /* LoadCSV.cpp in Sources */,
 				F2FCF16528CD388A00E40211 /* Title.cpp in Sources */,
+				2C20A498290588AA005675D1 /* Bomber.cpp in Sources */,
 				2C2137FD28D6F58E00298E62 /* Player.cpp in Sources */,
 				2C2137F828D6F1DD00298E62 /* Character.cpp in Sources */,
 				398F50AC28CDD4F8006D7A50 /* GameClear.cpp in Sources */,
