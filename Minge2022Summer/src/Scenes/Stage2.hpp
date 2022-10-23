@@ -4,7 +4,6 @@
 # include "myCamera.hpp"
 # include "Objects/Object.hpp"
 # include "../Player.hpp"
-# include "Enemies/SwordZombie.hpp"
 
 
 class Stage2 : public App::Scene {

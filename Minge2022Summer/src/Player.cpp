@@ -29,6 +29,11 @@ void Player::detectEnemyCollision(Enemy * enm) {
 	if (enm->pos.distanceFrom(pos) < 16) {
 		hp--;
 	}
+//    if (SwordZombie* sz = dynamic_cast<SwordZombie*>(enm)) {
+//      if(sz->isAttacking && sz->pos.distanceFrom(pos) < 20) {
+//        hp--;
+//      }
+//    }
 }
 
 
