@@ -12,4 +12,5 @@ public:
     void update()override;
     void draw()const override;
     bool isAttacking();
+    void emitObject(Array <Object*>*) override {}
 };

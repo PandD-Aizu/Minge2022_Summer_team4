@@ -21,6 +21,9 @@ Stage1::Stage1(const InitData& init)
 			case 5:
 				enemies << new SwordZombie(pos);
 				break;
+			case 6:
+				enemies << new Bomber(pos);
+				break;
 			}
 		}
 	}

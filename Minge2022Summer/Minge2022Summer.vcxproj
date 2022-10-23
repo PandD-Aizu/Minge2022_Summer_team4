@@ -118,6 +118,7 @@
     <ClCompile Include="src\Character.cpp" />
     <ClCompile Include="src\MapChip.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Scenes\Enemies\Bomber.cpp" />
     <ClCompile Include="src\Scenes\Enemies\Enemy.cpp" />
     <ClCompile Include="src\Scenes\Enemies\SwordZombie.cpp" />
     <ClCompile Include="src\Scenes\Stage1.cpp" />
@@ -330,6 +331,7 @@
     <ClInclude Include="src\common.hpp" />
     <ClInclude Include="src\Character.hpp" />
     <ClInclude Include="src\Player.hpp" />
+    <ClInclude Include="src\Scenes\Enemies\Bomber.hpp" />
     <ClInclude Include="src\Scenes\Enemies\Enemy.hpp" />
     <ClInclude Include="src\Scenes\Enemies\SwordZombie.hpp" />
     <ClInclude Include="src\Scenes\Stage1.hpp" />

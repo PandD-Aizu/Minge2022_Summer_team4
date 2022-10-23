@@ -4,6 +4,7 @@
 # include "myCamera.hpp"
 # include "Objects/Object.hpp"
 # include "../Player.hpp"
+# include "Enemies/Bomber.hpp"
 
 
 class Stage2 : public App::Scene {
