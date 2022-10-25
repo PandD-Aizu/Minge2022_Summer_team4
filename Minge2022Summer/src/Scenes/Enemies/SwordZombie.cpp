@@ -8,6 +8,7 @@ SwordZombie::SwordZombie(Point mapPos){
     direction=0;
     move=1;
     timer=0;
+	attackRange = 15;
 }
 void SwordZombie::update(){
     direction=atan2(pos.y-playerPos.y,pos.x-playerPos.x)-90_deg;
@@ -29,7 +30,7 @@ void SwordZombie::update(){
 void SwordZombie::draw()const{
     mapchip.get(5).draw(pos.x-collisionSize.x/2,pos.y-collisionSize.y/2);
     if(timer>=0.8){
-        Circle{pos.x,pos.y,8}.drawArc(direction-45_deg,90_deg,0,4,ColorF{1,0,0,0.5});
+        Circle{pos.x,pos.y,8}.drawArc(direction-45_deg,90_deg,0, attackRange,ColorF{1,0,0,0.5});
     }
 }
 bool SwordZombie::isAttacking(){

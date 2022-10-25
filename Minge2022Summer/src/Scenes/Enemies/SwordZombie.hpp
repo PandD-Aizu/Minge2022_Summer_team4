@@ -8,6 +8,7 @@ private:
     int move;
     double timer;
 public:
+	int attackRange;
     SwordZombie(Point);
     void update()override;
     void draw()const override;
