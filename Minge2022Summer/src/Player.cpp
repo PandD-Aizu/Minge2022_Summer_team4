@@ -38,7 +38,6 @@ void Player::detectEnemyCollision(Enemy * enm) {
 		damaged();
 	}
     if (SwordZombie* sz = dynamic_cast<SwordZombie*>(enm)) {
-		Print << U"casted";
 		if(sz->isAttacking() && sz->pos.distanceFrom(pos) < sz->attackRange*2) {
 			damaged();
 		}
