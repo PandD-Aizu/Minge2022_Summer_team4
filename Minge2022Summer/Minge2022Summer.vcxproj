@@ -121,6 +121,7 @@
     <ClCompile Include="src\Scenes\Enemies\Bomber.cpp" />
     <ClCompile Include="src\Scenes\Enemies\Enemy.cpp" />
     <ClCompile Include="src\Scenes\Enemies\SwordZombie.cpp" />
+    <ClCompile Include="src\Scenes\Objects\HomingBullet.cpp" />
     <ClCompile Include="src\Scenes\Stage1.cpp" />
     <ClCompile Include="src\Scenes\GameClear.cpp" />
     <ClCompile Include="src\Scenes\Objects\Bomb.cpp" />

@@ -6,6 +6,7 @@ Stage1::Stage1(const InitData& init)
 	: IScene{ init }
 {
 	objects << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
+	objects << new HomingBullet(Vec2{ 250, 300 });
 	countswordzombies = 0;
 	mapLayer0 = LoadCSV(U"maps/stage1/layer0.csv");
 	mapLayer1 = LoadCSV(U"maps/stage1/layer1.csv");
