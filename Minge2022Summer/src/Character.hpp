@@ -43,9 +43,9 @@ public:
 	Vec2 pos;
 
 	// 当たり判定の起点の座標（中心からの相対座標）
-	const Vec2 collisionPoint{ -8, -8 };
+	const Vec2 collisionPoint{ -7, -7 };
 	// 当たり判定の幅、高さ
-	const Vec2 collisionSize{ 16, 16 };
+	const Vec2 collisionSize{ 14, 14 };
 
 	Character();
 
