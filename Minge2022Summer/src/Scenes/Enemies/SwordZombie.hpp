@@ -12,6 +12,6 @@ public:
     SwordZombie(Point);
     void update()override;
     void draw()const override;
-    bool isAttacking();
+    bool isAttacking() const;
     void emitObject(Array <Object*>*) override {}
 };
