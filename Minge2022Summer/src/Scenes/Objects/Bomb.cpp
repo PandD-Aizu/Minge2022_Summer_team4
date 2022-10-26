@@ -1,7 +1,7 @@
 ﻿#include "Object.hpp"
 
-Bomb::Bomb(Vec2 pos, SecondsF limit, int32 range)
-	: position(pos), timer{ limit }, timeLimit(limit), range(range)
+Bomb::Bomb(Vec2 _pos, SecondsF limit, int32 range)
+	: Object(pos), timer{ limit }, timeLimit(limit), range(range)
 {
 	timer.start();
 }
@@ -21,11 +21,11 @@ void Bomb::update() {
 void Bomb::draw() const {
 	// 爆発待機
 	if (state == 0) {
-		Circle{ position, 8 }.draw(Palette::Darkgray);
+		Circle{ pos, 8 }.draw(Palette::Darkgray);
 	}
 
 	//爆発中
 	if (state == 1) {
-		Circle{ position, range }.draw(Color{ Palette::Red, 100 });
+		Circle{ pos, range }.draw(Color{ Palette::Red, 100 });
 	}
 }
