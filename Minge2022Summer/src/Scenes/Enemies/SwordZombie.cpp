@@ -8,16 +8,17 @@ SwordZombie::SwordZombie(Point mapPos)
 	pos = { mapPos.x + collisionSize.x / 2, mapPos.y + collisionSize.y / 2 };
 }
 void SwordZombie::update(){
-    if(pos.x<playerPos.x){
+	velocity = Vec2{ 0, 0 };
+    if((pos.x + speed/2)<playerPos.x){
         velocity.x=speed;
     }
-    if(pos.x>playerPos.x){
+    if((pos.x - speed/2) >playerPos.x){
         velocity.x=-speed;
     }
-    if(pos.y<playerPos.y){
+    if((pos.y + speed/2) <playerPos.y){
         velocity.y=speed;
     }
-    if(pos.y>playerPos.y){
+    if((pos.y - speed/2)>playerPos.y){
         velocity.y=-speed;
     }
 

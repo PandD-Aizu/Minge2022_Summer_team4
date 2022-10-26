@@ -11,18 +11,19 @@ void Bomber::update(){
 	plantCnt--;
 	
 
-    if(pos.x<playerPos.x){
-        velocity.x=speed;
-    }
-    if(pos.x>playerPos.x){
-        velocity.x=-speed;
-    }
-    if(pos.y<playerPos.y){
-        velocity.y=speed;
-    }
-    if(pos.y>playerPos.y){
-        velocity.y=-speed;
-    }
+	velocity = Vec2{ 0, 0 };
+	if ((pos.x + speed / 2) < playerPos.x) {
+		velocity.x = speed;
+	}
+	if ((pos.x - speed / 2) > playerPos.x) {
+		velocity.x = -speed;
+	}
+	if ((pos.y + speed / 2) < playerPos.y) {
+		velocity.y = speed;
+	}
+	if ((pos.y - speed / 2) > playerPos.y) {
+		velocity.y = -speed;
+	}
 
 	ensureDirection();
 	moveRestriction();
