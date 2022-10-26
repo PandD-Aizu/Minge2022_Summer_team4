@@ -12,10 +12,10 @@ void Enemy::getPlayerPos(Vec2 _playerPos) {
 
 void Enemy::ensureDirection() {
 	direction = 4;
-	if (velocity.x < 0) direction -= 3;
-	if (velocity.x > 0) direction += 3;
-	if (velocity.y < 0) direction -= 1;
-	if (velocity.y > 0) direction += 1;
+	if (velocity.x < -0.1) direction -= 3;
+	if (velocity.x > 0.1) direction += 3;
+	if (velocity.y < -0.1) direction -= 1;
+	if (velocity.y > 0.1) direction += 1;
 	if (direction == 4) direction = lastDirection;
 	lastDirection = direction;
 }

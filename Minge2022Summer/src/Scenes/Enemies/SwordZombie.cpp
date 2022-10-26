@@ -14,7 +14,6 @@ SwordZombie::SwordZombie(Point mapPos)
 	hp = 1;
 }
 void SwordZombie::update(){
-<<<<<<< HEAD
     direction=atan2(pos.y-playerPos.y,pos.x-playerPos.x)-90_deg;
     velocity.x=move*speed*sin(direction);
     velocity.y=move*speed*-cos(direction);
