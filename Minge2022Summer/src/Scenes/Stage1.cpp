@@ -83,6 +83,7 @@ void Stage1::update()
 
 	// プレイヤーの状態更新
 	player.update();
+	if (MouseL.down())player.attack();
 
 
 	//for (int32 i = 0; i < countswordzombies; i++) {

@@ -23,10 +23,12 @@ private:
 
 	ConstantBuffer<Blink> cb;
 
+	double directionDeg = 0;
 	int direction;
     int hp;
 	int invinceT;
-
+	int coolT = 0;
+	int attackRange;
 
 	int playerDirection;
 public:
@@ -41,5 +43,6 @@ public:
 	void detectObjCollision(Object*);
 	void spikeCollision();
 	int32 spike(int32 chipIndex);
-
+	bool isAttacking() const;
+	void attack();
 };
