@@ -15,5 +15,7 @@ public:
 	void draw() const override;
 
 	void getPlayerPos(Vec2);
+	bool isDefeated();
 	virtual void emitObject(Array<Object*>*) {}
+	void isAttacked();
 };

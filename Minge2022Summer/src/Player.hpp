@@ -1,6 +1,8 @@
 ﻿#pragma once
 # include "Character.hpp"
 # include "Scenes/Enemies/Enemy.hpp"
+# include "Scenes/Enemies/Bomber.hpp"
+# include "Scenes/Enemies/SwordZombie.hpp"
 # include "Scenes/Objects/Object.hpp"
 
 struct Blink
@@ -21,10 +23,12 @@ private:
 
 	ConstantBuffer<Blink> cb;
 
+	double directionDeg = 0;
 	int direction;
     int hp;
 	int invinceT;
-
+	int coolT = 0;
+	int attackRange;
 
 	int playerDirection;
 public:
@@ -39,5 +43,6 @@ public:
 	void detectObjCollision(Object*);
 	void spikeCollision();
 	int32 spike(int32 chipIndex);
-
+	bool isAttacking() const;
+	void attack();
 };

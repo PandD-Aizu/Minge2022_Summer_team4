@@ -40,3 +40,12 @@ void Enemy::draw() const {
 					pos.y - textureCenter.y
 		);
 }
+
+void Enemy::isAttacked() {
+	hp--;
+}
+
+bool Enemy::isDefeated() {
+	if (hp <= 0) return true;
+	else return false;
+}

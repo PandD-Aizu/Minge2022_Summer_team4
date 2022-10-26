@@ -4,6 +4,7 @@
 Player::Player(){
     hp=10;
 	invinceT = 0;
+	attackRange = 15;
 }
 
 void Player::update(){
@@ -19,24 +20,31 @@ void Player::update(){
 	}
 
 	decideDirection();
-
 	moveRestriction();
-
 	spikeCollision();
-
 	groundMapChipCollision();
-
 	moveNextPosition();
-
 	changeDirection();
 
-	
+	if(isAttacking()) coolT--;
 }
 
 void Player::detectEnemyCollision(Enemy * enm) {
 	if (enm->pos.distanceFrom(pos) < 16) {
 		damaged();
 	}
+	if (isAttacking()) {
+		// 敵を攻撃したときの当たり判定。円で仮置き
+		Circle hitRange{ pos.x,pos.y, attackRange*2 };
+		if (hitRange.intersects(enm->pos)) {
+			enm->isAttacked();
+		}
+	}
+    if (SwordZombie* sz = dynamic_cast<SwordZombie*>(enm)) {
+		if(sz->isAttacking() && sz->pos.distanceFrom(pos) < sz->attackRange*2) {
+			damaged();
+		}
+    }
 }
 
 
@@ -93,6 +101,10 @@ void Player::draw() const {
 		// 描画
 		CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
 			.draw(pos.x - textureCenter.x, pos.y - textureCenter.y);
+
+	}
+	if (isAttacking()) {
+		Circle{ pos.x,pos.y,8 }.drawArc(-ToRadians(directionDeg) + 45_deg, 90_deg, 0, attackRange, ColorF{1,0,0,0.5});
 	}
 }
 
@@ -103,7 +115,6 @@ bool Player::died(){
         return false;
     }
 }
-
 
 //キャラクターの移動
 void Player::decideDirection() {
@@ -121,20 +132,20 @@ void Player::decideDirection() {
 	Vec2 deltaVelocity{ 0, 0 };
 
 	// キーボードで８方向移動
-	if (KeyDown.pressed()) { // ↓ キー
+	if (KeyDown.pressed() || KeyS.pressed()) { // ↓ キー
 		deltaVelocity.y += walkSpeed;
 		direction += 1;
 	}
-	if (KeyUp.pressed()) { // ↑ キー
+	if (KeyUp.pressed() || KeyW.pressed()) { // ↑ キー
 		deltaVelocity.y -= walkSpeed;
 		direction -= 1;
 	}
-	if (KeyLeft.pressed()) { // ← キー
+	if (KeyLeft.pressed() || KeyA.pressed()) { // ← キー
 
 		deltaVelocity.x -= walkSpeed;
 		direction -= 3;
 	}
-	if (KeyRight.pressed()) { // → キー
+	if (KeyRight.pressed() || KeyD.pressed()) { // → キー
 
 		deltaVelocity.x += walkSpeed;
 		direction += 3;
@@ -150,35 +161,33 @@ void Player::decideDirection() {
 
 void Player::changeDirection() {
 	//プレイヤーの向きをマウスの方向に変更する関数です。
-	double theta;
+	directionDeg = atan2(-(Cursor::Pos().y - Scene::Height() / 2) , Cursor::Pos().x - Scene::Width() / 2);
 
-	theta = atan2(-(Cursor::Pos().y - Scene::Height() / 2) , Cursor::Pos().x - Scene::Width() / 2);
-
-	if (theta < 0) {
-		theta = theta + 2 * Math::Pi;
+	if (directionDeg < 0) {
+		directionDeg = directionDeg + 2 * Math::Pi;
 	}
 
-	theta = theta * 360 / (2 * Math::Pi);
+	directionDeg = directionDeg * 360 / (2 * Math::Pi);
 
-	if ((theta >= 0 && theta < 22.5) || (theta >= 337.5) && theta < 360) {	//右向き→
+	if ((directionDeg >= 0 && directionDeg < 22.5) || (directionDeg >= 337.5) && directionDeg < 360) {	//右向き→
 		playerDirection = 7;
 	}
-	else if (theta < 67.5) {		//右上
+	else if (directionDeg < 67.5) {		//右上
 		playerDirection = 6;
 	}
-	else if (theta < 112.5) {		//上
+	else if (directionDeg < 112.5) {		//上
 		playerDirection = 3;
 	}
-	else if (theta < 157.5) {		//左上
+	else if (directionDeg < 157.5) {		//左上
 		playerDirection = 0;
 	}
-	else if (theta < 202.5) {		//左
+	else if (directionDeg < 202.5) {		//左
 		playerDirection = 1;
 	}
-	else if (theta < 247.5) {		//左下
+	else if (directionDeg < 247.5) {		//左下
 		playerDirection = 2;
 	}
-	else if (theta < 292.5) {		//下
+	else if (directionDeg < 292.5) {		//下
 		playerDirection = 5;
 	}
 	else {							//右下
@@ -186,7 +195,6 @@ void Player::changeDirection() {
 	}
 
 }
-
 
 //とげとの当たり判定を行う
 void Player::spikeCollision() {
@@ -215,4 +223,20 @@ int32 Player::spike(int32 chipIndex)
 	}
 
 	return chipIndex;
+}
+
+
+bool Player::isAttacking() const {
+	if (coolT > 0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void Player::attack() {
+	if (coolT <= 0) {
+		coolT = 10;
+	}
 }

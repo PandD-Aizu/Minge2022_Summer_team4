@@ -83,6 +83,7 @@ void Stage1::update()
 
 	// プレイヤーの状態更新
 	player.update();
+	if (MouseL.down())player.attack();
 
 
 	//for (int32 i = 0; i < countswordzombies; i++) {
@@ -94,6 +95,8 @@ void Stage1::update()
 		enemy->update();
 		player.detectEnemyCollision(enemy);
 	}
+
+	enemies.remove_if([](Enemy* enm) {return enm->isDefeated(); });
 
 	for (auto& obj : objects) {
 		obj->update();
