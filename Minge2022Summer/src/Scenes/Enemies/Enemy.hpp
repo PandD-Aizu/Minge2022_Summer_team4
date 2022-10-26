@@ -7,5 +7,6 @@ private:
 public:
 	Vec2 playerPos;
 	void getPlayerPos(Vec2);
+	bool isDefeated();
 	virtual void emitObject(Array<Object*>*) {}
 };

@@ -40,3 +40,4 @@ bool SwordZombie::isAttacking(){
         return false;
     }
 }
+

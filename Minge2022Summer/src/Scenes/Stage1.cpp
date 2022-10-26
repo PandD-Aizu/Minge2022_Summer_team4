@@ -95,6 +95,8 @@ void Stage1::update()
 		player.detectEnemyCollision(enemy);
 	}
 
+	enemies.remove_if([](Enemy* enm) {return enm->isDefeated(); });
+
 	for (auto& obj : objects) {
 		obj->update();
 		player.detectObjCollision(obj);
