@@ -1,6 +1,8 @@
 ﻿#pragma once
 # include "Character.hpp"
 # include "Scenes/Enemies/Enemy.hpp"
+# include "Scenes/Enemies/Bomber.hpp"
+# include "Scenes/Enemies/SwordZombie.hpp"
 # include "Scenes/Objects/Object.hpp"
 
 struct Blink
