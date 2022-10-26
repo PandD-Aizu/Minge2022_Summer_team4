@@ -33,6 +33,13 @@ void Player::detectEnemyCollision(Enemy * enm) {
 	if (enm->pos.distanceFrom(pos) < 16) {
 		damaged();
 	}
+	if (isAttacking()) {
+		// 敵を攻撃したときの当たり判定。円で仮置き
+		Circle hitRange{ pos.x,pos.y, attackRange*2 };
+		if (hitRange.intersects(enm->pos)) {
+			enm->isAttacked();
+		}
+	}
     if (SwordZombie* sz = dynamic_cast<SwordZombie*>(enm)) {
 		if(sz->isAttacking() && sz->pos.distanceFrom(pos) < sz->attackRange*2) {
 			damaged();
