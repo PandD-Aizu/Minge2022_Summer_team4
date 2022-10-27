@@ -1,16 +1,15 @@
-﻿#include"Bomber.hpp"
+﻿#include"HomingGunner.hpp"
 
-Bomber::Bomber(Point mapPos)
-	:Enemy(U"Sprites/bomber.png")
+HomingGunner::HomingGunner(Point mapPos, int maxCnt)
+	:Enemy(U"Sprites/bomber.png"), maxShotCnt(maxCnt)
 {
-    speed=0.15;
-    velocity={0,0};
+	speed = 0.15;
+	velocity = { 0,0 };
 	pos = { mapPos.x + collisionSize.x / 2, mapPos.y + collisionSize.y / 2 };
 	hp = 1;
 }
-void Bomber::update(){
-	plantCnt--;
-	
+void HomingGunner::update() {
+	shotCnt--;
 
 	velocity = Vec2{ 0, 0 };
 	if ((pos.x + speed / 2) < playerPos.x) {
@@ -30,13 +29,13 @@ void Bomber::update(){
 	moveRestriction();
 	moveNextPosition();
 }
-void Bomber::draw() const {
+void HomingGunner::draw() const {
 	Enemy::draw();
 }
 
-void Bomber::emitObject(Array <Object *> *objects) {
-	if (plantCnt <= 0) {
-		*(objects) << new Bomb(pos); // 敵用の爆弾の設置
-		plantCnt = 500;
+void HomingGunner::emitObject(Array <Object*>* objects) {
+	if (shotCnt <= 0) {
+		*(objects) << new HomingBullet(pos, 30_deg, 0.5); // 敵用の爆弾の設置
+		shotCnt = maxShotCnt;
 	}
 }
