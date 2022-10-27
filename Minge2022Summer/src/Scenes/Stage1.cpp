@@ -6,7 +6,6 @@ Stage1::Stage1(const InitData& init)
 	: IScene{ init }
 {
 	objects << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
-	objects << new HomingBullet(Vec2{ 250, 300 });
 	countswordzombies = 0;
 	mapLayer0 = LoadCSV(U"maps/stage1/layer0.csv");
 	mapLayer1 = LoadCSV(U"maps/stage1/layer1.csv");
@@ -24,6 +23,9 @@ Stage1::Stage1(const InitData& init)
 				break;
 			case 6:
 				enemies << new Bomber(pos);
+				break;
+			case 7:
+				enemies << new HomingGunner(pos, 500);
 				break;
 			}
 		}
@@ -86,16 +88,13 @@ void Stage1::update()
 	player.update();
 	if (MouseL.down())player.attack();
 
-
-	//for (int32 i = 0; i < countswordzombies; i++) {
-	//	enemiespos[i] = swordzombie[i].sendmypos();
-	//}
-
 	for (auto& enemy : enemies) {
 		enemy->getPlayerPos(player.pos);
 		enemy->update();
 		player.detectEnemyCollision(enemy);
+		enemy->emitObject(&objects);
 	}
+
 
 	enemies.remove_if([](Enemy* enm) {return enm->isDefeated(); });
 

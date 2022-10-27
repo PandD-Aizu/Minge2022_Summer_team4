@@ -1,6 +1,6 @@
 ﻿#include "Object.hpp"
 
-HomingBullet::HomingBullet(Vec2 pos, double _speed, double _force, double startRad)
+HomingBullet::HomingBullet(Vec2 pos, double startRad, double _speed, double _force)
 	: Object(pos), speed(_speed), force(_force), direction(startRad)
 {
 }
@@ -21,10 +21,6 @@ void HomingBullet::draw() const {
 void HomingBullet::accToPlayer(Vec2* playerPos) {
 	double playerDir = fmod(atan2(playerPos->y - pos.y, playerPos->x - pos.x) + Math::TwoPi, Math::TwoPi);
 	double directionDiff = fmod(playerDir - direction + Math::TwoPi, Math::TwoPi);
-	ClearPrint();
-	Print << U"playerDir: " << playerDir;
-	Print << U"direction: " << direction;
-	Print << U"directionDiff: " << directionDiff;
 
 	if (directionDiff > Math::Pi) direction -= force;
 	else direction += force;
