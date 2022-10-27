@@ -39,3 +39,9 @@ int32 MapChip::spike(int32 chipIndex) const
 
 	return chipIndex;
 }
+
+bool isTileExist(Vec2 pos) {
+	Point targetCell(static_cast<int32>(pos.x / MapChip::MapChipSize), static_cast<int32>(pos.y / MapChip::MapChipSize));
+	if (mapLayer1[targetCell.x][targetCell.y] != 0) return true;
+	else return false;
+}
