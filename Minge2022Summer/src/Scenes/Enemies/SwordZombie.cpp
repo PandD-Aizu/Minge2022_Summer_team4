@@ -1,7 +1,9 @@
 ﻿#include"SwordZombie.hpp"
 #include"Math.h"
 
-SwordZombie::SwordZombie(Point mapPos){
+SwordZombie::SwordZombie(Point mapPos)
+	:Enemy{ U"Sprites/swordzombie.png"}
+{
     speed=Random(0.2,0.4);
     velocity={0,0};
 	pos = {mapPos.x+collisionSize.x/2,mapPos.y+collisionSize.y/2};
@@ -25,15 +27,19 @@ void SwordZombie::update(){
         move=1;
         timer=0;
     }
+
+	ensureDirection();
 	moveRestriction();
 	moveNextPosition();
 }
-void SwordZombie::draw()const{
-    mapchip.get(5).draw(pos.x-collisionSize.x/2,pos.y-collisionSize.y/2);
+
+void SwordZombie::draw() const {
+	Enemy::draw();
     if(isAttacking()){
         Circle{pos.x,pos.y,8}.drawArc(direction-45_deg,90_deg,0, attackRange,ColorF{1,0,0,0.5});
     }
 }
+
 bool SwordZombie::isAttacking() const{
     if(timer>=0.8){
         return true;
