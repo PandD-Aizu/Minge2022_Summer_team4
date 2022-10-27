@@ -19,9 +19,13 @@ void HomingBullet::draw() const {
 }
 
 void HomingBullet::accToPlayer(Vec2* playerPos) {
-	double playerDir = atan2(playerPos->x - pos.x, playerPos->y - pos.y);
-	double directionDiff = fmod(playerDir - direction, Math::TwoPi);
+	double playerDir = fmod(atan2(playerPos->y - pos.y, playerPos->x - pos.x) + Math::TwoPi, Math::TwoPi);
+	double directionDiff = fmod(playerDir - direction + Math::TwoPi, Math::TwoPi);
+	ClearPrint();
+	Print << U"playerDir: " << playerDir;
+	Print << U"direction: " << direction;
+	Print << U"directionDiff: " << directionDiff;
 
-	if (directionDiff > Math::Pi) direction += 0.02;
-	else direction -= 0.02;
+	if (directionDiff > Math::Pi) direction -= force;
+	else direction += force;
 }

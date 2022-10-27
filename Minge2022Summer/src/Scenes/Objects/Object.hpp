@@ -15,6 +15,7 @@ public:
 
 	virtual void update() {}
 	virtual void draw() const {}
+	Object() {}
 	Object(Vec2 pos) :pos(pos) {}
 	virtual ~Object() {}
 };
@@ -64,7 +65,7 @@ private:
 
 public:
 
-	HomingBullet(Vec2 _pos, double _speed = 3, double force = 2.0, double startDeg = 30_deg);
+	HomingBullet(Vec2 _pos, double _speed = 0.1, double force = 0.01, double startDeg = 30_deg);
 
 	void update() override;
 	void draw() const override;
