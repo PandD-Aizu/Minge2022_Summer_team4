@@ -3,6 +3,7 @@
 # include "Scenes/Enemies/Enemy.hpp"
 # include "Scenes/Enemies/Bomber.hpp"
 # include "Scenes/Enemies/SwordZombie.hpp"
+# include "Scenes/Enemies/ArcherWall.hpp"
 # include "Scenes/Objects/Object.hpp"
 
 struct Blink

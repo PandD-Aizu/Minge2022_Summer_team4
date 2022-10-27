@@ -86,3 +86,16 @@ public:
 	void update() override;
 	void draw() const override;
 };
+
+class Arrow : public Object {
+private:
+	double speed;
+	double direction;
+
+public:
+
+	Arrow(Vec2 _pos, double startDeg = 30_deg, double _speed = 0.3);
+
+	void update() override;
+	void draw() const override;
+};
