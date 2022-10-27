@@ -71,3 +71,19 @@ public:
 	void draw() const override;
 	void accToPlayer(Vec2 *);
 };
+
+class BounceBullet : public Object {
+private:
+	double speed;
+	double force;
+	double direction;
+	int32 bounceLimit;
+
+public:
+
+	BounceBullet(Vec2 _pos, double startDeg = 30_deg, double _speed = 0.3, double force = 0.03, int32 _bounceLimit = 1);
+
+	void update() override;
+	void draw() const override;
+	void accToPlayer(Vec2*);
+};

@@ -27,6 +27,9 @@ Stage1::Stage1(const InitData& init)
 			case 7:
 				enemies << new HomingGunner(pos, 500);
 				break;
+			case 8:
+				enemies << new BounceGunner(pos, 500);
+				break;
 			}
 		}
 	}
