@@ -2,17 +2,21 @@
 # include "../../common.hpp"
 
 class Object {
+protected:
 public:
 	// オブジェクト識別
 	int id;
 	// アニメーションの枚数
 	int animNum;
 	int animIndex;
+	Vec2 pos;
 
 	bool destructorFlag = false; // 削除フラグ
 
 	virtual void update() {}
 	virtual void draw() const {}
+	Object() {}
+	Object(Vec2 pos) :pos(pos) {}
 	virtual ~Object() {}
 };
 
@@ -43,7 +47,6 @@ private:
 	Timer timer;
 
 public:
-	Vec2 position;
 	int32 state = 0; // 現在の状態（0: 爆発待機 1: 爆発中）
 	int32 range; // 爆発範囲
 
@@ -52,4 +55,19 @@ public:
 	void update() override;
 
 	void draw() const override;
+};
+
+class HomingBullet : public Object {
+private:
+	double speed;
+	double force;
+	double direction;
+
+public:
+
+	HomingBullet(Vec2 _pos, double startDeg = 30_deg, double _speed = 0.3, double force = 0.03);
+
+	void update() override;
+	void draw() const override;
+	void accToPlayer(Vec2 *);
 };

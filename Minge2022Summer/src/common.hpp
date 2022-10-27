@@ -3,6 +3,9 @@
 
 Grid<int32> LoadCSV(FilePathView);
 
+// 指定したpositionに壁が存在するかどうか返す
+bool isTileExist(Vec2);
+
 struct GameData {
 	bool isMapSelected = false;
 };

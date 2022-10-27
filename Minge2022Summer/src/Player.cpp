@@ -66,7 +66,19 @@ void Player::detectObjCollision(Object* obj) {
 	}
 
 	if (Bomb* bomb = dynamic_cast<Bomb*>(obj)) {
-		if (bomb->state && bomb->position.distanceFrom(pos) <= bomb->range) {
+		if (bomb->state && bomb->pos.distanceFrom(pos) <= bomb->range) {
+			damaged();
+		}
+	}
+
+	if (HomingBullet* bullet = dynamic_cast<HomingBullet*>(obj)) {
+		bullet->accToPlayer(&pos);
+		if (isTileExist(bullet->pos)) {
+			bullet->destructorFlag = true;
+		}
+
+		if (bullet->pos.distanceFrom(pos) <= 15) {
+			bullet->destructorFlag = true;
 			damaged();
 		}
 	}

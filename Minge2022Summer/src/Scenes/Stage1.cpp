@@ -24,6 +24,9 @@ Stage1::Stage1(const InitData& init)
 			case 6:
 				enemies << new Bomber(pos);
 				break;
+			case 7:
+				enemies << new HomingGunner(pos, 500);
+				break;
 			}
 		}
 	}
@@ -85,16 +88,13 @@ void Stage1::update()
 	player.update();
 	if (MouseL.down())player.attack();
 
-
-	//for (int32 i = 0; i < countswordzombies; i++) {
-	//	enemiespos[i] = swordzombie[i].sendmypos();
-	//}
-
 	for (auto& enemy : enemies) {
 		enemy->getPlayerPos(player.pos);
 		enemy->update();
 		player.detectEnemyCollision(enemy);
+		enemy->emitObject(&objects);
 	}
+
 
 	enemies.remove_if([](Enemy* enm) {return enm->isDefeated(); });
 

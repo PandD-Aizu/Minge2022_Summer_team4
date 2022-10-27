@@ -6,6 +6,7 @@ Bomber::Bomber(Point mapPos)
     speed=0.15;
     velocity={0,0};
 	pos = { mapPos.x + collisionSize.x / 2, mapPos.y + collisionSize.y / 2 };
+	hp = 1;
 }
 void Bomber::update(){
 	plantCnt--;
@@ -31,7 +32,6 @@ void Bomber::update(){
 }
 void Bomber::draw() const {
 	Enemy::draw();
-    // mapchip.get(6).draw(pos.x-collisionSize.x/2,pos.y-collisionSize.y/2);
 }
 
 void Bomber::emitObject(Array <Object *> *objects) {
