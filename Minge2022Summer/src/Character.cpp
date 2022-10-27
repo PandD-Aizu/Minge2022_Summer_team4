@@ -29,18 +29,18 @@ void Character::moveRestriction() {
 	if (velocity.x > 0) {
 		// 当たり判定右上のセル座標
 		Point upperRightCell(
-							 static_cast<int32>((nextPos.x + collisionPoint.x + collisionSize.x - 1) / MapChip::MapChipSize),
+							 static_cast<int32>((nextPos.x + collisionPoint.x + collisionSize.x) / MapChip::MapChipSize),
 							 static_cast<int32>((nextPos.y + collisionPoint.y) / MapChip::MapChipSize)
 		);
 		// 当たり判定の右下のセル座標
 		Point lowerRightCell(
-							 static_cast<int32>((nextPos.x + collisionPoint.x + collisionSize.x - 1) / MapChip::MapChipSize),
+							 static_cast<int32>((nextPos.x + collisionPoint.x + collisionSize.x) / MapChip::MapChipSize),
 							 static_cast<int32>((nextPos.y + collisionPoint.y + collisionSize.y - 1) / MapChip::MapChipSize)
 		);
 		// 右上もしくは右下が壁に接触した場合
 		if (mapLayer1[upperRightCell.y][upperRightCell.x] == 2 || mapLayer1[lowerRightCell.y][lowerRightCell.x] == 2) {
 			// x座標を壁の左側の側面に矯正する
-			nextPos.x = upperRightCell.x * MapChip::MapChipSize - 1 - (collisionPoint.x + collisionSize.x - 1);
+			nextPos.x = upperRightCell.x * MapChip::MapChipSize - (collisionPoint.x + collisionSize.x);
 		}
 	}
 	// 左方向に移動中の場合
@@ -70,19 +70,20 @@ void Character::moveRestriction() {
 		// 当たり判定左下のセル座標
 		Point lowerLeftCell(
 							static_cast<int32>((nextPos.x + collisionPoint.x) / MapChip::MapChipSize),
-							static_cast<int32>((nextPos.y + collisionPoint.y + collisionSize.y - 1) / MapChip::MapChipSize)
+							static_cast<int32>((nextPos.y + collisionPoint.y + collisionSize.y) / MapChip::MapChipSize)
 		);
 		// 当たり判定の右下のセル座標
 		Point lowerRightCell(
 							 static_cast<int32>((nextPos.x + collisionPoint.x + collisionSize.x - 1) / MapChip::MapChipSize),
-							 static_cast<int32>((nextPos.y + collisionPoint.y + collisionSize.y - 1) / MapChip::MapChipSize)
+							 static_cast<int32>((nextPos.y + collisionPoint.y + collisionSize.y) / MapChip::MapChipSize)
 		);
 		// 左下もしくは右下が壁に接触した場合
 		if (mapLayer1[lowerLeftCell.y][lowerLeftCell.x] == 2 || mapLayer1[lowerRightCell.y][lowerRightCell.x] == 2) {
 			// x座標を壁の左側の側面に矯正する
-			nextPos.y = lowerLeftCell.y * MapChip::MapChipSize - 1 - (collisionPoint.y + collisionSize.y - 1);
+			nextPos.y = lowerLeftCell.y * MapChip::MapChipSize - (collisionPoint.y + collisionSize.y);
 
 		}
+
 	}
 	// 上方向に移動中の場合
 	else {
@@ -103,6 +104,7 @@ void Character::moveRestriction() {
 
 		}
 	}
+
 }
 
 // 地面マップとの当たり判定
