@@ -73,6 +73,9 @@ void Player::detectObjCollision(Object* obj) {
 
 	if (HomingBullet* homing = dynamic_cast<HomingBullet*>(obj)) {
 		homing->accToPlayer(&pos);
+		if (isTileExist(homing->pos)) {
+			homing->destructorFlag = true;
+		}
 	}
 }
 

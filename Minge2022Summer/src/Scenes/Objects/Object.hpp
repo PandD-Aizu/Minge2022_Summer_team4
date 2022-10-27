@@ -65,7 +65,7 @@ private:
 
 public:
 
-	HomingBullet(Vec2 _pos, double _speed = 0.1, double force = 0.01, double startDeg = 30_deg);
+	HomingBullet(Vec2 _pos, double _speed = 0.3, double force = 0.03, double startDeg = 30_deg);
 
 	void update() override;
 	void draw() const override;
