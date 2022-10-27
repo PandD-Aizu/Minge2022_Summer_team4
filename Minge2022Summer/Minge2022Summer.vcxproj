@@ -118,11 +118,13 @@
     <ClCompile Include="src\Character.cpp" />
     <ClCompile Include="src\MapChip.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Scenes\Enemies\ArcherWall.cpp" />
     <ClCompile Include="src\Scenes\Enemies\Bomber.cpp" />
     <ClCompile Include="src\Scenes\Enemies\BounceGunner.cpp" />
     <ClCompile Include="src\Scenes\Enemies\Enemy.cpp" />
     <ClCompile Include="src\Scenes\Enemies\HomingGunner.cpp" />
     <ClCompile Include="src\Scenes\Enemies\SwordZombie.cpp" />
+    <ClCompile Include="src\Scenes\Objects\Arrow.cpp" />
     <ClCompile Include="src\Scenes\Objects\HomingBullet.cpp" />
     <ClCompile Include="src\Scenes\Objects\BounceBullet.cpp" />
     <ClCompile Include="src\Scenes\Stage1.cpp" />
@@ -335,6 +337,7 @@
     <ClInclude Include="src\common.hpp" />
     <ClInclude Include="src\Character.hpp" />
     <ClInclude Include="src\Player.hpp" />
+    <ClInclude Include="src\Scenes\Enemies\ArcherWall.hpp" />
     <ClInclude Include="src\Scenes\Enemies\Bomber.hpp" />
     <ClInclude Include="src\Scenes\Enemies\BounceGunner.hpp" />
     <ClInclude Include="src\Scenes\Enemies\Enemy.hpp" />

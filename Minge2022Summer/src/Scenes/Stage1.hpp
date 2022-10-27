@@ -8,6 +8,7 @@
 # include "Enemies/SwordZombie.hpp"
 # include "Enemies/HomingGunner.hpp"
 # include "Enemies/BounceGunner.hpp"
+# include "Enemies/ArcherWall.hpp"
 
 
 class Stage1 : public App::Scene {

@@ -30,7 +30,8 @@ void Player::update(){
 }
 
 void Player::detectEnemyCollision(Enemy * enm) {
-	if (enm->pos.distanceFrom(pos) < 16) {
+	if (ArcherWall* aw = dynamic_cast<ArcherWall*>(enm)) {
+	} else if (enm->pos.distanceFrom(pos) < 16) {
 		damaged();
 	}
 	if (isAttacking()) {
@@ -85,6 +86,13 @@ void Player::detectObjCollision(Object* obj) {
 
 	if (BounceBullet* bullet = dynamic_cast<BounceBullet*>(obj)) {
 		if (bullet->pos.distanceFrom(pos) <= 15) {
+			bullet->destructorFlag = true;
+			damaged();
+		}
+	}
+
+	if (Arrow* bullet = dynamic_cast<Arrow*>(obj)) {
+		if (bullet->pos.distanceFrom(pos) <= 10) {
 			bullet->destructorFlag = true;
 			damaged();
 		}
