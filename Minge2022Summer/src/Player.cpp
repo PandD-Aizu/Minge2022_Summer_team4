@@ -29,6 +29,12 @@ void Player::update(){
 	if(isAttacking()) coolT--;
 }
 
+void Player::drawHP() const {
+	for (int i = 0; i < hp; i++) {
+		hpTexture.draw(10 + i * 35, 20);
+	}
+}
+
 void Player::detectEnemyCollision(Enemy * enm) {
 	if (ArcherWall* aw = dynamic_cast<ArcherWall*>(enm)) {
 	} else if (enm->pos.distanceFrom(pos) < 16) {

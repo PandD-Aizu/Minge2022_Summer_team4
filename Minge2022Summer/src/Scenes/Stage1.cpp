@@ -173,4 +173,5 @@ void Stage1::draw() const
 			player.draw();
 		}
 	}
+	player.drawHP();
 }
