@@ -82,6 +82,13 @@ void Player::detectObjCollision(Object* obj) {
 			damaged();
 		}
 	}
+
+	if (BounceBullet* bullet = dynamic_cast<BounceBullet*>(obj)) {
+		if (bullet->pos.distanceFrom(pos) <= 15) {
+			bullet->destructorFlag = true;
+			damaged();
+		}
+	}
 }
 
 void Player::damaged() {
