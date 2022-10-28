@@ -8,6 +8,7 @@ ArcherWall::ArcherWall(Point mapPos, int maxCnt, int _direction)
 	pos = { mapPos.x + collisionSize.x / 2, mapPos.y + collisionSize.y / 2 };
 	hp = 1;
 	direction = _direction;
+	isRestless = true;
 }
 
 void ArcherWall::update() {
