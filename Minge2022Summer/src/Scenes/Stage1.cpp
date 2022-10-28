@@ -170,7 +170,7 @@ void Stage1::update()
 		changeScene(U"GameClear");
 	}
 	if (player.died()) {
-		changeScene(U"GameClear");
+		changeScene(U"GameOver");
 	}
 }
 
