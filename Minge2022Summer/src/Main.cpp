@@ -58,7 +58,6 @@ void Main()
 	int FPS = 60; // 1秒間に1画面を書き換える回数
 	Stopwatch sw;   //FPS60
 	sw.start(); //FPS60
-	manager.init(U"GameOver");
 	while (System::Update())
 	{
 		if (not manager.update())
