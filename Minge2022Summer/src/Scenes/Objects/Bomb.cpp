@@ -16,12 +16,15 @@ void Bomb::update() {
 
 	// 消滅判定
 	if (state == 1 && timer.sF() == 0) destructorFlag = true;
+
+	animIndex = Periodic::Square0_1(0.2s);
 }
 
 void Bomb::draw() const {
 	// 爆発待機
 	if (state == 0) {
 		Circle{ pos, 8 }.draw(Palette::Darkgray);
+		objTexture(64 * animIndex, 64 * 1, 64, 64).scaled(0.5).drawAt(pos);
 	}
 
 	//爆発中
