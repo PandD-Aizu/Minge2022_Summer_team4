@@ -98,7 +98,7 @@ void Stage1::update()
 
 	for (auto& enemy : enemies) {
 		enemy->getPlayerPos(player.pos);
-		enemy->update();
+		if(enemy->isInSenceRange()) enemy->update();
 		player.detectEnemyCollision(enemy);
 		enemy->emitObject(&objects);
 	}
@@ -165,7 +165,7 @@ void Stage1::draw() const
 
 
 		// 敵キャラクターの描画
-		for (auto& enemy : enemies) if(enemy->pos.y <= player.pos.y) enemy->draw();
+		for (auto& enemy : enemies) if(enemy->pos.y <= player.pos.y)if (enemy->isInSenceRange())  enemy->draw();
 		// オブジェクトの描画
 		for (const auto& obj : objects) if (obj->pos.y <= player.pos.y) obj->draw();
 
@@ -175,7 +175,7 @@ void Stage1::draw() const
 		}
 
 		// 敵キャラクターの描画
-		for (auto& enemy : enemies) if (enemy->pos.y > player.pos.y) enemy->draw();
+		for (auto& enemy : enemies) if (enemy->pos.y > player.pos.y)if (enemy->isInSenceRange())  enemy->draw();
 		// オブジェクトの描画
 		for (const auto& obj : objects) if (obj->pos.y > player.pos.y) obj->draw();
 
