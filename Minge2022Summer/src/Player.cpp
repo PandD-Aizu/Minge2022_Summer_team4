@@ -109,7 +109,7 @@ void Player::detectObjCollision(Object* obj) {
 	}
 
 	if (Arrow* bullet = dynamic_cast<Arrow*>(obj)) {
-		if (bullet->pos.distanceFrom(pos) <= 10) {
+		if (bullet->body.intersects(Circle{ pos, 8 })) {
 			bullet->destructorFlag = true;
 			damaged();
 			AudioAsset(U"arrowHit").playOneShot();
