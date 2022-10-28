@@ -90,6 +90,7 @@ void Player::detectObjCollision(Object* obj) {
 		bullet->accToPlayer(&pos);
 		if (isTileExist(bullet->pos)) {
 			bullet->destructorFlag = true;
+			AudioAsset(U"explode").playOneShot();
 		}
 
 		if (bullet->pos.distanceFrom(pos) <= 10) {
