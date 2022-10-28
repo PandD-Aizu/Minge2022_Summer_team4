@@ -1,4 +1,4 @@
-# include "Title.hpp"
+﻿# include "Title.hpp"
 
 
 
@@ -11,20 +11,22 @@ Title::Title(const InitData& init)
 void Title::update()
 {
 	// 左クリックで
-	if (btn1.mouseOver() && MouseL.pressed()) {
-		// ゲームシーンに遷移
-		changeScene(U"Game");
-        getData().currentStage = 1;
+	if (btn_left.mouseOver() && MouseL.down()) {
+		if (selectedStage > 1) {
+			selectedStage--;
+			texture_stage = Texture{ U"stage{}.png"_fmt(selectedStage) };
+		}
 	}
-	if (btn2.mouseOver() && MouseL.pressed()) {
-		// ゲームシーンに遷移
-        changeScene(U"Game");
-        getData().currentStage = 2;
-    }
-	if (btn3.mouseOver() && MouseL.pressed()) {
-		// ゲームシーンに遷移
-        changeScene(U"Game");
-        getData().currentStage = 3;
+	if (btn_right.mouseOver() && MouseL.down()) {
+		if (selectedStage < 7) {
+			selectedStage++;
+			texture_stage = Texture{ U"stage{}.png"_fmt(selectedStage) };
+		}
+	}
+
+	if (btn_stage.mouseOver() && MouseL.down()) {
+		getData().currentStage = selectedStage;
+		changeScene(U"Game");
 	}
 }
 
@@ -34,8 +36,8 @@ void Title::draw() const
 	bg.draw();
 
 	FontAsset(U"TitleFont")(U"My Game").draw();
-	btn1(btnTexture1).draw();
-	btn2(btnTexture2).draw();
-	btn3(btnTexture3).draw();
+	btn_stage(texture_stage).draw();
+	btn_left(texture_left).draw();
+	btn_right(texture_right).draw();
 }
 
