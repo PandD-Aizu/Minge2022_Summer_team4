@@ -4,7 +4,7 @@
 Player::Player(){
     hp=10;
 	invinceT = 0;
-	attackRange = 15;
+	attackRange = 32;
 }
 
 void Player::update(){
@@ -41,8 +41,13 @@ void Player::detectEnemyCollision(Enemy * enm) {
 		damaged();
 	}
 	if (isAttacking()) {
-		// 敵を攻撃したときの当たり判定。円で仮置き
-		Circle hitRange{ pos.x,pos.y, attackRange*2 };
+		// 敵を攻撃したときの当たり判定。
+		const double directionRad = -(directionDeg / 180) * Math::Pi;
+		const Triangle hitRange = Triangle{
+			pos,
+			pos + Vec2{ cos(directionRad - Math::Pi / 6) * attackRange, sin(directionRad - Math::Pi / 6) * attackRange},
+			pos + Vec2{ cos(directionRad + Math::Pi / 6) * attackRange, sin(directionRad + Math::Pi / 6) * attackRange}
+		};
 		if (hitRange.intersects(enm->pos)) {
 			enm->isAttacked();
 		}
