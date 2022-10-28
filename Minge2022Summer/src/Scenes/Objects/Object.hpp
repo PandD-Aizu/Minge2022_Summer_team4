@@ -3,6 +3,7 @@
 
 class Object {
 protected:
+	const Texture objTexture{U"Sprites/weapons.png"};
 public:
 	// オブジェクト識別
 	int id;

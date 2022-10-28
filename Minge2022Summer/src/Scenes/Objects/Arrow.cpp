@@ -19,4 +19,5 @@ void Arrow::update() {
 
 void Arrow::draw() const {
 	body.draw(Palette::White);
+	objTexture(0, 0, 64, 64).scaled(0.5).rotated(direction + 90_deg).drawAt(pos);
 }
