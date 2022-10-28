@@ -1,8 +1,6 @@
-﻿//# include <Siv3D.hpp>
+//# include <Siv3D.hpp>
 # include "common.hpp"
-# include "Scenes/Stage1.hpp"
-# include "Scenes/Stage2.hpp"
-# include "Scenes/Stage3.hpp"
+# include "Scenes/Game.hpp"
 # include "Scenes/Title.hpp"
 # include "Scenes/GameClear.hpp"
 
@@ -10,10 +8,10 @@ SIV3D_SET(EngineOption::Renderer::OpenGL);
 
 Grid<int> mapLayer0;
 Grid<int> mapLayer1;
+Size MapSize;
 
 void Main()
 {
-
 	// アセットの登録
 	AudioAsset::Register(U"slash0", U"Sounds/SE/slash 01.wav");
 	AudioAsset::Register(U"slash1", U"Sounds/SE/slash 02.wav");
@@ -45,9 +43,7 @@ void Main()
 	manager.add<Title>(U"Title");
 
 	// ゲームシーン（名前は "Stage"）を登録
-	manager.add<Stage1>(U"Stage1");
-	manager.add<Stage2>(U"Stage2");
-	manager.add<Stage3>(U"Stage3");
+	manager.add<Game>(U"Game");
 
 	// ゲームクリアーシーン（名前は "GameClear"）を登録
 	manager.add<GameClear>(U"GameClear");

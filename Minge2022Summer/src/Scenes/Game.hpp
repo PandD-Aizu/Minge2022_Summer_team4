@@ -11,7 +11,7 @@
 # include "Enemies/ArcherWall.hpp"
 
 
-class Stage1 : public App::Scene {
+class Game: public App::Scene {
 private:
 	MyCamera camera;
 	// マップチップ用テクスチャ
@@ -31,7 +31,7 @@ private:
 
 
 public:
-	Stage1(const InitData& init);
+	Game(const InitData& init);
 
 	void update() override;
 	void draw() const override;

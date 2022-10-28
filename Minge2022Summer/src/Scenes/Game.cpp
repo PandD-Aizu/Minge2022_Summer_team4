@@ -1,13 +1,10 @@
-#include "Stage1.hpp"
-//# include "../LoadCSV.hpp"
+#include "Game.hpp"
 
-
-Stage1::Stage1(const InitData& init)
+Game::Game(const InitData& init)
 	: IScene{ init }
 {
 	AudioAsset(U"mainBGM").setVolume(0.2);
 	AudioAsset(U"mainBGM").play();
-	countswordzombies = 0;
 	mapLayer0 = LoadCSV(U"maps/stage{}/layer0.csv"_fmt(getData().currentStage));
 	mapLayer1 = LoadCSV(U"maps/stage{}/layer1.csv"_fmt(getData().currentStage));
     MapSize = mapLayer0.size();
@@ -105,7 +102,7 @@ Stage1::Stage1(const InitData& init)
 }
 
 
-void Stage1::update()
+void Game::update()
 {
 	// =========== デバッグ ==========
 	if (KeyB.down()) objects << new Bomb(player.pos); // 敵用の爆弾の設置
@@ -176,7 +173,7 @@ void Stage1::update()
 	}
 }
 
-void Stage1::draw() const
+void Game::draw() const
 {
 	{
 		auto t = camera.createTransformer();

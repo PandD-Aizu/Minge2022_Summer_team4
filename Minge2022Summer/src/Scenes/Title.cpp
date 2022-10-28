@@ -1,4 +1,4 @@
-﻿# include "Title.hpp"
+# include "Title.hpp"
 
 
 
@@ -13,15 +13,18 @@ void Title::update()
 	// 左クリックで
 	if (btn1.mouseOver() && MouseL.pressed()) {
 		// ゲームシーンに遷移
-		changeScene(U"Stage1");
+		changeScene(U"Game");
+        getData().currentStage = 1;
 	}
 	if (btn2.mouseOver() && MouseL.pressed()) {
 		// ゲームシーンに遷移
-		changeScene(U"Stage2");
-	}
+        changeScene(U"Game");
+        getData().currentStage = 2;
+    }
 	if (btn3.mouseOver() && MouseL.pressed()) {
 		// ゲームシーンに遷移
-		changeScene(U"Stage3");
+        changeScene(U"Game");
+        getData().currentStage = 3;
 	}
 }
 
