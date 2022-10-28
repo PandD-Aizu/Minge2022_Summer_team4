@@ -7,7 +7,7 @@ private:
 	int shotCnt = 100;
 	int maxShotCnt;
 public:
-	ArcherWall(Point, int, int);
+	ArcherWall(Point mapPos, int maxCnt, int direction, int delay = 60);
 	void update() override;
 	void draw()const override;
 	void emitObject(Array<Object*>*) override;
