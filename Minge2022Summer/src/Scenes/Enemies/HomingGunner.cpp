@@ -1,7 +1,7 @@
 ﻿#include"HomingGunner.hpp"
 
 HomingGunner::HomingGunner(Point mapPos, int maxCnt, int _level)
-	:Enemy(U"Sprites/bomber.png"), maxShotCnt(maxCnt)
+	:Enemy(U"Sprites/missileBall.png"), maxShotCnt(maxCnt)
 {
 	speed = 0.3;
 	velocity = { 0,0 };

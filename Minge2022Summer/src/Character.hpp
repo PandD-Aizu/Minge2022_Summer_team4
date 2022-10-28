@@ -21,9 +21,9 @@ protected:
 	const Texture CharacterTexture;
 	
 	// テクスチャのサイズ
-	const Vec2 textureSize{ 20, 28 };
+	const Vec2 textureSize{ 64, 64 };
 	// 中心の相対座標（テクスチャの左上からの相対座標
-	const Vec2 textureCenter{ 10, 20 };
+	const Vec2 textureCenter{ 32, 44 };
 	
 
 	// 方向: (基準4から 上:-1 下:+1 左:-3 右:+3)
