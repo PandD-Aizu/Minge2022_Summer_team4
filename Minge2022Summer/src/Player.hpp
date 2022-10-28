@@ -16,6 +16,7 @@ class Player : public Character{
 private:
 	// テクスチャ読み込み
 	const Texture CharacterTexture{ U"Sprites/player.png" };
+	const Texture hpTexture{ U"heart.png" };
 
 	PixelShader ps;
 	const PixelShader rgbShader = GLSL{ U"Shaders/rgb_shift.frag", {{U"PSConstants2D", 0}} };
@@ -46,4 +47,5 @@ public:
 	int32 spike(int32 chipIndex);
 	bool isAttacking() const;
 	void attack();
+	void drawHP() const;
 };
