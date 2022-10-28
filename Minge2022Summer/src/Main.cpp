@@ -21,6 +21,10 @@ void Main()
 	AudioAsset::Register(U"slash3", U"Sounds/SE/slash 04.wav");
 	AudioAsset::Register(U"SZ_attack", U"Sounds/SE/SwordZombie_attack.mp3");
 	AudioAsset::Register(U"SZ_hit", U"Sounds/SE/SwordZombie_hit.mp3");
+	AudioAsset::Register(U"homingShot", U"Sounds/SE/HomingGun.mp3");
+	AudioAsset::Register(U"explode", U"Sounds/SE/explode.wav");
+	AudioAsset::Register(U"warp", U"Sounds/SE/warp.mp3");
+	// AudioAsset::Register(U"", U"Sounds/SE");
 
 	AudioAsset::Register(U"mainBGM", U"Sounds/BGM/Unchangeable.mp3");
 
