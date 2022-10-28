@@ -67,7 +67,8 @@ class MyCamera : public BasicCamera
 	void follow()
 	{
 		m_center = Math::Lerp(m_center, m_targetCenter, m_followingSpeed);
-		m_scale = 1.0 / Math::Lerp(1.0 / m_scale, 1.0 / m_targetScale, m_followingSpeed);
+		//m_scale = 1.0 / Math::Lerp(1.0 / m_scale, 1.0 / m_targetScale, m_followingSpeed);
+        m_scale = 1.0;
 	}
 
 public:

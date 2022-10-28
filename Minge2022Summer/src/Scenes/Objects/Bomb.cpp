@@ -29,12 +29,12 @@ void Bomb::draw() const {
 	// 爆発待機
 	if (state == 0) {
 		Circle{ pos, 8 }.draw(Palette::Darkgray);
-		objTexture(64 * animIndex, 64 * 1, 64, 64).scaled(0.5).drawAt(pos);
+		objTexture(64 * animIndex, 64 * 1, 64, 64).drawAt(pos);
 	}
 
 	//爆発中
 	if (state == 1) {
 		// Circle{ pos, range }.draw(Color{ Palette::Red, 100 });
-		explosionTexture(256 * animIndex/2, 0, 256, 256).scaled(0.5).drawAt(pos);
+		explosionTexture(256 * animIndex/2, 0, 256, 256).drawAt(pos);
 	}
 }

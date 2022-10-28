@@ -95,8 +95,6 @@ Game::Game(const InitData& init)
 
 	// カメラの位置と大きさを初期化
 	camera.setScreen(Rect(Scene::Size()));
-	camera.setScale(2);
-	camera.setTargetScale(2);
 	camera.setCenter(player.pos);
 	camera.setFollowingSpeed(0.05);
 }
@@ -208,8 +206,6 @@ void Game::draw() const
 
 		// ゲームクリア領域
 		gameClearBody.draw(Color{ 255, 255, 0 });
-
-
 
 		// 敵キャラクターの描画
 		for (auto& enemy : enemies) if(enemy->pos.y <= player.pos.y)if (enemy->isInSenceRange())  enemy->draw();
