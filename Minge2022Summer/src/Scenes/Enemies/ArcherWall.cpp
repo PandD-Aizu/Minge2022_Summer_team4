@@ -1,7 +1,7 @@
 ﻿#include"ArcherWall.hpp"
 
 ArcherWall::ArcherWall(Point mapPos, int maxCnt, int _direction, int delay)
-	:Enemy(U"Sprites/bomber.png"), maxShotCnt(maxCnt)
+	:Enemy(U"Sprites/archer.png"), maxShotCnt(maxCnt)
 {
 	speed = 0.15;
 	velocity = { 0,0 };

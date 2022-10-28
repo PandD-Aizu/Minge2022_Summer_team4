@@ -35,9 +35,9 @@ void Enemy::draw() const {
 
 	// 描画
 	CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
-		.draw(
-			  pos.x - textureCenter.x,
-					pos.y - textureCenter.y
+		.drawAt(
+			  pos.x,	
+					pos.y
 		);
 }
 
