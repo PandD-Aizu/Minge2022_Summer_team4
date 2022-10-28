@@ -1,4 +1,4 @@
-﻿#include "Stage1.hpp"
+#include "Stage1.hpp"
 //# include "../LoadCSV.hpp"
 
 
@@ -8,8 +8,8 @@ Stage1::Stage1(const InitData& init)
 	AudioAsset(U"mainBGM").setVolume(0.2);
 	AudioAsset(U"mainBGM").play();
 	countswordzombies = 0;
-	mapLayer0 = LoadCSV(U"maps/stage1/layer0.csv");
-	mapLayer1 = LoadCSV(U"maps/stage1/layer1.csv");
+	mapLayer0 = LoadCSV(U"maps/stage{}/layer0.csv"_fmt(getData().currentStage));
+	mapLayer1 = LoadCSV(U"maps/stage{}/layer1.csv"_fmt(getData().currentStage));
 
 	HashTable<int32, Point> stairPair;
 	HashTable<int32, Point> stairPairNonRev;

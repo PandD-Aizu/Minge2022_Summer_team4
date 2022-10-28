@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <Siv3D.hpp>
 
 Grid<int32> LoadCSV(FilePathView);
@@ -8,10 +8,12 @@ bool isTileExist(Vec2);
 
 struct GameData {
 	bool isMapSelected = false;
+    int currentStage = 1;
 };
 
 extern Grid<int> mapLayer0;
 extern Grid<int> mapLayer1;
+extern Size MapSize;
 
 using App = SceneManager<String, GameData>;
 
