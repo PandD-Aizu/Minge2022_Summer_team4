@@ -3,6 +3,7 @@
 AccelerationFloor::AccelerationFloor(Vec2 pos, double _direction, double _force)
 	: Object(pos), direction(_direction), force(_force)
 {
+	pos = { pos.x + MapChip::MapChipSize / 2, pos.y + MapChip::MapChipSize / 2 };
 	body = RectF{ Arg::center(pos), MapChip::MapChipSize }.rotated(direction);
 }
 
