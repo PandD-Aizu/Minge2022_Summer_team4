@@ -11,7 +11,7 @@
 # include "Enemies/ArcherWall.hpp"
 
 
-class Stage3 : public App::Scene {
+class Game: public App::Scene {
 private:
 	MyCamera camera;
 	// マップチップ用テクスチャ
@@ -19,20 +19,19 @@ private:
 
 	RenderTexture renderTexture;
 
-	int32 countswordzombies;
+    int32 countswordzombies;
 	// マップのセルの数（横 20, 縦 15 マス）
-	Size MapSize{ 50, 100 };
-	Array<Enemy*> enemies;
+    Array<Enemy*> enemies;
 	Array<Object*> objects;
 
 	Player player;
-
+    
 	// ゲームクリア領域
 	Circle gameClearBody{ Vec2{ 16 * 16 + 8, 16 * 4 + 8}, 8 };
 
 
 public:
-	Stage3(const InitData& init);
+	Game(const InitData& init);
 
 	void update() override;
 	void draw() const override;

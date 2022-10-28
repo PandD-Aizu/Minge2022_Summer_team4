@@ -1,4 +1,4 @@
-﻿# include "common.hpp"
+# include "common.hpp"
 
 #define STAIRS 10
 
@@ -49,3 +49,4 @@ bool isTileExist(Vec2 pos) {
 	}
 	else return false;
 }
+

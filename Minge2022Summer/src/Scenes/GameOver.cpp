@@ -1,4 +1,4 @@
-﻿# include "GameOver.hpp"
+# include "GameOver.hpp"
 
 GameOver::GameOver(const InitData& init)
 	: IScene{ init }
@@ -15,7 +15,7 @@ void GameOver::update()
 	if (continueBtn.mouseOver() && MouseL.pressed())
 	{
 		// コンティニュー
-		changeScene(U"Stage1");
+		changeScene(U"Game");
 	}
 	if (titleBtn.mouseOver() && MouseL.pressed())
 	{

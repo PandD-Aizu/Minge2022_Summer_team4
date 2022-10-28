@@ -1,15 +1,13 @@
-﻿#include "Stage3.hpp"
-//# include "../LoadCSV.hpp"
+﻿#include "Game.hpp"
 
-
-Stage3::Stage3(const InitData& init)
+Game::Game(const InitData& init)
 	: IScene{ init }
 {
 	AudioAsset(U"mainBGM").setVolume(0.2);
 	AudioAsset(U"mainBGM").play();
-	countswordzombies = 0;
-	mapLayer0 = LoadCSV(U"maps/stage3/layer0.csv");
-	mapLayer1 = LoadCSV(U"maps/stage3/layer1.csv");
+	mapLayer0 = LoadCSV(U"maps/stage{}/layer0.csv"_fmt(getData().currentStage));
+	mapLayer1 = LoadCSV(U"maps/stage{}/layer1.csv"_fmt(getData().currentStage));
+    MapSize = mapLayer0.size();
 
 	HashTable<int32, Point> stairPair;
 	HashTable<int32, Point> stairPairNonRev;
@@ -19,8 +17,9 @@ Stage3::Stage3(const InitData& init)
 	{
 		for (int32 x = 0; x < MapSize.x; ++x)
 		{
+			const int32 value = mapLayer1[y][x];
 			const Point pos{ (x * MapChip::MapChipSize), (y * MapChip::MapChipSize) };
-			switch (mapLayer1[y][x])
+			switch(value)
 			{
 			case 5:
 				enemies << new SwordZombie(pos);
@@ -42,42 +41,54 @@ Stage3::Stage3(const InitData& init)
 				gameClearBody.y = pos.y;
 				break;
 			}
-			if (mapLayer1[y][x] / 10 == 4) {
-				enemies << new ArcherWall(pos, 500, mapLayer1[y][x] % 10);
+			if (value / 10 == 4) {
+				enemies << new ArcherWall(pos, 500, value % 10);
 			}
 			// 5X: 自由に行き来可能な階段
-			if (mapLayer1[y][x] / 10 == 5) {
-				if (stairPair.contains(mapLayer1[y][x] % 10)) {
-					objects << new Stair(stairPair[mapLayer1[y][x] % 10], pos, true);
+			if (value / 10 == 5) {
+				if (stairPair.contains(value % 10)) {
+					objects << new Stair(stairPair[value % 10], pos, true);
 				}
 				else {
-					stairPair.emplace(mapLayer1[y][x] % 10, pos);
+					stairPair.emplace(value % 10, pos);
 				}
 			}
 			// 6X: 一方通行の階段（入口）
-			if (mapLayer1[y][x] / 10 == 6) {
-				if (stairPairNonRev.contains(mapLayer1[y][x] % 10)) {
-					objects << new Stair(pos, stairPairNonRev[mapLayer1[y][x] % 10], false);
+			if (value / 10 == 6) {
+				if (stairPairNonRev.contains(value % 10)) {
+					objects << new Stair(pos, stairPairNonRev[value % 10], false);
 				}
 				else {
-					stairPairNonRev.emplace(mapLayer1[y][x] % 10, pos);
+					stairPairNonRev.emplace(value % 10, pos);
 				}
 			}
 			// 7X: 一方通行の階段（出口）
-			if (mapLayer1[y][x] / 10 == 7) {
-				if (stairPairNonRev.contains(mapLayer1[y][x] % 10)) {
-					objects << new Stair(stairPairNonRev[mapLayer1[y][x] % 10], pos, false);
+			if (value / 10 == 7) {
+				if (stairPairNonRev.contains(value % 10)) {
+					objects << new Stair(stairPairNonRev[value % 10], pos, false);
 				}
 				else {
-					stairPairNonRev.emplace(mapLayer1[y][x] % 10, pos);
+					stairPairNonRev.emplace(value % 10, pos);
 				}
+			}
+
+			// 1XXX: 矢を放つ罠
+			// Xoo: 向き（スプライトの向きと同じ）
+			// oXo: 発射間隔（(X + 1) * 0.5秒)
+			// ooX: 最初の発射までの遅延（X * 0.5秒）
+			if (value / 1000 == 1) {
+				const int32 direction = (value % 1000) / 100;
+				const int32 duration = ((value % 100) / 10 + 1) * 30;
+				const int32 delay = (value % 10) * 30;
+				enemies << new ArcherWall(pos, duration, direction, delay);
 			}
 		}
 	}
 
 	if ((mapLayer0.size() != MapSize) || (mapLayer1.size() != MapSize)) {
 		// MapSize と、ロードしたデータのサイズが一致しない場合のエラー
-		throw Error{ U"mapLayer0: {}, mapLayer1: {}"_fmt(mapLayer0.size(), mapLayer1.size()) };
+        Print << MapSize << U"  :  " << mapLayer1.size();
+		// throw Error{ U"mapLayer0: {}, mapLayer1: {}"_fmt(mapLayer0.size(), mapLayer1.size()) };
 	}
 	// マップを 320x240 のレンダーテクスチャに描画し、それを最終的に 2 倍サイズで描画する
 	renderTexture = RenderTexture{ 320, 240 };
@@ -91,7 +102,7 @@ Stage3::Stage3(const InitData& init)
 }
 
 
-void Stage3::update()
+void Game::update()
 {
 	// =========== デバッグ ==========
 	if (KeyB.down()) objects << new Bomb(player.pos); // 敵用の爆弾の設置
@@ -134,7 +145,7 @@ void Stage3::update()
 
 	for (auto& enemy : enemies) {
 		enemy->getPlayerPos(player.pos);
-		if (enemy->isInSenceRange()) enemy->update();
+		if(enemy->isInSenceRange()) enemy->update();
 		player.detectEnemyCollision(enemy);
 		enemy->emitObject(&objects);
 	}
@@ -158,11 +169,11 @@ void Stage3::update()
 		changeScene(U"GameClear");
 	}
 	if (player.died()) {
-		changeScene(U"GameClear");
+		changeScene(U"GameOver");
 	}
 }
 
-void Stage3::draw() const
+void Game::draw() const
 {
 	{
 		auto t = camera.createTransformer();
@@ -201,7 +212,7 @@ void Stage3::draw() const
 
 
 		// 敵キャラクターの描画
-		for (auto& enemy : enemies) if (enemy->pos.y <= player.pos.y)if (enemy->isInSenceRange())  enemy->draw();
+		for (auto& enemy : enemies) if(enemy->pos.y <= player.pos.y)if (enemy->isInSenceRange())  enemy->draw();
 		// オブジェクトの描画
 		for (const auto& obj : objects) if (obj->pos.y <= player.pos.y) obj->draw();
 

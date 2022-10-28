@@ -41,9 +41,7 @@
 		2C6906D82298140F00A427D0 /* engine in Resources */ = {isa = PBXBuildFile; fileRef = 2C6906D72298140F00A427D0 /* engine */; };
 		2CA856A02901721A00A846BB /* Bomb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA8569F2901721A00A846BB /* Bomb.cpp */; };
 		2CA856A22901727A00A846BB /* MapChip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA856A12901727A00A846BB /* MapChip.cpp */; };
-		2CA856A92901729900A846BB /* Stage2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA856A42901729900A846BB /* Stage2.cpp */; };
-		2CA856AA2901729900A846BB /* Stage1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA856A52901729900A846BB /* Stage1.cpp */; };
-		2CA856AB2901729900A846BB /* Stage3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA856A72901729900A846BB /* Stage3.cpp */; };
+		2CA856AA2901729900A846BB /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA856A52901729900A846BB /* Game.cpp */; };
 		2CC4270D290BAF6A00C663F6 /* ArcherWall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC4270A290BAF6900C663F6 /* ArcherWall.cpp */; };
 		2CC4270E290BAF6A00C663F6 /* HomingGunner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC4270B290BAF6A00C663F6 /* HomingGunner.cpp */; };
 		2CC4270F290BAF6A00C663F6 /* BounceGunner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC4270C290BAF6A00C663F6 /* BounceGunner.cpp */; };
@@ -103,12 +101,8 @@
 		2C7AE38A28E02D2600306D27 /* Object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Object.hpp; sourceTree = "<group>"; };
 		2CA8569F2901721A00A846BB /* Bomb.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bomb.cpp; sourceTree = "<group>"; };
 		2CA856A12901727A00A846BB /* MapChip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MapChip.cpp; path = src/MapChip.cpp; sourceTree = SOURCE_ROOT; };
-		2CA856A32901729800A846BB /* Stage3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stage3.hpp; sourceTree = "<group>"; };
-		2CA856A42901729900A846BB /* Stage2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stage2.cpp; sourceTree = "<group>"; };
-		2CA856A52901729900A846BB /* Stage1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stage1.cpp; sourceTree = "<group>"; };
-		2CA856A62901729900A846BB /* Stage2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stage2.hpp; sourceTree = "<group>"; };
-		2CA856A72901729900A846BB /* Stage3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stage3.cpp; sourceTree = "<group>"; };
-		2CA856A82901729900A846BB /* Stage1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stage1.hpp; sourceTree = "<group>"; };
+		2CA856A52901729900A846BB /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		2CA856A82901729900A846BB /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		2CC42707290BAF6900C663F6 /* BounceGunner.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BounceGunner.hpp; sourceTree = "<group>"; };
 		2CC42708290BAF6900C663F6 /* ArcherWall.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ArcherWall.hpp; sourceTree = "<group>"; };
 		2CC42709290BAF6900C663F6 /* HomingGunner.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HomingGunner.hpp; sourceTree = "<group>"; };
@@ -276,14 +270,10 @@
 		F2FCF15B28CD388A00E40211 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				2CA856A52901729900A846BB /* Game.cpp */,
+				2CA856A82901729900A846BB /* Game.hpp */,
 				F2794A4D290C1FEE00E0392B /* GameOver.cpp */,
 				F2794A4C290C1FEE00E0392B /* GameOver.hpp */,
-				2CA856A52901729900A846BB /* Stage1.cpp */,
-				2CA856A82901729900A846BB /* Stage1.hpp */,
-				2CA856A42901729900A846BB /* Stage2.cpp */,
-				2CA856A62901729900A846BB /* Stage2.hpp */,
-				2CA856A72901729900A846BB /* Stage3.cpp */,
-				2CA856A32901729800A846BB /* Stage3.hpp */,
 				2C7AE38828E02CFF00306D27 /* Objects */,
 				2C2137FA28D6F24900298E62 /* Enemies */,
 				2C2137F928D6F23C00298E62 /* myCamera.hpp */,
@@ -364,7 +354,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CA856A22901727A00A846BB /* MapChip.cpp in Sources */,
-				2CA856A92901729900A846BB /* Stage2.cpp in Sources */,
 				2C33F94828E4065200079803 /* Enemy.cpp in Sources */,
 				2CF69C5E29001ACA00D317C5 /* Stair.cpp in Sources */,
 				2CC4270D290BAF6A00C663F6 /* ArcherWall.cpp in Sources */,
@@ -382,8 +371,7 @@
 				398F50AC28CDD4F8006D7A50 /* GameClear.cpp in Sources */,
 				2CA856A02901721A00A846BB /* Bomb.cpp in Sources */,
 				2CC42713290BAF7600C663F6 /* BounceBullet.cpp in Sources */,
-				2CA856AB2901729900A846BB /* Stage3.cpp in Sources */,
-				2CA856AA2901729900A846BB /* Stage1.cpp in Sources */,
+				2CA856AA2901729900A846BB /* Game.cpp in Sources */,
 				2CC42714290BAF7600C663F6 /* HomingBullet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
