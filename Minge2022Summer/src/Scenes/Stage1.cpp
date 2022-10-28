@@ -19,8 +19,9 @@ Stage1::Stage1(const InitData& init)
 	{
 		for (int32 x = 0; x < MapSize.x; ++x)
 		{
+			const int32 value = mapLayer1[y][x];
 			const Point pos{ (x * MapChip::MapChipSize), (y * MapChip::MapChipSize) };
-			switch(mapLayer1[y][x])
+			switch(value)
 			{
 			case 5:
 				enemies << new SwordZombie(pos);
@@ -42,35 +43,46 @@ Stage1::Stage1(const InitData& init)
 				gameClearBody.y = pos.y;
 				break;
 			}
-			if (mapLayer1[y][x] / 10 == 4) {
-				enemies << new ArcherWall(pos, 500, mapLayer1[y][x] % 10);
+			if (value / 10 == 4) {
+				enemies << new ArcherWall(pos, 500, value % 10);
 			}
 			// 5X: 自由に行き来可能な階段
-			if (mapLayer1[y][x] / 10 == 5) {
-				if (stairPair.contains(mapLayer1[y][x] % 10)) {
-					objects << new Stair(stairPair[mapLayer1[y][x] % 10], pos, true);
+			if (value / 10 == 5) {
+				if (stairPair.contains(value % 10)) {
+					objects << new Stair(stairPair[value % 10], pos, true);
 				}
 				else {
-					stairPair.emplace(mapLayer1[y][x] % 10, pos);
+					stairPair.emplace(value % 10, pos);
 				}
 			}
 			// 6X: 一方通行の階段（入口）
-			if (mapLayer1[y][x] / 10 == 6) {
-				if (stairPairNonRev.contains(mapLayer1[y][x] % 10)) {
-					objects << new Stair(pos, stairPairNonRev[mapLayer1[y][x] % 10], false);
+			if (value / 10 == 6) {
+				if (stairPairNonRev.contains(value % 10)) {
+					objects << new Stair(pos, stairPairNonRev[value % 10], false);
 				}
 				else {
-					stairPairNonRev.emplace(mapLayer1[y][x] % 10, pos);
+					stairPairNonRev.emplace(value % 10, pos);
 				}
 			}
 			// 7X: 一方通行の階段（出口）
-			if (mapLayer1[y][x] / 10 == 7) {
-				if (stairPairNonRev.contains(mapLayer1[y][x] % 10)) {
-					objects << new Stair(stairPairNonRev[mapLayer1[y][x] % 10], pos, false);
+			if (value / 10 == 7) {
+				if (stairPairNonRev.contains(value % 10)) {
+					objects << new Stair(stairPairNonRev[value % 10], pos, false);
 				}
 				else {
-					stairPairNonRev.emplace(mapLayer1[y][x] % 10, pos);
+					stairPairNonRev.emplace(value % 10, pos);
 				}
+			}
+
+			// 1XXX: 矢を放つ罠
+			// Xoo: 向き（スプライトの向きと同じ）
+			// oXo: 発射間隔（(X + 1) * 0.5秒)
+			// ooX: 最初の発射までの遅延（X * 0.5秒）
+			if (value / 1000 == 1) {
+				const int32 direction = (value % 1000) / 100;
+				const int32 duration = ((value % 100) / 10 + 1) * 30;
+				const int32 delay = (value % 10) * 30;
+				enemies << new ArcherWall(pos, duration, direction, delay);
 			}
 		}
 	}
