@@ -4,6 +4,11 @@
 # include "myCamera.hpp"
 # include "Objects/Object.hpp"
 # include "../Player.hpp"
+# include "Enemies/Bomber.hpp"
+# include "Enemies/SwordZombie.hpp"
+# include "Enemies/HomingGunner.hpp"
+# include "Enemies/BounceGunner.hpp"
+# include "Enemies/ArcherWall.hpp"
 
 
 class Stage3 : public App::Scene {
@@ -16,7 +21,7 @@ private:
 
 	int32 countswordzombies;
 	// マップのセルの数（横 20, 縦 15 マス）
-	Size MapSize{ 26, 50 };
+	Size MapSize{ 50, 100 };
 	Array<Enemy*> enemies;
 	Array<Object*> objects;
 
