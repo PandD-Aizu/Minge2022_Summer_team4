@@ -21,7 +21,7 @@ private:
 
     int32 countswordzombies;
 	// マップのセルの数（横 20, 縦 15 マス）
-	Size MapSize{26, 50};
+	Size MapSize{42, 50};
     Array<Enemy*> enemies;
 	Array<Object*> objects;
 

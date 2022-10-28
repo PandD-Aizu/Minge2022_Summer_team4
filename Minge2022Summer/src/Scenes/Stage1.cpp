@@ -30,6 +30,13 @@ Stage1::Stage1(const InitData& init)
 			case 8:
 				enemies << new BounceGunner(pos, 500);
 				break;
+			case 100:
+				player.pos = pos;
+				break;
+			case 101:
+				gameClearBody.x = pos.x;
+				gameClearBody.y = pos.y;
+				break;
 			}
 			if (mapLayer1[y][x] / 10 == 4) {
 				enemies << new ArcherWall(pos, 500, mapLayer1[y][x] % 10);
