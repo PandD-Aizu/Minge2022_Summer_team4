@@ -80,6 +80,7 @@ private:
 	double force;
 	double direction;
 	int32 bounceLimit;
+	int bounceAnimT = 0;
 
 public:
 
