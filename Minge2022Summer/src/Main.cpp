@@ -25,8 +25,11 @@ void Main()
 	AudioAsset::Register(U"explode", U"Sounds/SE/explode.wav");
 	AudioAsset::Register(U"warp", U"Sounds/SE/warp.mp3");
 	// AudioAsset::Register(U"", U"Sounds/SE");
+	AudioAsset::Register(U"arrowShot", U"Sounds/SE/arrowShot.wav");
+	AudioAsset::Register(U"arrowHit", U"Sounds/SE/arrowHit.mp3");
 
 	AudioAsset::Register(U"mainBGM", U"Sounds/BGM/Unchangeable.mp3");
+	AudioAsset(U"mainBGM").setLoop(true);
 
 	// ウィンドウを 640x480 にリサイズする
 	//Scene::SetResizeMode(ResizeMode::Keep);

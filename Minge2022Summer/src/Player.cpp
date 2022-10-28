@@ -111,6 +111,7 @@ void Player::detectObjCollision(Object* obj) {
 		if (bullet->pos.distanceFrom(pos) <= 10) {
 			bullet->destructorFlag = true;
 			damaged();
+			AudioAsset(U"arrowHit").playOneShot();
 		}
 	}
 }
