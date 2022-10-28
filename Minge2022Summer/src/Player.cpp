@@ -132,12 +132,13 @@ void Player::draw() const {
 
 		const ScopedCustomShader2D shader{ ps };
 		// 描画
-		CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
+		CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y).scaled(0.5)
 			.draw(pos.x - textureCenter.x, pos.y - textureCenter.y);
 
 	}
 	if (isAttacking()) {
-		Circle{ pos.x,pos.y,8 }.drawArc(-ToRadians(directionDeg) + 45_deg, 90_deg, 0, attackRange, ColorF{1,0,0,0.5});
+		slashTexture(64 * ((10 - coolT)/2), 0, 64, 84).scaled(0.5).rotated(-ToRadians(directionDeg)+90_deg).drawAt(pos.x, pos.y);
+		//Circle{ pos.x,pos.y,8 }.drawArc(-ToRadians(directionDeg) + 45_deg, 90_deg, 0, attackRange, ColorF{1,0,0,0.5});
 	}
 }
 
