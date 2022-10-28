@@ -33,7 +33,7 @@ int32 MapChip::spike(int32 chipIndex) const
 			chipIndex = static_cast<int32>(Scene::Time() * 1 / (chipIndex % 10)) % 2 + 3;
 		}
 		else {
-			chipIndex = 1;
+			chipIndex = 4;
 		}
 	}
 
