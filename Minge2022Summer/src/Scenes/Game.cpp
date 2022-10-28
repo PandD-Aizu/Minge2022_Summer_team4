@@ -33,6 +33,9 @@ Game::Game(const InitData& init)
 			case 8:
 				enemies << new BounceGunner(pos, 500);
 				break;
+			case 9:
+				enemies << new HomingGunner(pos, 500, 2);
+				break;
 			case 100:
 				player.pos = pos;
 				break;

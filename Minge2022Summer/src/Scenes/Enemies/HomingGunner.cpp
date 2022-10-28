@@ -1,12 +1,14 @@
 ﻿#include"HomingGunner.hpp"
 
-HomingGunner::HomingGunner(Point mapPos, int maxCnt)
+HomingGunner::HomingGunner(Point mapPos, int maxCnt, int _level)
 	:Enemy(U"Sprites/bomber.png"), maxShotCnt(maxCnt)
 {
 	speed = 0.3;
 	velocity = { 0,0 };
 	pos = { mapPos.x + collisionSize.x / 2, mapPos.y + collisionSize.y / 2 };
-	hp = 1;
+	hp = 3;
+	if (level == 2) hp = 5;
+	level = _level;
 }
 void HomingGunner::update() {
 	shotCnt--;
@@ -37,7 +39,13 @@ void HomingGunner::draw() const {
 void HomingGunner::emitObject(Array <Object*>* objects) {
 	if (shotCnt <= 0) {
 		double playerDir = fmod(atan2(playerPos.y - pos.y, playerPos.x - pos.x) + Math::TwoPi, Math::TwoPi);
-		*(objects) << new HomingBullet(pos, playerDir, 0.8, 0.02); // 敵用の爆弾の設置
+		if (level == 1) {
+			*(objects) << new HomingBullet(pos, playerDir, 0.8, 0.02); // 敵用の爆弾の設置
+		}
+		else if (level == 2) {
+			*(objects) << new HomingBullet(pos, playerDir + Math::Pi * 0.75, 2, 0.1, 0.75s);
+			*(objects) << new HomingBullet(pos, playerDir - Math::Pi * 0.75, 2, 0.1, 0.75s);
+		}
 		AudioAsset(U"homingShot").playOneShot();
 		shotCnt = maxShotCnt;
 	}
