@@ -281,6 +281,7 @@ bool Player::isAttacking() const {
 
 void Player::attack() {
 	if (coolT <= 0) {
+		AudioAsset(U"slash{}"_fmt(rand()%4)).playOneShot();
 		coolT = 10;
 	}
 }

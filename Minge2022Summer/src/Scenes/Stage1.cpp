@@ -5,6 +5,8 @@
 Stage1::Stage1(const InitData& init)
 	: IScene{ init }
 {
+	AudioAsset(U"mainBGM").setVolume(0.2);
+	AudioAsset(U"mainBGM").play();
 	objects << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
 	countswordzombies = 0;
 	mapLayer0 = LoadCSV(U"maps/stage1/layer0.csv");
@@ -157,21 +159,26 @@ void Stage1::draw() const
 			}
 		}
 
-		// 敵キャラクターの描画
-		for (auto& enemy : enemies) enemy->draw();
-
-		// オブジェクトの描画
-		{
-			for (const auto& obj : objects)  obj->draw();
-		}
-
 		// ゲームクリア領域
 		gameClearBody.draw(Color{ 255, 255, 0 });
+
+
+
+		// 敵キャラクターの描画
+		for (auto& enemy : enemies) if(enemy->pos.y <= player.pos.y) enemy->draw();
+		// オブジェクトの描画
+		for (const auto& obj : objects) if (obj->pos.y <= player.pos.y) obj->draw();
 
 		{
 			//歩行アニメーションのインデックス(0, 1, 2)
 			player.draw();
 		}
+
+		// 敵キャラクターの描画
+		for (auto& enemy : enemies) if (enemy->pos.y > player.pos.y) enemy->draw();
+		// オブジェクトの描画
+		for (const auto& obj : objects) if (obj->pos.y > player.pos.y) obj->draw();
+
 	}
 	player.drawHP();
 }
