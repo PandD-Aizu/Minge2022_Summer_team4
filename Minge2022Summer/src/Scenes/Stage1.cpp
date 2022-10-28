@@ -7,7 +7,6 @@ Stage1::Stage1(const InitData& init)
 {
 	AudioAsset(U"mainBGM").setVolume(0.2);
 	AudioAsset(U"mainBGM").play();
-	objects << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
 	countswordzombies = 0;
 	mapLayer0 = LoadCSV(U"maps/stage1/layer0.csv");
 	mapLayer1 = LoadCSV(U"maps/stage1/layer1.csv");
