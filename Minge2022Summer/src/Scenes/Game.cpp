@@ -72,6 +72,18 @@ Game::Game(const InitData& init)
 				}
 			}
 
+			// 2XX: 加速床
+			if (value / 100 == 2) {
+				const int32 directionRaw = (value % 100) / 10;
+				const double force = (double)(value % 10 + 1) / 20;
+				double direction;
+				if (directionRaw == 3) direction = Math::Pi * 1.5;
+				if (directionRaw == 5) direction = Math::Pi * 0.5;
+				if (directionRaw == 1) direction = Math::Pi;
+				if (directionRaw == 7) direction = 0;
+				objects << new AccelerationFloor(pos, direction, force);
+			}
+
 			// 1XXX: 矢を放つ罠
 			// Xoo: 向き（スプライトの向きと同じ）
 			// oXo: 発射間隔（(X + 1) * 0.5秒)

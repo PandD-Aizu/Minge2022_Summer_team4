@@ -126,6 +126,7 @@
     <ClCompile Include="src\Scenes\Enemies\SwordZombie.cpp" />
     <ClCompile Include="src\Scenes\Game.cpp" />
     <ClCompile Include="src\Scenes\GameOver.cpp" />
+    <ClCompile Include="src\Scenes\Objects\AccelerationFloor.cpp" />
     <ClCompile Include="src\Scenes\Objects\Arrow.cpp" />
     <ClCompile Include="src\Scenes\Objects\HomingBullet.cpp" />
     <ClCompile Include="src\Scenes\Objects\BounceBullet.cpp" />
