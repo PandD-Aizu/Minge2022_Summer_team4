@@ -6,7 +6,7 @@ BounceGunner::BounceGunner(Point mapPos, int maxCnt)
 	speed = 0.15;
 	velocity = { 0,0 };
 	pos = { mapPos.x + collisionSize.x / 2, mapPos.y + collisionSize.y / 2 };
-	hp = 1;
+	hp = 2;
 }
 void BounceGunner::update() {
 	shotCnt--;
@@ -26,6 +26,7 @@ void BounceGunner::update() {
 	}
 
 	ensureDirection();
+	applyKnockBack();
 	moveRestriction();
 	moveNextPosition();
 }

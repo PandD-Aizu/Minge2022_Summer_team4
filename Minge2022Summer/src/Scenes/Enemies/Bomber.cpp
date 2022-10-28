@@ -6,7 +6,7 @@ Bomber::Bomber(Point mapPos)
     speed=0.15;
     velocity={0,0};
 	pos = { mapPos.x + collisionSize.x / 2, mapPos.y + collisionSize.y / 2 };
-	hp = 1;
+	hp = 3;
 }
 void Bomber::update(){
 	plantCnt--;
@@ -27,6 +27,7 @@ void Bomber::update(){
 	}
 
 	ensureDirection();
+	applyKnockBack();
 	moveRestriction();
 	moveNextPosition();
 }

@@ -26,6 +26,7 @@ void HomingGunner::update() {
 	}
 
 	ensureDirection();
+	applyKnockBack();
 	moveRestriction();
 	moveNextPosition();
 }
