@@ -53,6 +53,7 @@
 		2CDF46D028D7184800D71A73 /* SwordZombie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46CE28D7184800D71A73 /* SwordZombie.cpp */; };
 		2CF69C5E29001ACA00D317C5 /* Stair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CF69C5D29001ACA00D317C5 /* Stair.cpp */; };
 		398F50AC28CDD4F8006D7A50 /* GameClear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398F50AB28CDD4F7006D7A50 /* GameClear.cpp */; };
+		F2794A4E290C1FEE00E0392B /* GameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2794A4D290C1FEE00E0392B /* GameOver.cpp */; };
 		F2FCF16528CD388A00E40211 /* Title.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2FCF15F28CD388A00E40211 /* Title.cpp */; };
 		F2FCF16628CD388A00E40211 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2FCF16328CD388A00E40211 /* Main.cpp */; };
 /* End PBXBuildFile section */
@@ -118,6 +119,8 @@
 		2CF69C5D29001ACA00D317C5 /* Stair.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stair.cpp; sourceTree = "<group>"; };
 		398F50AA28CDD4F7006D7A50 /* GameClear.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameClear.hpp; sourceTree = "<group>"; };
 		398F50AB28CDD4F7006D7A50 /* GameClear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameClear.cpp; sourceTree = "<group>"; };
+		F2794A4C290C1FEE00E0392B /* GameOver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameOver.hpp; sourceTree = "<group>"; };
+		F2794A4D290C1FEE00E0392B /* GameOver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOver.cpp; sourceTree = "<group>"; };
 		F2FCF15D28CD388A00E40211 /* Title.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Title.hpp; sourceTree = "<group>"; };
 		F2FCF15F28CD388A00E40211 /* Title.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Title.cpp; sourceTree = "<group>"; };
 		F2FCF16228CD388A00E40211 /* common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = common.hpp; sourceTree = "<group>"; };
@@ -269,6 +272,8 @@
 			children = (
 				2CA856A52901729900A846BB /* Game.cpp */,
 				2CA856A82901729900A846BB /* Game.hpp */,
+				F2794A4D290C1FEE00E0392B /* GameOver.cpp */,
+				F2794A4C290C1FEE00E0392B /* GameOver.hpp */,
 				2C7AE38828E02CFF00306D27 /* Objects */,
 				2C2137FA28D6F24900298E62 /* Enemies */,
 				2C2137F928D6F23C00298E62 /* myCamera.hpp */,
@@ -360,6 +365,7 @@
 				F2FCF16528CD388A00E40211 /* Title.cpp in Sources */,
 				2C20A498290588AA005675D1 /* Bomber.cpp in Sources */,
 				2C2137FD28D6F58E00298E62 /* Player.cpp in Sources */,
+				F2794A4E290C1FEE00E0392B /* GameOver.cpp in Sources */,
 				2CC4270E290BAF6A00C663F6 /* HomingGunner.cpp in Sources */,
 				2C2137F828D6F1DD00298E62 /* Character.cpp in Sources */,
 				398F50AC28CDD4F8006D7A50 /* GameClear.cpp in Sources */,

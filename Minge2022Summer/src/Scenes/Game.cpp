@@ -169,7 +169,7 @@ void Game::update()
 		changeScene(U"GameClear");
 	}
 	if (player.died()) {
-		changeScene(U"GameClear");
+		changeScene(U"GameOver");
 	}
 }
 
