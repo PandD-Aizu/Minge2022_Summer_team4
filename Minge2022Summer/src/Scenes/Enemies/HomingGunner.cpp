@@ -36,8 +36,8 @@ void HomingGunner::draw() const {
 void HomingGunner::emitObject(Array <Object*>* objects) {
 	if (shotCnt <= 0) {
 		double playerDir = fmod(atan2(playerPos.y - pos.y, playerPos.x - pos.x) + Math::TwoPi, Math::TwoPi);
-
 		*(objects) << new HomingBullet(pos, playerDir, 0.4, 0.02); // 敵用の爆弾の設置
+		AudioAsset(U"homingShot").playOneShot();
 		shotCnt = maxShotCnt;
 	}
 }

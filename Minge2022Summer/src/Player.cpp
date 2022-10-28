@@ -65,10 +65,12 @@ void Player::detectObjCollision(Object* obj) {
 	if (Stair* stair = dynamic_cast<Stair*>(obj)) {
 		
 		if (stair->inPos.distanceFrom(pos) <= 10 && !(stair->reverseLock)) {
+			AudioAsset(U"warp").playOneShot();
 			pos = stair->outPos;
 			stair->reverseLock = true;
 		}
 		if (stair->outPos.distanceFrom(pos) <= 10 && stair->isReversable && !(stair->reverseLock)) {
+			AudioAsset(U"warp").playOneShot();
 			pos = stair->inPos;
 			stair->reverseLock = true;
 		}
@@ -88,25 +90,29 @@ void Player::detectObjCollision(Object* obj) {
 		bullet->accToPlayer(&pos);
 		if (isTileExist(bullet->pos)) {
 			bullet->destructorFlag = true;
+			AudioAsset(U"explode").playOneShot();
 		}
 
-		if (bullet->pos.distanceFrom(pos) <= 15) {
+		if (bullet->pos.distanceFrom(pos) <= 10) {
 			bullet->destructorFlag = true;
 			damaged();
+			AudioAsset(U"explode").playOneShot();
 		}
 	}
 
 	if (BounceBullet* bullet = dynamic_cast<BounceBullet*>(obj)) {
-		if (bullet->pos.distanceFrom(pos) <= 15) {
+		if (bullet->pos.distanceFrom(pos) <= 10) {
 			bullet->destructorFlag = true;
 			damaged();
+			AudioAsset(U"explode").playOneShot();
 		}
 	}
 
 	if (Arrow* bullet = dynamic_cast<Arrow*>(obj)) {
-		if (bullet->pos.distanceFrom(pos) <= 10) {
+		if (bullet->body.intersects(Circle{ pos, 8 })) {
 			bullet->destructorFlag = true;
 			damaged();
+			AudioAsset(U"arrowHit").playOneShot();
 		}
 	}
 }

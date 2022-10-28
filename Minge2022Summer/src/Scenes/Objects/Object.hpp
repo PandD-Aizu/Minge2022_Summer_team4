@@ -93,6 +93,7 @@ private:
 	double direction;
 
 public:
+	Quad body;
 
 	Arrow(Vec2 _pos, double startDeg = 30_deg, double _speed = 0.3);
 
