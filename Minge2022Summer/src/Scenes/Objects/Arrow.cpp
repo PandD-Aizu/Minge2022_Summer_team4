@@ -3,7 +3,7 @@
 Arrow::Arrow(Vec2 pos, double startRad, double _speed)
 	: Object(pos), speed(_speed), direction(startRad)
 {
-	body = RectF{ Arg::center(pos), 16, 4 }.rotated(direction);
+	body = RectF{ Arg::center(pos), MapChip::MapChipSize, MapChip::MapChipSize / 4 }.rotated(direction);
 }
 
 void Arrow::update() {
@@ -14,7 +14,7 @@ void Arrow::update() {
 
 	pos.x += cos(direction) * speed;
 	pos.y += sin(direction) * speed;
-	body = RectF{ Arg::center(pos), 16, 4 }.rotated(direction);
+	body = RectF{ Arg::center(pos), MapChip::MapChipSize, MapChip::MapChipSize / 4 }.rotated(direction);
 }
 
 void Arrow::draw() const {

@@ -3,7 +3,7 @@
 Bomber::Bomber(Point mapPos)
 	:Enemy(U"Sprites/bomber.png")
 {
-    speed=0.15;
+    speed=0.3;
     velocity={0,0};
 	pos = { mapPos.x + collisionSize.x / 2, mapPos.y + collisionSize.y / 2 };
 	hp = 3;
