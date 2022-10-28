@@ -3,6 +3,7 @@
 
 class Object {
 protected:
+	const Texture objTexture{U"Sprites/weapons.png"};
 public:
 	// オブジェクト識別
 	int id;
@@ -45,6 +46,7 @@ class Bomb : public Object {
 private:
 	SecondsF timeLimit;
 	Timer timer;
+	const Texture explosionTexture{ U"Sprites/explosion.png" };
 
 public:
 	int32 state = 0; // 現在の状態（0: 爆発待機 1: 爆発中）
@@ -78,6 +80,7 @@ private:
 	double force;
 	double direction;
 	int32 bounceLimit;
+	int bounceAnimT = 0;
 
 public:
 

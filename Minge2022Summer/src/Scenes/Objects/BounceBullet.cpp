@@ -9,16 +9,22 @@ void BounceBullet::update() {
 	if (direction < 0) direction += Math::TwoPi;
 	if (direction > Math::TwoPi) direction -= Math::TwoPi;
 
+	if(bounceAnimT-- <= 0)animIndex = 0;
+
 	// X方向の移動先に壁があったら、directionを左右反転
 	if (isTileExist(pos + Vec2{ cos(direction) * speed , 0 })) {
 		if (bounceLimit == 0) destructorFlag = true;
 		direction = fmod(-(direction + Math::Pi), Math::TwoPi);
+		animIndex = 2;
+		bounceAnimT = 8;
 		bounceLimit--;
 	}
 	// Y方向の移動先に壁があったら、directionを上下反転
 	if (isTileExist(pos + Vec2{ 0, sin(direction) * speed })) {
 		if (bounceLimit == 0) destructorFlag = true;
 		direction = fmod(-direction, Math::TwoPi);
+		animIndex = 1;
+		bounceAnimT = 8;
 		bounceLimit--;
 	}
 
@@ -28,5 +34,6 @@ void BounceBullet::update() {
 }
 
 void BounceBullet::draw() const {
-	Circle{ pos, 8 }.draw(Palette::Orange);
+	//Circle{ pos, 8 }.draw(Palette::Orange);
+	objTexture(64 * animIndex, 64 * 3, 64, 64).scaled(0.5).drawAt(pos);
 }

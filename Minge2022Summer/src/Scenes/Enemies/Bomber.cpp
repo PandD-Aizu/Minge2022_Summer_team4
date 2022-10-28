@@ -36,7 +36,7 @@ void Bomber::draw() const {
 
 void Bomber::emitObject(Array <Object *> *objects) {
 	if (plantCnt <= 0) {
-		*(objects) << new Bomb(pos); // 敵用の爆弾の設置
+		*(objects) << new Bomb(pos, 8s, 60); // 敵用の爆弾の設置
 		plantCnt = 500;
 	}
 }
