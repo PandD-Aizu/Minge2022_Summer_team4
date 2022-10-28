@@ -5,7 +5,6 @@
 Title::Title(const InitData& init)
 	: IScene{ init }
 {
-	Print << U"Title::Title()";
 }
 
 void Title::update()
