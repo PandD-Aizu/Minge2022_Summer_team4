@@ -18,4 +18,5 @@ public:
 	bool isDefeated();
 	virtual void emitObject(Array<Object*>*) {}
 	void isAttacked();
+	bool isInSenceRange() const;
 };

@@ -49,3 +49,8 @@ bool Enemy::isDefeated() {
 	if (hp <= 0) return true;
 	else return false;
 }
+
+bool Enemy::isInSenceRange() const {
+	if (playerPos.distanceFrom(pos) < 200) return true;
+	else return false;
+}
