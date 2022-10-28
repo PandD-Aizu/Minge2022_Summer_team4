@@ -36,6 +36,11 @@ void Character::applyKnockBack() {
 
 //移動制限
 void Character::moveRestriction() {
+	// 壁を貫通しないように、移動速度制限
+	if (Max(Math::Abs(velocity.x), Math::Abs(velocity.y)) > MapChip::MapChipSize - 1) {
+		velocity = velocity * (MapChip::MapChipSize - 1) / Max(Math::Abs(velocity.x), Math::Abs(velocity.y));
+	}
+	if (Math::Abs(velocity.y) > MapChip::MapChipSize - 1) velocity.y = Math::Sign(velocity.y) * (MapChip::MapChipSize - 1);
 	// x方向の移動制限
 	nextPos = pos + velocity * Vec2(1, 0);
 	// 右方向に移動中の場合
