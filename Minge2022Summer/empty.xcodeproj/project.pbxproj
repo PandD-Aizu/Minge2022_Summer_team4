@@ -54,6 +54,7 @@
 		2CF69C5E29001ACA00D317C5 /* Stair.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CF69C5D29001ACA00D317C5 /* Stair.cpp */; };
 		398F50AC28CDD4F8006D7A50 /* GameClear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398F50AB28CDD4F7006D7A50 /* GameClear.cpp */; };
 		F2794A4E290C1FEE00E0392B /* GameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2794A4D290C1FEE00E0392B /* GameOver.cpp */; };
+		F280BECC290C4E7900CBC77B /* AccelerationFloor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F280BECB290C4E7900CBC77B /* AccelerationFloor.cpp */; };
 		F2FCF16528CD388A00E40211 /* Title.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2FCF15F28CD388A00E40211 /* Title.cpp */; };
 		F2FCF16628CD388A00E40211 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2FCF16328CD388A00E40211 /* Main.cpp */; };
 /* End PBXBuildFile section */
@@ -121,6 +122,7 @@
 		398F50AB28CDD4F7006D7A50 /* GameClear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameClear.cpp; sourceTree = "<group>"; };
 		F2794A4C290C1FEE00E0392B /* GameOver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameOver.hpp; sourceTree = "<group>"; };
 		F2794A4D290C1FEE00E0392B /* GameOver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOver.cpp; sourceTree = "<group>"; };
+		F280BECB290C4E7900CBC77B /* AccelerationFloor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AccelerationFloor.cpp; sourceTree = "<group>"; };
 		F2FCF15D28CD388A00E40211 /* Title.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Title.hpp; sourceTree = "<group>"; };
 		F2FCF15F28CD388A00E40211 /* Title.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Title.cpp; sourceTree = "<group>"; };
 		F2FCF16228CD388A00E40211 /* common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = common.hpp; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		2C7AE38828E02CFF00306D27 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				F280BECB290C4E7900CBC77B /* AccelerationFloor.cpp */,
 				2CC42712290BAF7600C663F6 /* Arrow.cpp */,
 				2CC42710290BAF7600C663F6 /* BounceBullet.cpp */,
 				2CC42711290BAF7600C663F6 /* HomingBullet.cpp */,
@@ -360,6 +363,7 @@
 				2CC42715290BAF7600C663F6 /* Arrow.cpp in Sources */,
 				2CDF46D028D7184800D71A73 /* SwordZombie.cpp in Sources */,
 				2CC4270F290BAF6A00C663F6 /* BounceGunner.cpp in Sources */,
+				F280BECC290C4E7900CBC77B /* AccelerationFloor.cpp in Sources */,
 				F2FCF16628CD388A00E40211 /* Main.cpp in Sources */,
 				2CCB96B428F29E3800BEB395 /* LoadCSV.cpp in Sources */,
 				F2FCF16528CD388A00E40211 /* Title.cpp in Sources */,
