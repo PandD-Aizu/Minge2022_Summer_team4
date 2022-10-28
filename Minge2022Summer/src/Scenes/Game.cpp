@@ -10,6 +10,7 @@ Stage1::Stage1(const InitData& init)
 	countswordzombies = 0;
 	mapLayer0 = LoadCSV(U"maps/stage{}/layer0.csv"_fmt(getData().currentStage));
 	mapLayer1 = LoadCSV(U"maps/stage{}/layer1.csv"_fmt(getData().currentStage));
+    MapSize = mapLayer0.size();
 
 	HashTable<int32, Point> stairPair;
 	HashTable<int32, Point> stairPairNonRev;
@@ -89,7 +90,8 @@ Stage1::Stage1(const InitData& init)
 
 	if ((mapLayer0.size() != MapSize) || (mapLayer1.size() != MapSize)) {
 		// MapSize と、ロードしたデータのサイズが一致しない場合のエラー
-		throw Error{ U"mapLayer0: {}, mapLayer1: {}"_fmt(mapLayer0.size(), mapLayer1.size()) };
+        Print << MapSize << U"  :  " << mapLayer1.size();
+		// throw Error{ U"mapLayer0: {}, mapLayer1: {}"_fmt(mapLayer0.size(), mapLayer1.size()) };
 	}
 	// マップを 320x240 のレンダーテクスチャに描画し、それを最終的に 2 倍サイズで描画する
 	renderTexture = RenderTexture{ 320, 240 };
