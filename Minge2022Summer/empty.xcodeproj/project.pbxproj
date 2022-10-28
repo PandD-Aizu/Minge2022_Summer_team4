@@ -44,6 +44,12 @@
 		2CA856A92901729900A846BB /* Stage2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA856A42901729900A846BB /* Stage2.cpp */; };
 		2CA856AA2901729900A846BB /* Stage1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA856A52901729900A846BB /* Stage1.cpp */; };
 		2CA856AB2901729900A846BB /* Stage3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CA856A72901729900A846BB /* Stage3.cpp */; };
+		2CC4270D290BAF6A00C663F6 /* ArcherWall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC4270A290BAF6900C663F6 /* ArcherWall.cpp */; };
+		2CC4270E290BAF6A00C663F6 /* HomingGunner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC4270B290BAF6A00C663F6 /* HomingGunner.cpp */; };
+		2CC4270F290BAF6A00C663F6 /* BounceGunner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC4270C290BAF6A00C663F6 /* BounceGunner.cpp */; };
+		2CC42713290BAF7600C663F6 /* BounceBullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC42710290BAF7600C663F6 /* BounceBullet.cpp */; };
+		2CC42714290BAF7600C663F6 /* HomingBullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC42711290BAF7600C663F6 /* HomingBullet.cpp */; };
+		2CC42715290BAF7600C663F6 /* Arrow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CC42712290BAF7600C663F6 /* Arrow.cpp */; };
 		2CCB96B428F29E3800BEB395 /* LoadCSV.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CCB96B328F29E3800BEB395 /* LoadCSV.cpp */; };
 		2CD8412C283263B2005013A6 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD8412B283263B2005013A6 /* libboost_filesystem.a */; };
 		2CDF46D028D7184800D71A73 /* SwordZombie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF46CE28D7184800D71A73 /* SwordZombie.cpp */; };
@@ -57,7 +63,6 @@
 		2C1778841CE0A9EA00BB8AD0 /* empty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = empty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C1778921CE0A9EA00BB8AD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C1778A21CE0B65500BB8AD0 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
-		2C20A495290588A0005675D1 /* DamageFloor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DamageFloor.hpp; sourceTree = "<group>"; };
 		2C20A496290588AA005675D1 /* Bomber.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bomber.hpp; sourceTree = "<group>"; };
 		2C20A497290588AA005675D1 /* Bomber.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bomber.cpp; sourceTree = "<group>"; };
 		2C2137F628D6F1DD00298E62 /* Character.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Character.hpp; path = src/Character.hpp; sourceTree = SOURCE_ROOT; };
@@ -103,6 +108,15 @@
 		2CA856A62901729900A846BB /* Stage2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stage2.hpp; sourceTree = "<group>"; };
 		2CA856A72901729900A846BB /* Stage3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stage3.cpp; sourceTree = "<group>"; };
 		2CA856A82901729900A846BB /* Stage1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stage1.hpp; sourceTree = "<group>"; };
+		2CC42707290BAF6900C663F6 /* BounceGunner.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BounceGunner.hpp; sourceTree = "<group>"; };
+		2CC42708290BAF6900C663F6 /* ArcherWall.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ArcherWall.hpp; sourceTree = "<group>"; };
+		2CC42709290BAF6900C663F6 /* HomingGunner.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HomingGunner.hpp; sourceTree = "<group>"; };
+		2CC4270A290BAF6900C663F6 /* ArcherWall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArcherWall.cpp; sourceTree = "<group>"; };
+		2CC4270B290BAF6A00C663F6 /* HomingGunner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HomingGunner.cpp; sourceTree = "<group>"; };
+		2CC4270C290BAF6A00C663F6 /* BounceGunner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BounceGunner.cpp; sourceTree = "<group>"; };
+		2CC42710290BAF7600C663F6 /* BounceBullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BounceBullet.cpp; sourceTree = "<group>"; };
+		2CC42711290BAF7600C663F6 /* HomingBullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HomingBullet.cpp; sourceTree = "<group>"; };
+		2CC42712290BAF7600C663F6 /* Arrow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Arrow.cpp; sourceTree = "<group>"; };
 		2CCB96B328F29E3800BEB395 /* LoadCSV.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadCSV.cpp; sourceTree = "<group>"; };
 		2CD8412B283263B2005013A6 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../lib/macOS/boost/libboost_filesystem.a; sourceTree = "<group>"; };
 		2CDF46CE28D7184800D71A73 /* SwordZombie.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SwordZombie.cpp; sourceTree = "<group>"; };
@@ -177,6 +191,12 @@
 		2C2137FA28D6F24900298E62 /* Enemies */ = {
 			isa = PBXGroup;
 			children = (
+				2CC4270A290BAF6900C663F6 /* ArcherWall.cpp */,
+				2CC42708290BAF6900C663F6 /* ArcherWall.hpp */,
+				2CC4270C290BAF6A00C663F6 /* BounceGunner.cpp */,
+				2CC42707290BAF6900C663F6 /* BounceGunner.hpp */,
+				2CC4270B290BAF6A00C663F6 /* HomingGunner.cpp */,
+				2CC42709290BAF6900C663F6 /* HomingGunner.hpp */,
 				2C20A497290588AA005675D1 /* Bomber.cpp */,
 				2C20A496290588AA005675D1 /* Bomber.hpp */,
 				2CDF46CE28D7184800D71A73 /* SwordZombie.cpp */,
@@ -190,7 +210,9 @@
 		2C7AE38828E02CFF00306D27 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				2C20A495290588A0005675D1 /* DamageFloor.hpp */,
+				2CC42712290BAF7600C663F6 /* Arrow.cpp */,
+				2CC42710290BAF7600C663F6 /* BounceBullet.cpp */,
+				2CC42711290BAF7600C663F6 /* HomingBullet.cpp */,
 				2CA8569F2901721A00A846BB /* Bomb.cpp */,
 				2C7AE38A28E02D2600306D27 /* Object.hpp */,
 				2CF69C5D29001ACA00D317C5 /* Stair.cpp */,
@@ -340,17 +362,23 @@
 				2CA856A92901729900A846BB /* Stage2.cpp in Sources */,
 				2C33F94828E4065200079803 /* Enemy.cpp in Sources */,
 				2CF69C5E29001ACA00D317C5 /* Stair.cpp in Sources */,
+				2CC4270D290BAF6A00C663F6 /* ArcherWall.cpp in Sources */,
+				2CC42715290BAF7600C663F6 /* Arrow.cpp in Sources */,
 				2CDF46D028D7184800D71A73 /* SwordZombie.cpp in Sources */,
+				2CC4270F290BAF6A00C663F6 /* BounceGunner.cpp in Sources */,
 				F2FCF16628CD388A00E40211 /* Main.cpp in Sources */,
 				2CCB96B428F29E3800BEB395 /* LoadCSV.cpp in Sources */,
 				F2FCF16528CD388A00E40211 /* Title.cpp in Sources */,
 				2C20A498290588AA005675D1 /* Bomber.cpp in Sources */,
 				2C2137FD28D6F58E00298E62 /* Player.cpp in Sources */,
+				2CC4270E290BAF6A00C663F6 /* HomingGunner.cpp in Sources */,
 				2C2137F828D6F1DD00298E62 /* Character.cpp in Sources */,
 				398F50AC28CDD4F8006D7A50 /* GameClear.cpp in Sources */,
 				2CA856A02901721A00A846BB /* Bomb.cpp in Sources */,
+				2CC42713290BAF7600C663F6 /* BounceBullet.cpp in Sources */,
 				2CA856AB2901729900A846BB /* Stage3.cpp in Sources */,
 				2CA856AA2901729900A846BB /* Stage1.cpp in Sources */,
+				2CC42714290BAF7600C663F6 /* HomingBullet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,10 +5,14 @@
 Stage2::Stage2(const InitData& init)
 	: IScene{ init }
 {
-	objects << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
+	AudioAsset(U"mainBGM").setVolume(0.2);
+	AudioAsset(U"mainBGM").play();
 	countswordzombies = 0;
-	mapLayer0 = LoadCSV(U"maps/Stage2/layer0.csv");
-	mapLayer1 = LoadCSV(U"maps/Stage2/layer1.csv");
+	mapLayer0 = LoadCSV(U"maps/stage2/layer0.csv");
+	mapLayer1 = LoadCSV(U"maps/stage2/layer1.csv");
+
+	HashTable<int32, Point> stairPair;
+	HashTable<int32, Point> stairPairNonRev;
 
 	// layer1上の敵を読み込む
 	for (int32 y = 0; y < MapSize.y; ++y)
@@ -21,10 +25,52 @@ Stage2::Stage2(const InitData& init)
 			case 5:
 				enemies << new SwordZombie(pos);
 				break;
-
 			case 6:
 				enemies << new Bomber(pos);
 				break;
+			case 7:
+				enemies << new HomingGunner(pos, 500);
+				break;
+			case 8:
+				enemies << new BounceGunner(pos, 500);
+				break;
+			case 100:
+				player.pos = pos;
+				break;
+			case 101:
+				gameClearBody.x = pos.x;
+				gameClearBody.y = pos.y;
+				break;
+			}
+			if (mapLayer1[y][x] / 10 == 4) {
+				enemies << new ArcherWall(pos, 500, mapLayer1[y][x] % 10);
+			}
+			// 5X: 自由に行き来可能な階段
+			if (mapLayer1[y][x] / 10 == 5) {
+				if (stairPair.contains(mapLayer1[y][x] % 10)) {
+					objects << new Stair(stairPair[mapLayer1[y][x] % 10], pos, true);
+				}
+				else {
+					stairPair.emplace(mapLayer1[y][x] % 10, pos);
+				}
+			}
+			// 6X: 一方通行の階段（入口）
+			if (mapLayer1[y][x] / 10 == 6) {
+				if (stairPairNonRev.contains(mapLayer1[y][x] % 10)) {
+					objects << new Stair(pos, stairPairNonRev[mapLayer1[y][x] % 10], false);
+				}
+				else {
+					stairPairNonRev.emplace(mapLayer1[y][x] % 10, pos);
+				}
+			}
+			// 7X: 一方通行の階段（出口）
+			if (mapLayer1[y][x] / 10 == 7) {
+				if (stairPairNonRev.contains(mapLayer1[y][x] % 10)) {
+					objects << new Stair(stairPairNonRev[mapLayer1[y][x] % 10], pos, false);
+				}
+				else {
+					stairPairNonRev.emplace(mapLayer1[y][x] % 10, pos);
+				}
 			}
 		}
 	}
@@ -84,14 +130,17 @@ void Stage2::update()
 
 	// プレイヤーの状態更新
 	player.update();
-
+	if (MouseL.down())player.attack();
 
 	for (auto& enemy : enemies) {
 		enemy->getPlayerPos(player.pos);
-		enemy->update();
+		if (enemy->isInSenceRange()) enemy->update();
 		player.detectEnemyCollision(enemy);
 		enemy->emitObject(&objects);
 	}
+
+
+	enemies.remove_if([](Enemy* enm) {return enm->isDefeated(); });
 
 	for (auto& obj : objects) {
 		obj->update();
@@ -146,20 +195,26 @@ void Stage2::draw() const
 			}
 		}
 
-		// 敵キャラクターの描画
-		for (auto& enemy : enemies) enemy->draw();
-
-		// オブジェクトの描画
-		{
-			for (const auto& obj : objects)  obj->draw();
-		}
-
 		// ゲームクリア領域
 		gameClearBody.draw(Color{ 255, 255, 0 });
+
+
+
+		// 敵キャラクターの描画
+		for (auto& enemy : enemies) if (enemy->pos.y <= player.pos.y)if (enemy->isInSenceRange())  enemy->draw();
+		// オブジェクトの描画
+		for (const auto& obj : objects) if (obj->pos.y <= player.pos.y) obj->draw();
 
 		{
 			//歩行アニメーションのインデックス(0, 1, 2)
 			player.draw();
 		}
+
+		// 敵キャラクターの描画
+		for (auto& enemy : enemies) if (enemy->pos.y > player.pos.y)if (enemy->isInSenceRange())  enemy->draw();
+		// オブジェクトの描画
+		for (const auto& obj : objects) if (obj->pos.y > player.pos.y) obj->draw();
+
 	}
+	player.drawHP();
 }
