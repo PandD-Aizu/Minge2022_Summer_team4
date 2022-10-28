@@ -64,10 +64,11 @@ private:
 	double speed;
 	double force;
 	double direction;
+	Timer homingTimer;
 
 public:
 
-	HomingBullet(Vec2 _pos, double startDeg = 30_deg, double _speed = 0.3, double force = 0.03);
+	HomingBullet(Vec2 _pos, double startDeg = 30_deg, double _speed = 0.3, double force = 0.03, SecondsF homingTime = -1s);
 
 	void update() override;
 	void draw() const override;

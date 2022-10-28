@@ -6,7 +6,7 @@ private:
 	int shotCnt = 100;
 	int maxShotCnt;
 public:
-	HomingGunner(Point, int);
+	HomingGunner(Point mapPos, int maxCnt, int level = 1);
 	void update() override;
 	void draw()const override;
 	void emitObject(Array<Object*>*) override;
