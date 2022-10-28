@@ -126,6 +126,12 @@ void Player::detectObjCollision(Object* obj) {
 			AudioAsset(U"arrowHit").playOneShot();
 		}
 	}
+
+	if (AccelerationFloor* floor = dynamic_cast<AccelerationFloor*>(obj)) {
+		if (floor->body.intersects(pos)) {
+			knockBackForce += floor->getAcceleration();
+		}
+	}
 }
 
 bool Player::damaged() {

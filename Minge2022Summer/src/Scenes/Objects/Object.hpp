@@ -103,3 +103,20 @@ public:
 	void update() override;
 	void draw() const override;
 };
+
+class AccelerationFloor : public Object {
+private:
+	double speed;
+	double direction;
+	double force;
+
+public:
+	Quad body;
+
+	AccelerationFloor(Vec2 _pos, double _direction, double force);
+
+	void update() override;
+	void draw() const override;
+
+	Vec2 getAcceleration();
+};
