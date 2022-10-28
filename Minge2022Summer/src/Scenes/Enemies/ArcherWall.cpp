@@ -22,8 +22,8 @@ void ArcherWall::draw() const {
 void ArcherWall::emitObject(Array <Object*>* objects) {
 	if (shotCnt <= 0) {
 		double targetDir = 0;
-		if (direction == 3) targetDir = Math::Pi / 2;
-		if (direction == 5) targetDir = Math::Pi * 1.5;
+		if (direction == 3) targetDir = Math::Pi * 1.5;
+		if (direction == 5) targetDir = Math::Pi / 2;
 		if (direction == 1) targetDir = Math::Pi;
 		if (direction == 7) targetDir = 0;
 
