@@ -20,6 +20,7 @@ void Player::update(){
 	}
 
 	decideDirection();
+	applyKnockBack();
 	moveRestriction();
 	spikeCollision();
 	groundMapChipCollision();
@@ -39,6 +40,8 @@ void Player::detectEnemyCollision(Enemy * enm) {
 	if (ArcherWall* aw = dynamic_cast<ArcherWall*>(enm)) {
 	} else if (enm->pos.distanceFrom(pos) < 16) {
 		damaged();
+		double enemyDir = fmod(atan2(enm->pos.y - pos.y, enm->pos.x - pos.x) + Math::TwoPi, Math::TwoPi);
+		knockBackForce += Vec2{ cos(enemyDir + Math::Pi) * 10, sin(enemyDir + Math::Pi) * 10 };
 	}
 	if (isAttacking()) {
 		// 敵を攻撃したときの当たり判定。

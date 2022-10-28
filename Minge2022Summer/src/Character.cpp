@@ -15,11 +15,17 @@ void Character::update() {
 
 	moveRestriction();
 
+
+
 	groundMapChipCollision();
 
 	moveNextPosition();
 }
 
+void Character::applyKnockBack() {
+	velocity += knockBackForce;
+	knockBackForce *= 0.8;
+}
 
 //移動制限
 void Character::moveRestriction() {

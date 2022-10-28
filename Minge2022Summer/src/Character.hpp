@@ -37,7 +37,7 @@ protected:
 	//プレイヤーの移動に使う
 	Vec2 nextPos;
 
-	
+	Vec2 knockBackForce{ 0, 0 };
 
 public:
 	Vec2 pos;
@@ -51,6 +51,7 @@ public:
 
 	virtual void update();
 	//void decideDirection();			//プレイヤーの方向を決める
+	void applyKnockBack();
 	void moveRestriction();		//移動制限
 	void groundMapChipCollision();        //マップチップとの当たり判定処理
 	void moveNextPosition();		//プレイヤーの移動
