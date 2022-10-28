@@ -17,7 +17,7 @@ void SwordZombie::update(){
     direction=atan2(pos.y-playerPos.y,pos.x-playerPos.x)-90_deg;
     velocity.x=move*speed*sin(direction);
     velocity.y=move*speed*-cos(direction);
-    if(pos.distanceFrom(playerPos)<17){
+    if(pos.distanceFrom(playerPos)<22){
         move=0;
         timer+=Scene::DeltaTime();
         if(timer>=1){

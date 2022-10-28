@@ -14,6 +14,14 @@ Grid<int> mapLayer1;
 void Main()
 {
 
+	// アセットの登録
+	AudioAsset::Register(U"slash1", U"Sounds/SE/slash 01.wav");
+	AudioAsset::Register(U"slash2", U"Sounds/SE/slash 02.wav");
+	AudioAsset::Register(U"slash3", U"Sounds/SE/slash 03.wav");
+	AudioAsset::Register(U"slash4", U"Sounds/SE/slash 04.wav");
+	AudioAsset::Register(U"SZ_attack", U"Sounds/SE/SwordZombie_attack.mp3");
+	AudioAsset::Register(U"SZ_hit", U"Sounds/SE/SwordZombie_hit.mp3");
+
 	// ウィンドウを 640x480 にリサイズする
 	//Scene::SetResizeMode(ResizeMode::Keep);
 	Window::Resize(640, 480);
