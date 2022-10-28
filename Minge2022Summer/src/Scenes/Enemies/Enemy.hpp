@@ -7,6 +7,7 @@ private:
 	const Texture CharacterTexture;
 
 public:
+	double knockBackPower = 5;
 	Vec2 playerPos;
 	bool isRestless = false;
 

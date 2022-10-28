@@ -40,8 +40,7 @@ void Player::detectEnemyCollision(Enemy * enm) {
 	if (ArcherWall* aw = dynamic_cast<ArcherWall*>(enm)) {
 	} else if (enm->pos.distanceFrom(pos) < 16) {
 		damaged();
-		double enemyDir = fmod(atan2(enm->pos.y - pos.y, enm->pos.x - pos.x) + Math::TwoPi, Math::TwoPi);
-		knockBackForce += Vec2{ cos(enemyDir + Math::Pi) * 10, sin(enemyDir + Math::Pi) * 10 };
+		addKnockBack(enm->pos, enm->knockBackPower);
 	}
 	if (isAttacking()) {
 		// 敵を攻撃したときの当たり判定。
@@ -59,7 +58,7 @@ void Player::detectEnemyCollision(Enemy * enm) {
 		if(sz->isAttacking()) {
 			if (sz->pos.distanceFrom(pos) < sz->attackRange * 2) {
 				if(damaged())AudioAsset(U"SZ_hit").playOneShot();
-				
+				addKnockBack(enm->pos, 10);
 			}
 			else {
 				AudioAsset(U"SZ_attack").playOneShot();
@@ -91,6 +90,7 @@ void Player::detectObjCollision(Object* obj) {
 	if (Bomb* bomb = dynamic_cast<Bomb*>(obj)) {
 		if (bomb->state && bomb->pos.distanceFrom(pos) <= bomb->range) {
 			damaged();
+			addKnockBack(bomb->pos, 20);
 		}
 	}
 
@@ -104,6 +104,7 @@ void Player::detectObjCollision(Object* obj) {
 		if (bullet->pos.distanceFrom(pos) <= 10) {
 			bullet->destructorFlag = true;
 			damaged();
+			addKnockBack(bullet->pos, 5);
 			AudioAsset(U"explode").playOneShot();
 		}
 	}
@@ -112,6 +113,7 @@ void Player::detectObjCollision(Object* obj) {
 		if (bullet->pos.distanceFrom(pos) <= 10) {
 			bullet->destructorFlag = true;
 			damaged();
+			addKnockBack(bullet->pos, 5);
 			AudioAsset(U"explode").playOneShot();
 		}
 	}
@@ -120,6 +122,7 @@ void Player::detectObjCollision(Object* obj) {
 		if (bullet->body.intersects(Circle{ pos, 8 })) {
 			bullet->destructorFlag = true;
 			damaged();
+			addKnockBack(bullet->pos, 5);
 			AudioAsset(U"arrowHit").playOneShot();
 		}
 	}

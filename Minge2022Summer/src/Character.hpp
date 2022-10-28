@@ -51,6 +51,7 @@ public:
 
 	virtual void update();
 	//void decideDirection();			//プレイヤーの方向を決める
+	void addKnockBack(Vec2 targetPos, double force = 10);
 	void applyKnockBack();
 	void moveRestriction();		//移動制限
 	void groundMapChipCollision();        //マップチップとの当たり判定処理

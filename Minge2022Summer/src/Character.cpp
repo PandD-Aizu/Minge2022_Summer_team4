@@ -22,6 +22,13 @@ void Character::update() {
 	moveNextPosition();
 }
 
+// ノックバックを追加する
+void Character::addKnockBack(Vec2 targetPos, double force) {
+	double enemyDir = fmod(atan2(targetPos.y - pos.y, targetPos.x - pos.x) + Math::TwoPi, Math::TwoPi);
+	knockBackForce += Vec2{ cos(enemyDir + Math::Pi) * force, sin(enemyDir + Math::Pi) * force };
+}
+
+// 現在受けているノックバックの影響をvelocityに適用する
 void Character::applyKnockBack() {
 	velocity += knockBackForce;
 	knockBackForce *= 0.8;
