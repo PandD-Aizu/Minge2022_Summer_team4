@@ -7,8 +7,8 @@ Stage2::Stage2(const InitData& init)
 {
 	objects << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
 	countswordzombies = 0;
-	mapLayer0 = LoadCSV(U"maps/Stage2/layer0.csv");
-	mapLayer1 = LoadCSV(U"maps/Stage2/layer1.csv");
+	mapLayer0 = LoadCSV(U"maps/stage2/layer0.csv");
+	mapLayer1 = LoadCSV(U"maps/stage2/layer1.csv");
 
 	// layer1上の敵を読み込む
 	for (int32 y = 0; y < MapSize.y; ++y)
@@ -21,10 +21,25 @@ Stage2::Stage2(const InitData& init)
 			case 5:
 				enemies << new SwordZombie(pos);
 				break;
-
 			case 6:
 				enemies << new Bomber(pos);
 				break;
+			case 7:
+				enemies << new HomingGunner(pos, 500);
+				break;
+			case 8:
+				enemies << new BounceGunner(pos, 500);
+				break;
+			case 100:
+				player.pos = pos;
+				break;
+			case 101:
+				gameClearBody.x = pos.x;
+				gameClearBody.y = pos.y;
+				break;
+			}
+			if (mapLayer1[y][x] / 10 == 4) {
+				enemies << new ArcherWall(pos, 500, mapLayer1[y][x] % 10);
 			}
 		}
 	}
@@ -84,7 +99,7 @@ void Stage2::update()
 
 	// プレイヤーの状態更新
 	player.update();
-
+	if (MouseL.down())player.attack();
 
 	for (auto& enemy : enemies) {
 		enemy->getPlayerPos(player.pos);
@@ -92,6 +107,9 @@ void Stage2::update()
 		player.detectEnemyCollision(enemy);
 		enemy->emitObject(&objects);
 	}
+
+
+	enemies.remove_if([](Enemy* enm) {return enm->isDefeated(); });
 
 	for (auto& obj : objects) {
 		obj->update();
@@ -162,4 +180,5 @@ void Stage2::draw() const
 			player.draw();
 		}
 	}
+	player.drawHP();
 }
