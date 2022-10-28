@@ -15,7 +15,7 @@ protected:
 
 	
 	Vec2 velocity;
-	double walkSpeed = 1;
+	double walkSpeed = 2;
 
 	// テクスチャ読み込み
 	const Texture CharacterTexture;
@@ -43,9 +43,9 @@ public:
 	Vec2 pos;
 
 	// 当たり判定の起点の座標（中心からの相対座標）
-	const Vec2 collisionPoint{ -7, -7 };
+	const Vec2 collisionPoint{ -15, -15 };
 	// 当たり判定の幅、高さ
-	const Vec2 collisionSize{ 14, 14 };
+	const Vec2 collisionSize{ 30, 30 };
 
 	Character();
 

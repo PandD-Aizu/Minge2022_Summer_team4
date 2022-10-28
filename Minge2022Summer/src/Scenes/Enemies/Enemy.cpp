@@ -52,6 +52,6 @@ bool Enemy::isDefeated() {
 }
 
 bool Enemy::isInSenceRange() const {
-	if (playerPos.distanceFrom(pos) < 300 || isRestless) return true;
+	if (playerPos.distanceFrom(pos) < 600 || isRestless) return true;
 	else return false;
 }

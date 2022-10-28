@@ -22,7 +22,7 @@ private:
 	// テクスチャのサイズ
 	const Vec2 textureSize{ 64, 64 };
 	// 中心の相対座標（テクスチャの左上からの相対座標
-	const Vec2 textureCenter{ 16, 22 };
+	const Vec2 textureCenter{ 32, 44 };
 
 	PixelShader ps;
 	const PixelShader rgbShader = GLSL{ U"Shaders/rgb_shift.frag", {{U"PSConstants2D", 0}} };

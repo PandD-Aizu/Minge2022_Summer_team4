@@ -4,7 +4,7 @@
 Player::Player(){
     hp=10;
 	invinceT = 0;
-	attackRange = 32;
+	attackRange = MapChip::MapChipSize * 2;
 }
 
 void Player::update(){
@@ -38,7 +38,7 @@ void Player::drawHP() const {
 
 void Player::detectEnemyCollision(Enemy * enm) {
 	if (ArcherWall* aw = dynamic_cast<ArcherWall*>(enm)) {
-	} else if (enm->pos.distanceFrom(pos) < 16) {
+	} else if (enm->pos.distanceFrom(pos) < MapChip::MapChipSize) {
 		damaged();
 		addKnockBack(enm->pos, enm->knockBackPower);
 	}
@@ -101,28 +101,28 @@ void Player::detectObjCollision(Object* obj) {
 			AudioAsset(U"explode").playOneShot();
 		}
 
-		if (bullet->pos.distanceFrom(pos) <= 10) {
+		if (bullet->pos.distanceFrom(pos) <= 20) {
 			bullet->destructorFlag = true;
 			damaged();
-			addKnockBack(bullet->pos, 5);
+			addKnockBack(bullet->pos, 10);
 			AudioAsset(U"explode").playOneShot();
 		}
 	}
 
 	if (BounceBullet* bullet = dynamic_cast<BounceBullet*>(obj)) {
-		if (bullet->pos.distanceFrom(pos) <= 10) {
+		if (bullet->pos.distanceFrom(pos) <= 20) {
 			bullet->destructorFlag = true;
 			damaged();
-			addKnockBack(bullet->pos, 5);
+			addKnockBack(bullet->pos, 10);
 			AudioAsset(U"explode").playOneShot();
 		}
 	}
 
 	if (Arrow* bullet = dynamic_cast<Arrow*>(obj)) {
-		if (bullet->body.intersects(Circle{ pos, 8 })) {
+		if (bullet->body.intersects(Circle{ pos, 16 })) {
 			bullet->destructorFlag = true;
 			damaged();
-			addKnockBack(bullet->pos, 5);
+			addKnockBack(bullet->pos, 10);
 			AudioAsset(U"arrowHit").playOneShot();
 		}
 	}
@@ -165,12 +165,12 @@ void Player::draw() const {
 
 		const ScopedCustomShader2D shader{ ps };
 		// 描画
-		CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y).scaled(0.5)
+		CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
 			.draw(pos.x - textureCenter.x, pos.y - textureCenter.y);
 
 	}
 	if (isAttacking()) {
-		slashTexture(64 * ((10 - coolT)/2), 0, 64, 84).scaled(0.5).rotated(-ToRadians(directionDeg)+90_deg).drawAt(pos.x, pos.y);
+		slashTexture(64 * ((10 - coolT)/2), 0, 64, 84).rotated(-ToRadians(directionDeg)+90_deg).drawAt(pos.x, pos.y);
 		//Circle{ pos.x,pos.y,8 }.drawArc(-ToRadians(directionDeg) + 45_deg, 90_deg, 0, attackRange, ColorF{1,0,0,0.5});
 	}
 }
