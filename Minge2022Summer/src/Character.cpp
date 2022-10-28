@@ -15,14 +15,32 @@ void Character::update() {
 
 	moveRestriction();
 
+
+
 	groundMapChipCollision();
 
 	moveNextPosition();
 }
 
+// ノックバックを追加する
+void Character::addKnockBack(Vec2 targetPos, double force) {
+	double enemyDir = fmod(atan2(targetPos.y - pos.y, targetPos.x - pos.x) + Math::TwoPi, Math::TwoPi);
+	knockBackForce += Vec2{ cos(enemyDir + Math::Pi) * force, sin(enemyDir + Math::Pi) * force };
+}
+
+// 現在受けているノックバックの影響をvelocityに適用する
+void Character::applyKnockBack() {
+	velocity += knockBackForce;
+	knockBackForce *= 0.8;
+}
 
 //移動制限
 void Character::moveRestriction() {
+	// 壁を貫通しないように、移動速度制限
+	if (Max(Math::Abs(velocity.x), Math::Abs(velocity.y)) > MapChip::MapChipSize - 1) {
+		velocity = velocity * (MapChip::MapChipSize - 1) / Max(Math::Abs(velocity.x), Math::Abs(velocity.y));
+	}
+	if (Math::Abs(velocity.y) > MapChip::MapChipSize - 1) velocity.y = Math::Sign(velocity.y) * (MapChip::MapChipSize - 1);
 	// x方向の移動制限
 	nextPos = pos + velocity * Vec2(1, 0);
 	// 右方向に移動中の場合

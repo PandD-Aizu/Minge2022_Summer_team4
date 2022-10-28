@@ -43,6 +43,7 @@ void Enemy::draw() const {
 
 void Enemy::isAttacked() {
 	hp--;
+	addKnockBack(playerPos, 10);
 }
 
 bool Enemy::isDefeated() {

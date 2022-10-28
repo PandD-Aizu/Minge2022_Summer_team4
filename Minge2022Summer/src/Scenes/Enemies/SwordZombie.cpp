@@ -11,7 +11,7 @@ SwordZombie::SwordZombie(Point mapPos)
     move=1;
     timer=0;
 	attackRange = 15;
-	hp = 1;
+	hp = 3;
 }
 void SwordZombie::update(){
     direction=atan2(pos.y-playerPos.y,pos.x-playerPos.x)-90_deg;
@@ -29,6 +29,7 @@ void SwordZombie::update(){
     }
 
 	ensureDirection();
+	applyKnockBack();
 	moveRestriction();
 	moveNextPosition();
 }
