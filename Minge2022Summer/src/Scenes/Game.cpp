@@ -93,8 +93,9 @@ Game::Game(const InitData& init)
 			// ooX: 最初の発射までの遅延（X * 0.5秒）
 			if (value / 1000 == 1) {
 				const int32 direction = (value % 1000) / 100;
-				const int32 duration = ((value % 100) / 10 + 1) * 30;
-				const int32 delay = (value % 10) * 30;
+				int32 duration = ((value % 100) / 10) * 60;
+				if (duration == 0) duration = 30;
+				const int32 delay = (value % 10) * 10;
 				enemies << new ArcherWall(pos, duration, direction, delay);
 			}
 		}
