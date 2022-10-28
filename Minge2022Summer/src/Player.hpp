@@ -43,7 +43,7 @@ public:
     Player();
     void update();
 	void draw() const;		//プレイヤーの歩行の描画
-	void damaged();
+	bool damaged();
     bool died();
 	void decideDirection();
 	void detectEnemyCollision(Enemy*);

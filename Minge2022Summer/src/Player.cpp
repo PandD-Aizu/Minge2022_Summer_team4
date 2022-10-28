@@ -48,8 +48,14 @@ void Player::detectEnemyCollision(Enemy * enm) {
 		}
 	}
     if (SwordZombie* sz = dynamic_cast<SwordZombie*>(enm)) {
-		if(sz->isAttacking() && sz->pos.distanceFrom(pos) < sz->attackRange*2) {
-			damaged();
+		if(sz->isAttacking()) {
+			if (sz->pos.distanceFrom(pos) < sz->attackRange * 2) {
+				if(damaged())AudioAsset(U"SZ_hit").playOneShot();
+				
+			}
+			else {
+				AudioAsset(U"SZ_attack").playOneShot();
+			}
 		}
     }
 }
@@ -105,10 +111,14 @@ void Player::detectObjCollision(Object* obj) {
 	}
 }
 
-void Player::damaged() {
+bool Player::damaged() {
 	if (invinceT == 0) {
 		hp--;
 		invinceT = 100;
+		return true;
+	}
+	else {
+		return false;
 	}
 }
 
@@ -271,6 +281,7 @@ bool Player::isAttacking() const {
 
 void Player::attack() {
 	if (coolT <= 0) {
+		AudioAsset(U"slash{}"_fmt(rand()%4)).playOneShot();
 		coolT = 10;
 	}
 }
