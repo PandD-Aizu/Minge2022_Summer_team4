@@ -5,6 +5,7 @@
 # include "Scenes/Stage3.hpp"
 # include "Scenes/Title.hpp"
 # include "Scenes/GameClear.hpp"
+# include "Scenes/GameOver.hpp"
 
 SIV3D_SET(EngineOption::Renderer::OpenGL);
 
@@ -52,10 +53,12 @@ void Main()
 	// ゲームクリアーシーン（名前は "GameClear"）を登録
 	manager.add<GameClear>(U"GameClear");
 
+	manager.add<GameOver>(U"GameOver");
+
 	int FPS = 60; // 1秒間に1画面を書き換える回数
 	Stopwatch sw;   //FPS60
 	sw.start(); //FPS60
-
+	manager.init(U"GameOver");
 	while (System::Update())
 	{
 		if (not manager.update())

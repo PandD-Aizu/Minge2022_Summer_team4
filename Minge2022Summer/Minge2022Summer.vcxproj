@@ -124,6 +124,7 @@
     <ClCompile Include="src\Scenes\Enemies\Enemy.cpp" />
     <ClCompile Include="src\Scenes\Enemies\HomingGunner.cpp" />
     <ClCompile Include="src\Scenes\Enemies\SwordZombie.cpp" />
+    <ClCompile Include="src\Scenes\GameOver.cpp" />
     <ClCompile Include="src\Scenes\Objects\Arrow.cpp" />
     <ClCompile Include="src\Scenes\Objects\HomingBullet.cpp" />
     <ClCompile Include="src\Scenes\Objects\BounceBullet.cpp" />
@@ -343,6 +344,7 @@
     <ClInclude Include="src\Scenes\Enemies\Enemy.hpp" />
     <ClInclude Include="src\Scenes\Enemies\HomingGunner.hpp" />
     <ClInclude Include="src\Scenes\Enemies\SwordZombie.hpp" />
+    <ClInclude Include="src\Scenes\GameOver.hpp" />
     <ClInclude Include="src\Scenes\Stage1.hpp" />
     <ClInclude Include="src\Scenes\GameClear.hpp" />
     <ClInclude Include="src\Scenes\myCamera.hpp" />
