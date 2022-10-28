@@ -18,7 +18,7 @@ void HomingBullet::update() {
 
 void HomingBullet::draw() const {
 	//Circle{ pos, 8 }.draw(Palette::Green);
-	objTexture(64 * animIndex, 64 * 2, 64, 64).scaled(0.5).rotated(direction + 90_deg).drawAt(pos);
+	objTexture(64 * animIndex, 64 * 2, 64, 64).rotated(direction + 90_deg).drawAt(pos);
 }
 
 void HomingBullet::accToPlayer(Vec2* playerPos) {

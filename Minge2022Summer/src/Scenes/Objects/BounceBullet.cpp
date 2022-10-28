@@ -35,5 +35,5 @@ void BounceBullet::update() {
 
 void BounceBullet::draw() const {
 	//Circle{ pos, 8 }.draw(Palette::Orange);
-	objTexture(64 * animIndex, 64 * 3, 64, 64).scaled(0.5).drawAt(pos);
+	objTexture(64 * animIndex, 64 * 3, 64, 64).drawAt(pos);
 }

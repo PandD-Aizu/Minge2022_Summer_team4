@@ -22,7 +22,7 @@ class MapChip
 public:
 
 	// マップチップのサイズ（ピクセル）
-	static constexpr int32 MapChipSize = 16;
+	static constexpr int32 MapChipSize = 32;
 
 	MapChip();
 
