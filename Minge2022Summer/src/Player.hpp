@@ -15,8 +15,13 @@ struct Blink
 class Player : public Character{
 private:
 	// テクスチャ読み込み
-	const Texture CharacterTexture{ U"Sprites/player.png" };
+	const Texture CharacterTexture{ U"Sprites/player2.png" };
 	const Texture hpTexture{ U"heart.png" };
+
+	// テクスチャのサイズ
+	const Vec2 textureSize{ 64, 64 };
+	// 中心の相対座標（テクスチャの左上からの相対座標
+	const Vec2 textureCenter{ 16, 22 };
 
 	PixelShader ps;
 	const PixelShader rgbShader = GLSL{ U"Shaders/rgb_shift.frag", {{U"PSConstants2D", 0}} };

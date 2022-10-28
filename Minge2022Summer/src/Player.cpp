@@ -132,7 +132,7 @@ void Player::draw() const {
 
 		const ScopedCustomShader2D shader{ ps };
 		// 描画
-		CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y)
+		CharacterTexture((textureSize.x * animationIndex.x), (textureSize.y * animationIndex.y), textureSize.x, textureSize.y).scaled(0.5)
 			.draw(pos.x - textureCenter.x, pos.y - textureCenter.y);
 
 	}
