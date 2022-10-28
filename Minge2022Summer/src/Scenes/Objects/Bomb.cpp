@@ -1,7 +1,7 @@
 ﻿#include "Object.hpp"
 
 Bomb::Bomb(Vec2 _pos, SecondsF limit, int32 range)
-	: Object(pos), timer{ limit }, timeLimit(limit), range(range)
+	: Object(_pos), timer{ limit }, timeLimit(limit), range(range)
 {
 	timer.start();
 }
@@ -26,6 +26,7 @@ void Bomb::draw() const {
 
 	//爆発中
 	if (state == 1) {
+		AudioAsset(U"explode").play();
 		Circle{ pos, range }.draw(Color{ Palette::Red, 100 });
 	}
 }

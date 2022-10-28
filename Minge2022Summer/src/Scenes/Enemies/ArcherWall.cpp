@@ -28,6 +28,7 @@ void ArcherWall::emitObject(Array <Object*>* objects) {
 		if (direction == 7) targetDir = 0;
 
 		*(objects) << new Arrow(pos, targetDir, 0.6); // 矢の発射
+		if(playerPos.distanceFrom(pos) < 300) AudioAsset(U"arrowShot").playOneShot();
 		shotCnt = maxShotCnt;
 	}
 }
