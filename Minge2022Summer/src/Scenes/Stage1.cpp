@@ -5,10 +5,12 @@
 Stage1::Stage1(const InitData& init)
 	: IScene{ init }
 {
-	objects << new Stair(Vec2{ 150, 150 }, Vec2{ 250, 600 }, true);
 	countswordzombies = 0;
 	mapLayer0 = LoadCSV(U"maps/stage1/layer0.csv");
 	mapLayer1 = LoadCSV(U"maps/stage1/layer1.csv");
+
+	HashTable<int32, Point> stairPair;
+	HashTable<int32, Point> stairPairNonRev;
 
 	// layer1上の敵を読み込む
 	for (int32 y = 0; y < MapSize.y; ++y)
@@ -40,6 +42,33 @@ Stage1::Stage1(const InitData& init)
 			}
 			if (mapLayer1[y][x] / 10 == 4) {
 				enemies << new ArcherWall(pos, 500, mapLayer1[y][x] % 10);
+			}
+			// 5X: 自由に行き来可能な階段
+			if (mapLayer1[y][x] / 10 == 5) {
+				if (stairPair.contains(mapLayer1[y][x] % 10)) {
+					objects << new Stair(stairPair[mapLayer1[y][x] % 10], pos, true);
+				}
+				else {
+					stairPair.emplace(mapLayer1[y][x] % 10, pos);
+				}
+			}
+			// 6X: 一方通行の階段（入口）
+			if (mapLayer1[y][x] / 10 == 6) {
+				if (stairPairNonRev.contains(mapLayer1[y][x] % 10)) {
+					objects << new Stair(pos, stairPairNonRev[mapLayer1[y][x] % 10], false);
+				}
+				else {
+					stairPairNonRev.emplace(mapLayer1[y][x] % 10, pos);
+				}
+			}
+			// 7X: 一方通行の階段（出口）
+			if (mapLayer1[y][x] / 10 == 7) {
+				if (stairPairNonRev.contains(mapLayer1[y][x] % 10)) {
+					objects << new Stair(stairPairNonRev[mapLayer1[y][x] % 10], pos, false);
+				}
+				else {
+					stairPairNonRev.emplace(mapLayer1[y][x] % 10, pos);
+				}
 			}
 		}
 	}
