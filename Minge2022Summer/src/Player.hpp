@@ -16,6 +16,7 @@ class Player : public Character{
 private:
 	// テクスチャ読み込み
 	const Texture CharacterTexture{ U"Sprites/player2.png" };
+	const Texture slashTexture{ U"Sprites/slash.png" };
 	const Texture hpTexture{ U"heart.png" };
 
 	// テクスチャのサイズ
