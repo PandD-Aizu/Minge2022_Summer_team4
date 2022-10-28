@@ -5,8 +5,10 @@
 class Enemy : public Character{
 private:
 	const Texture CharacterTexture;
+
 public:
 	Vec2 playerPos;
+	bool isRestless = false;
 
 	Enemy();
 	Enemy(String texture);
