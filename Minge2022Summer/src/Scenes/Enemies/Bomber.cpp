@@ -3,7 +3,7 @@
 Bomber::Bomber(Point mapPos)
 	:Enemy(U"Sprites/bomber.png")
 {
-    speed=0.15;
+    speed=0.3;
     velocity={0,0};
 	pos = { mapPos.x + collisionSize.x / 2, mapPos.y + collisionSize.y / 2 };
 	hp = 3;
@@ -37,7 +37,7 @@ void Bomber::draw() const {
 
 void Bomber::emitObject(Array <Object *> *objects) {
 	if (plantCnt <= 0) {
-		*(objects) << new Bomb(pos, 8s, 60); // 敵用の爆弾の設置
+		*(objects) << new Bomb(pos, 8s, 120); // 敵用の爆弾の設置
 		plantCnt = 500;
 	}
 }

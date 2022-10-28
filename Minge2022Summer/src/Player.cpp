@@ -4,7 +4,7 @@
 Player::Player(){
     hp=10;
 	invinceT = 0;
-	attackRange = 32;
+	attackRange = MapChip::MapChipSize * 2;
 }
 
 void Player::update(){
@@ -38,7 +38,7 @@ void Player::drawHP() const {
 
 void Player::detectEnemyCollision(Enemy * enm) {
 	if (ArcherWall* aw = dynamic_cast<ArcherWall*>(enm)) {
-	} else if (enm->pos.distanceFrom(pos) < 16) {
+	} else if (enm->pos.distanceFrom(pos) < MapChip::MapChipSize) {
 		damaged();
 		addKnockBack(enm->pos, enm->knockBackPower);
 	}
@@ -101,28 +101,28 @@ void Player::detectObjCollision(Object* obj) {
 			AudioAsset(U"explode").playOneShot();
 		}
 
-		if (bullet->pos.distanceFrom(pos) <= 10) {
+		if (bullet->pos.distanceFrom(pos) <= 20) {
 			bullet->destructorFlag = true;
 			damaged();
-			addKnockBack(bullet->pos, 5);
+			addKnockBack(bullet->pos, 10);
 			AudioAsset(U"explode").playOneShot();
 		}
 	}
 
 	if (BounceBullet* bullet = dynamic_cast<BounceBullet*>(obj)) {
-		if (bullet->pos.distanceFrom(pos) <= 10) {
+		if (bullet->pos.distanceFrom(pos) <= 20) {
 			bullet->destructorFlag = true;
 			damaged();
-			addKnockBack(bullet->pos, 5);
+			addKnockBack(bullet->pos, 10);
 			AudioAsset(U"explode").playOneShot();
 		}
 	}
 
 	if (Arrow* bullet = dynamic_cast<Arrow*>(obj)) {
-		if (bullet->body.intersects(Circle{ pos, 8 })) {
+		if (bullet->body.intersects(Circle{ pos, 16 })) {
 			bullet->destructorFlag = true;
 			damaged();
-			addKnockBack(bullet->pos, 5);
+			addKnockBack(bullet->pos, 10);
 			AudioAsset(U"arrowHit").playOneShot();
 		}
 	}
